@@ -12,12 +12,13 @@ import Measurements from "@/pages/measurements";
 import FitPredict from "@/pages/fit-predict";
 import ARTryOn from "@/pages/ar-tryon";
 import Profile from "@/pages/profile";
-import Navbar from "@/components/navbar";
+import EnhancedNavbar from "@/components/enhanced-navbar";
+import Recommendations from "@/pages/recommendations";
 
 function Router() {
   return (
     <>
-      <Navbar />
+      <EnhancedNavbar />
       <Switch>
         <Route path="/" component={Home} />
         <Route path="/login" component={Login} />
@@ -25,6 +26,7 @@ function Router() {
         <Route path="/measurements" component={Measurements} />
         <Route path="/fit-predict" component={FitPredict} />
         <Route path="/ar-tryon" component={ARTryOn} />
+        <Route path="/recommendations" component={Recommendations} />
         <Route path="/profile" component={Profile} />
         <Route component={NotFound} />
       </Switch>

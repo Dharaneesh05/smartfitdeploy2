@@ -7,6 +7,12 @@ import {
   type InsertProduct,
   type FitAnalysis,
   type Favorite,
+  type Recommendation,
+  type InsertRecommendation,
+  type UserHistory,
+  type InsertHistory,
+  type Notification,
+  type InsertNotification,
   type LoginData
 } from "@shared/schema";
 import { randomUUID } from "crypto";
@@ -35,6 +41,19 @@ export interface IStorage {
   addToFavorites(userId: string, productId: string): Promise<Favorite>;
   removeFromFavorites(userId: string, productId: string): Promise<void>;
   getUserFavorites(userId: string): Promise<(Favorite & { product: Product })[]>;
+  
+  // Recommendations methods
+  createRecommendation(userId: string, recommendation: InsertRecommendation): Promise<Recommendation>;
+  getUserRecommendations(userId: string): Promise<Recommendation[]>;
+  
+  // History methods
+  addToHistory(userId: string, history: InsertHistory): Promise<UserHistory>;
+  getUserHistory(userId: string): Promise<UserHistory[]>;
+  
+  // Notifications methods
+  createNotification(userId: string, notification: InsertNotification): Promise<Notification>;
+  getUserNotifications(userId: string): Promise<Notification[]>;
+  markNotificationAsRead(notificationId: string): Promise<void>;
 }
 
 export class MemStorage implements IStorage {
@@ -43,6 +62,9 @@ export class MemStorage implements IStorage {
   private products: Map<string, Product>;
   private fitAnalyses: Map<string, FitAnalysis>;
   private favorites: Map<string, Favorite>;
+  private recommendations: Map<string, Recommendation>;
+  private userHistory: Map<string, UserHistory>;
+  private notifications: Map<string, Notification>;
 
   constructor() {
     this.users = new Map();
@@ -50,6 +72,9 @@ export class MemStorage implements IStorage {
     this.products = new Map();
     this.fitAnalyses = new Map();
     this.favorites = new Map();
+    this.recommendations = new Map();
+    this.userHistory = new Map();
+    this.notifications = new Map();
   }
 
   async getUser(id: string): Promise<User | undefined> {
@@ -85,9 +110,14 @@ export class MemStorage implements IStorage {
     const now = new Date();
     
     const newMeasurement: Measurement = {
-      ...measurement,
       id,
       userId,
+      chest: measurement.chest || null,
+      shoulders: measurement.shoulders || null,
+      waist: measurement.waist || null,
+      height: measurement.height || null,
+      hips: measurement.hips || null,
+      confidence: measurement.confidence || null,
       createdAt: existing?.createdAt || now,
       updatedAt: now
     };
@@ -99,9 +129,14 @@ export class MemStorage implements IStorage {
   async createProduct(userId: string, product: InsertProduct): Promise<Product> {
     const id = randomUUID();
     const newProduct: Product = {
-      ...product,
       id,
       userId,
+      name: product.name,
+      brand: product.brand || null,
+      imageUrl: product.imageUrl || null,
+      description: product.description || null,
+      size: product.size || null,
+      measurements: product.measurements || null,
       createdAt: new Date()
     };
     this.products.set(id, newProduct);
@@ -169,6 +204,82 @@ export class MemStorage implements IStorage {
         product: product!
       };
     }).filter(fav => fav.product);
+  }
+
+  // Recommendations methods
+  async createRecommendation(userId: string, recommendation: InsertRecommendation): Promise<Recommendation> {
+    const id = randomUUID();
+    const newRecommendation: Recommendation = {
+      id,
+      userId,
+      productName: recommendation.productName,
+      brand: recommendation.brand || null,
+      price: recommendation.price || null,
+      imageUrl: recommendation.imageUrl || null,
+      fitScore: recommendation.fitScore,
+      reason: recommendation.reason,
+      category: recommendation.category || null,
+      size: recommendation.size || null,
+      externalUrl: recommendation.externalUrl || null,
+      createdAt: new Date()
+    };
+    this.recommendations.set(id, newRecommendation);
+    return newRecommendation;
+  }
+
+  async getUserRecommendations(userId: string): Promise<Recommendation[]> {
+    return Array.from(this.recommendations.values()).filter(r => r.userId === userId);
+  }
+
+  // History methods
+  async addToHistory(userId: string, history: InsertHistory): Promise<UserHistory> {
+    const id = randomUUID();
+    const newHistory: UserHistory = {
+      id,
+      userId,
+      action: history.action,
+      details: history.details || null,
+      metadata: history.metadata || null,
+      createdAt: new Date()
+    };
+    this.userHistory.set(id, newHistory);
+    return newHistory;
+  }
+
+  async getUserHistory(userId: string): Promise<UserHistory[]> {
+    return Array.from(this.userHistory.values())
+      .filter(h => h.userId === userId)
+      .sort((a, b) => (b.createdAt?.getTime() || 0) - (a.createdAt?.getTime() || 0));
+  }
+
+  // Notifications methods
+  async createNotification(userId: string, notification: InsertNotification): Promise<Notification> {
+    const id = randomUUID();
+    const newNotification: Notification = {
+      id,
+      userId,
+      title: notification.title,
+      message: notification.message,
+      type: notification.type,
+      isRead: false,
+      actionUrl: notification.actionUrl || null,
+      createdAt: new Date()
+    };
+    this.notifications.set(id, newNotification);
+    return newNotification;
+  }
+
+  async getUserNotifications(userId: string): Promise<Notification[]> {
+    return Array.from(this.notifications.values())
+      .filter(n => n.userId === userId)
+      .sort((a, b) => (b.createdAt?.getTime() || 0) - (a.createdAt?.getTime() || 0));
+  }
+
+  async markNotificationAsRead(notificationId: string): Promise<void> {
+    const notification = this.notifications.get(notificationId);
+    if (notification) {
+      this.notifications.set(notificationId, { ...notification, isRead: true });
+    }
   }
 }
 

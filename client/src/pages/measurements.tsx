@@ -81,7 +81,7 @@ export default function Measurements() {
             <CardHeader>
               <CardTitle>Current Measurements</CardTitle>
               <CardDescription>
-                Last updated: {new Date(existingMeasurements.updatedAt).toLocaleDateString()}
+                Last updated: {new Date((existingMeasurements as any).updatedAt || Date.now()).toLocaleDateString()}
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -95,7 +95,7 @@ export default function Measurements() {
                 }).map(([key, label]) => (
                   <div key={key} className="text-center" data-testid={`current-${key}`}>
                     <div className="text-2xl font-bold text-primary">
-                      {existingMeasurements[key]} cm
+                      {(existingMeasurements as any)[key]} cm
                     </div>
                     <div className="text-sm text-gray-600">{label}</div>
                   </div>

@@ -249,6 +249,63 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Recommendations routes
+  app.get("/api/recommendations", authenticateToken, async (req: Request, res: Response) => {
+    try {
+      const recommendations = await storage.getUserRecommendations(req.userId!);
+      res.json(recommendations);
+    } catch (error) {
+      res.status(500).json({ message: 'Failed to get recommendations' });
+    }
+  });
+
+  app.post("/api/recommendations", authenticateToken, async (req: Request, res: Response) => {
+    try {
+      const recommendation = await storage.createRecommendation(req.userId!, req.body);
+      res.json(recommendation);
+    } catch (error) {
+      res.status(500).json({ message: 'Failed to create recommendation' });
+    }
+  });
+
+  // History routes
+  app.get("/api/history", authenticateToken, async (req: Request, res: Response) => {
+    try {
+      const history = await storage.getUserHistory(req.userId!);
+      res.json(history);
+    } catch (error) {
+      res.status(500).json({ message: 'Failed to get history' });
+    }
+  });
+
+  app.post("/api/history", authenticateToken, async (req: Request, res: Response) => {
+    try {
+      const historyEntry = await storage.addToHistory(req.userId!, req.body);
+      res.json(historyEntry);
+    } catch (error) {
+      res.status(500).json({ message: 'Failed to add to history' });
+    }
+  });
+
+  // Notifications routes
+  app.get("/api/notifications", authenticateToken, async (req: Request, res: Response) => {
+    try {
+      const notifications = await storage.getUserNotifications(req.userId!);
+      res.json(notifications);
+    } catch (error) {
+      res.status(500).json({ message: 'Failed to get notifications' });
+    }
+  });
+
+  app.patch("/api/notifications/:id/read", authenticateToken, async (req: Request, res: Response) => {
+    try {
+      await storage.markNotificationAsRead(req.params.id);
+      res.json({ success: true });
+    } catch (error) {
+      res.status(500).json({ message: 'Failed to mark notification as read' });
+    }
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }

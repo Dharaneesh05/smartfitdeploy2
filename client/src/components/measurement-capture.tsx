@@ -280,7 +280,7 @@ export default function MeasurementCapture({
                     </div>
                     <div className="text-right">
                       <span className="text-xl font-bold text-gray-900" data-testid={`value-${key}`}>
-                        {measurements[key as keyof MeasurementData]} cm
+                        {String(measurements[key as keyof MeasurementData])} cm
                       </span>
                       <p className="text-sm text-success" data-testid={`confidence-${key}`}>
                         {measurements.confidence[key]}% confidence

@@ -1,0 +1,88 @@
+The design draws inspiration from 2025 trends in virtual try-on apps, such as clean, intuitive interfaces that boost engagement and conversions through personalized recommendations and AR integration. Colors, fonts, and layouts remain consistent: soft blue accents, Roboto/Open Sans fonts, responsive grids, and subtle animations for a polished, professional look similar to leading apps like those from Banuba or Auglio.
+I'll describe each page/component inch by inch, highlighting the new/emphasized elements in bold for clarity.
+1. Navbar (Common Across All Pages)
+
+Position: Fixed top, full-width, 60px height, white background with light shadow.
+Left Side (20%): Logo "FitPredict" (24px bold blue, clickable to home). Padding-left: 20px.
+Center (60%): Links: "Home", "Measurements", "Fit Predict", "AR Try-On", "Profile", "Recommendations" (new link to a dedicated page for personalized suggestions based on profile data). Blue text, hover underline.
+Right Side (20%): If logged in: "Welcome, [Username]" + Profile icon (dropdown: "View Profile", "Logout" (moved here for quick access, but also in profile)). If not: "Login/Signup" buttons. Padding-right: 20px.
+Mobile: Hamburger menu.
+
+2. Signup Page (/signup)
+
+Layout: Centered white card (400px wide, 500px tall) on light gray background.
+Top (20%): "Create Account" (32px blue), subtitle "Join to get personalized fit predictions and recommendations" (16px gray).
+Middle (60%): Fields: Username, Email, Password, Confirm Password, Terms checkbox.
+Bottom (20%): "Signup" button, "Already have an account? Login" link.
+New Addition: Below form, teaser: "Unlock features like saved favorites and product suggestions!" (italic gray).
+
+3. Login Page (/login)
+
+Layout: Similar to signup (400px card).
+Top: "Login" (32px blue), subtitle "Access your profile, favorites, and recommendations".
+Middle: Email, Password fields.
+Bottom: "Login" button, "Forgot password?" and "Signup" links.
+New Addition: Post-login redirect shows a welcome toast: "Logged in! Check your profile for saved analyses and recommendations."
+
+4. Homepage (/)
+
+Hero (Top 400px): Gradient background, title "Welcome to FitPredict" (48px blue), description "AI-powered body measurements, fit predictions, AR try-on, product suggestions, and recommendations to reduce returns by 30%" (20px gray). "Get Started" button.
+How It Works (300px): Three cards:
+
+Step 1: Measure Body (icon: ruler).
+Step 2: Predict Fit & Get Recommendations (icon: shirt, updated to mention suggestions).
+Step 3: AR Try-On (icon: mirror).
+
+
+New Section (Bottom 200px): "Featured Recommendations" carousel (3-5 product cards: image, name, "Why it fits you" based on demo data, blue "Try Now" button). If logged in, personalized via profile measurements.
+Footer: "© 2025 FitPredict", social icons.
+
+5. Profile Page (/profile) – Protected
+
+Layout: Left sidebar (30%), right content (70%).
+Left Sidebar: Avatar (100px circle), Username (24px bold), Email (16px gray), "Edit Profile" button (blue outline). New: "Logout" button (red outline, placed here for emphasis as requested; confirms with modal: "Are you sure?").
+Right Content: Tabs: "Measurements", "Favorites", "Saved Analysis", "Recommendations" (new tab), "History" (added feature).
+
+Measurements Tab: Table with dimensions/values/date. "Re-Measure" button. New: "Export Data" button (downloads JSON/CSV of measurements, added feature for privacy/export).
+Favorites Tab: Grid of cards (product image 200x200, name, fit status, "View AR" or "Remove" buttons). Emphasized: Users can view and manage saved favorites here.
+Saved Analysis Tab: Vertical list: Product name, date, fit details (e.g., "Too Tight: Chest +3cm"), recommendations from past predictions. Emphasized: View all saved fit analyses; new "Re-Analyze" button to re-run with updated measurements.
+Recommendations Tab (New): Personalized list/grid of suggested products (e.g., "Based on your chest size, try these shirts"). Each card: Image, name, size, price (mock data), "Add to Favorites" or "Buy Now" (links to external e-commerce). Fetched dynamically from backend.
+History Tab (Added Feature): Timeline of user actions (e.g., "Measured body on [date]", "Predicted fit for Shirt X", "Viewed AR for Product Y"). Helps users track usage; includes search/filter.
+
+
+New Addition (Bottom): "Community Tips" section (added feature: collapsible accordion with AI-generated tips like "How to measure accurately" or user forums link, inspired by 2025 AR trends). "Delete Account" button (red, with confirmation).
+
+6. Measurements Page (/measurements) – Protected
+
+Top: "Body Measurements" (32px blue), description updated: "Save to profile for use in predictions, recommendations, and AR".
+Options: "Real-Time Camera", "Upload Images" buttons.
+Camera/Upload Sections: As before, with results list.
+New Addition: After saving, prompt: "Measurements updated! View in Profile or get instant recommendations?" (blue link to recommendations tab).
+
+7. Fit Predict Page (/fit-predict) – Protected
+
+Left Form (40%): "Upload Product" (24px blue), input options (image/description/URL), "Predict Fit" button.
+Right Results (60%): Fit status badge, comparison table. Emphasized Product Suggestions: If not fit, "Recommendations" subsection with 3-5 cards (images, sizes, "Why recommended: Matches your shoulders +2cm tolerance"). "Favorite" and "Try AR" buttons.
+New Addition: "Save Analysis" button (stores to profile's Saved Analysis tab). Integration with YOLO: Loading spinner says "Analyzing product with AI...".
+
+8. AR Try-On Page (/ar-tryon) – Protected
+
+Main Video: Webcam with overlay, feedback text (e.g., "Perfect Fit" in green).
+Controls: "Start Camera", product dropdown (includes favorites and recommendations).
+Side Panel: Measurements list, new "Suggestions During Try-On": Real-time tips like "This looks tight – check recommended larger size" (popup cards with alternatives).
+New Addition: "Save This Look" button (adds AR snapshot/analysis to favorites/saved analysis in profile). "Share to Community" (added feature: mock share button for user-generated content).
+
+9. New Page: Recommendations (/recommendations) – Protected
+
+Layout: Full-width grid (3 columns desktop, 1 mobile), white background.
+Top Header: "Personalized Recommendations" (32px blue), "Based on your profile measurements and saved analyses" (16px gray).
+Main Content: Product cards (200x300): Image, name, fit score (e.g., "95% Match"), price, "Why? Chest perfect, shoulders loose" (from AI comparison). Filters: "By Category" (shirts, pants), "By Fit Type" (tight/loose).
+Bottom: "Load More" button, "View in Profile" link.
+Inspiration: Draws from 2025 virtual try-on trends for personalized, AR-linked suggestions to boost shopping confidence.
+
+Additional Global Features and Enhancements
+
+Shopping Integration (Added Feature): In recommendations/favorites, "Add to Cart" or "Buy on Amazon" buttons (mock links to external sites, with affiliate tracking).
+Notifications (Added Feature): Top-right bell icon in navbar: Alerts like "New recommendation based on your recent analysis!" (uses backend push).
+Accessibility: All elements have alt text, keyboard navigation, high contrast modes.
+Performance: Lazy-load images in grids, ensuring elegant loading spinners.

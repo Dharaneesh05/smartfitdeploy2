@@ -136,7 +136,7 @@ export default function ARTryOn() {
 
         <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
           <ARTryOnInterface
-            product={product}
+            product={product || { id: '', name: 'No Product Selected' }}
             onPurchase={handlePurchase}
             onSaveToProfile={handleSaveToProfile}
           />

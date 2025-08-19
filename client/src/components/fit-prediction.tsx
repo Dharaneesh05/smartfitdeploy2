@@ -248,7 +248,7 @@ export default function FitPrediction({ onTryOnAR, onAddToFavorites }: FitPredic
                       </CardHeader>
                       <CardContent>
                         <div className="space-y-4">
-                          {Object.entries(fitResult.analysis.measurements.user).map(([key, userValue]) => {
+                          {Object.entries(fitResult.analysis.measurements.user).map(([key, userValue]: [string, any]) => {
                             const productValue = fitResult.analysis.measurements.product[key];
                             if (!productValue) return null;
                             

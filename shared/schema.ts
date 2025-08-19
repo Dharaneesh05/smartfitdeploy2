@@ -54,6 +54,41 @@ export const favorites = pgTable("favorites", {
   createdAt: timestamp("created_at").defaultNow(),
 });
 
+export const recommendations = pgTable("recommendations", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  userId: varchar("user_id").notNull().references(() => users.id),
+  productName: text("product_name").notNull(),
+  brand: text("brand"),
+  price: text("price"),
+  imageUrl: text("image_url"),
+  fitScore: real("fit_score").notNull(),
+  reason: text("reason").notNull(),
+  category: text("category"),
+  size: text("size"),
+  externalUrl: text("external_url"),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+export const userHistory = pgTable("user_history", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  userId: varchar("user_id").notNull().references(() => users.id),
+  action: text("action").notNull(),
+  details: text("details"),
+  metadata: jsonb("metadata").$type<Record<string, any>>(),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+export const notifications = pgTable("notifications", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  userId: varchar("user_id").notNull().references(() => users.id),
+  title: text("title").notNull(),
+  message: text("message").notNull(),
+  type: text("type").notNull(),
+  isRead: boolean("is_read").default(false),
+  actionUrl: text("action_url"),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
 // Zod schemas for validation
 export const insertUserSchema = createInsertSchema(users).pick({
   username: true,
@@ -88,6 +123,32 @@ export const productSchema = createInsertSchema(products).pick({
   measurements: true,
 });
 
+// Additional schemas for new features
+export const recommendationSchema = createInsertSchema(recommendations).pick({
+  productName: true,
+  brand: true,
+  price: true,
+  imageUrl: true,
+  fitScore: true,
+  reason: true,
+  category: true,
+  size: true,
+  externalUrl: true,
+});
+
+export const historySchema = createInsertSchema(userHistory).pick({
+  action: true,
+  details: true,
+  metadata: true,
+});
+
+export const notificationSchema = createInsertSchema(notifications).pick({
+  title: true,
+  message: true,
+  type: true,
+  actionUrl: true,
+});
+
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type LoginData = z.infer<typeof loginSchema>;
 export type User = typeof users.$inferSelect;
@@ -97,3 +158,9 @@ export type Product = typeof products.$inferSelect;
 export type InsertProduct = z.infer<typeof productSchema>;
 export type FitAnalysis = typeof fitAnalyses.$inferSelect;
 export type Favorite = typeof favorites.$inferSelect;
+export type Recommendation = typeof recommendations.$inferSelect;
+export type InsertRecommendation = z.infer<typeof recommendationSchema>;
+export type UserHistory = typeof userHistory.$inferSelect;
+export type InsertHistory = z.infer<typeof historySchema>;
+export type Notification = typeof notifications.$inferSelect;
+export type InsertNotification = z.infer<typeof notificationSchema>;
