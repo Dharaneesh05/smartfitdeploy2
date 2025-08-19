@@ -1,0 +1,17 @@
+Project Overview:
+
+The app allows users to sign up, log in, and manage profiles where body measurements, favorite products, and fit analysis are stored.
+On the homepage, provide a short description of how it works (e.g., "Measure your body via camera or images, upload clothing products, get AI fit predictions and AR try-on to avoid returns!").
+Core functionality: One-time body measurements via real-time camera (MediaPipe for landmarks) or uploaded images (front, back, side views) using OpenCV for processing. Measurements are stored in MongoDB and viewable in the user profile.
+For fit prediction: Users upload a clothing product image (use YOLO for detecting product features/sizes) or enter a description/link. Compare with stored body measurements to predict fit ("Perfect Fit," "Too Tight," "Too Loose," etc.).
+AR Visualization: After measurements, provide real-time AR try-on (similar to Lenskart) using the webcam to overlay the product on the user's body, showing if it fits visually. Use stored measurements for scaling. If fit is not perfect, highlight changes needed (e.g., "Increase chest by 2 cm").
+Additional features: Suggestions/recommendations for alternative products based on body size (integrate with mock e-commerce API or scraped data). Users can favorite products, store fit analysis in DB, and view them in their profile.
+Privacy: Implement face blurring during measurements. Do not store raw images/videos; only measurements and anonymized data.
+Goal: Reduce online shopping returns by providing accurate fit predictions and visualizations.
+
+Tech Stack:
+
+Frontend: React.js (with hooks, React Router for navigation, Material-UI or Tailwind CSS for styling). Use WebRTC for camera access.
+Backend: Node.js with Express.js for API endpoints. Use JWT for authentication. Integrate MongoDB for database (via Mongoose ODM).
+ML/Prediction Service: Python microservice (using Flask or FastAPI) for ML tasks. Libraries: OpenCV, MediaPipe (for body landmarks), YOLOv8 (for product image detection/extraction), Tesseract-OCR (for size label extraction from images). Expose endpoints like /measure-body, /predict-fit, /ar-overlay. Communicate with frontend via API calls.
+Database: MongoDB (store users, measure
