@@ -127,7 +127,7 @@
 }
 
 .ar-controls {
-  @apply bg-white/98 backdrop-blur-md border border-slate-200/80 shadow-2xl rounded-xl;
+  @apply bg-white/95 backdrop-blur-md border border-slate-200 shadow-2xl rounded-xl;
   backdrop-filter: blur(16px);
 }
 

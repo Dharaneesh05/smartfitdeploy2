@@ -4,11 +4,11 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Camera, Upload, Save, Eye, EyeOff, Settings } from 'lucide-react';
+import { Camera, Upload, Save, Eye, EyeOff, Settings, RotateCcw } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 // Import RotateCcw from lucide-react
-import { RotateCcw } from 'lucide-react';
+// import { RotateCcw } from 'lucide-react';
 
 interface MeasurementData {
   chest: number;

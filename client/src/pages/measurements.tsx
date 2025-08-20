@@ -5,6 +5,7 @@ import { useAuth } from '@/contexts/auth-context';
 import { apiRequest } from '@/lib/queryClient';
 import MeasurementCapture from '@/components/measurement-capture';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { useEffect, useState } from 'react';
 
 interface MeasurementData {
   chest: number;
@@ -16,10 +17,18 @@ interface MeasurementData {
 }
 
 export default function Measurements() {
+  const [measurements, setMeasurements] = useState<MeasurementData | null>(null);
   const { user } = useAuth();
   const [, setLocation] = useLocation();
   const { toast } = useToast();
   const queryClient = useQueryClient();
+
+  // Store measurements when they're captured
+  useEffect(() => {
+    if (measurements && !localStorage.getItem('userMeasurements')) {
+      localStorage.setItem('userMeasurements', JSON.stringify(measurements));
+    }
+  }, [measurements]);
 
   // Redirect if not authenticated
   if (!user) {
@@ -58,6 +67,7 @@ export default function Measurements() {
   const handleMeasurementsCapture = (measurements: MeasurementData) => {
     // Measurements captured, could trigger real-time updates here
     console.log('Measurements captured:', measurements);
+    setMeasurements(measurements);
   };
 
   const handleSaveMeasurements = async (measurements: MeasurementData) => {
