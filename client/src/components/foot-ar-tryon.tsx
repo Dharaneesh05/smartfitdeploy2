@@ -142,11 +142,25 @@ export default function FootARTryOn({
                       {/* Left foot with enhanced realism */}
                       <div className="relative">
                         <div 
-                          className={`w-36 h-24 ${getFootwearShape(product.type)} relative transition-all duration-300 shadow-lg`}
+                          className={`w-40 h-28 ${getFootwearShape(product.type)} relative transition-all duration-300 shadow-2xl`}
                           style={{ 
-                            background: `linear-gradient(135deg, ${getColorHex(currentColor)}F5, ${getColorHex(currentColor)}E6)`,
-                            border: `2px solid ${getColorHex(currentColor)}B0`,
-                            boxShadow: `0 8px 20px ${getColorHex(currentColor)}30, inset 0 2px 4px rgba(255,255,255,0.1)`
+                            background: `
+                              linear-gradient(135deg, 
+                                ${getColorHex(currentColor)}F8 0%, 
+                                ${getColorHex(currentColor)}E8 25%, 
+                                ${getColorHex(currentColor)}F0 50%, 
+                                ${getColorHex(currentColor)}E6 75%, 
+                                ${getColorHex(currentColor)}EA 100%
+                              )`,
+                            border: `3px solid ${getColorHex(currentColor)}C0`,
+                            boxShadow: `
+                              0 12px 30px ${getColorHex(currentColor)}25, 
+                              inset 0 3px 8px rgba(255,255,255,0.2), 
+                              inset 0 -3px 8px rgba(0,0,0,0.1),
+                              0 0 25px ${getColorHex(currentColor)}15
+                            `,
+                            filter: 'drop-shadow(0 8px 16px rgba(0,0,0,0.2))',
+                            transform: 'perspective(600px) rotateX(8deg) rotateY(-3deg)'
                           }}
                         >
                           {/* Enhanced sports shoe details */}

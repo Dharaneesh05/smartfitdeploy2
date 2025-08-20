@@ -5,10 +5,14 @@ import { useToast } from '@/hooks/use-toast';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { apiRequest } from '@/lib/queryClient';
 import FitPrediction from '@/components/fit-prediction';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import FootwearFitPrediction from '@/components/footwear-fit-prediction';
 
 export default function FitPredict() {
   const { user } = useAuth();
   const [, setLocation] = useLocation();
+  const queryClient = useQueryClient(); // Ensure queryClient is initialized
+  const { toast } = useToast(); // Ensure toast is initialized
 
   useEffect(() => {
     if (!user) {
@@ -62,10 +66,24 @@ export default function FitPredict() {
           </p>
         </div>
 
-        <FitPrediction
-          onTryOnAR={handleTryOnAR}
-          onAddToFavorites={handleAddToFavorites}
-        />
+        <Tabs defaultValue="clothing" className="w-full">
+          <TabsList>
+            <TabsTrigger value="clothing">Clothing</TabsTrigger>
+            <TabsTrigger value="footwear">Footwear</TabsTrigger>
+          </TabsList>
+          <TabsContent value="clothing">
+            <FitPrediction
+              onTryOnAR={handleTryOnAR}
+              onAddToFavorites={handleAddToFavorites}
+            />
+          </TabsContent>
+          <TabsContent value="footwear">
+            <FootwearFitPrediction
+              onTryOnAR={handleTryOnAR}
+              onAddToFavorites={handleAddToFavorites}
+            />
+          </TabsContent>
+        </Tabs>
       </div>
     </div>
   );
