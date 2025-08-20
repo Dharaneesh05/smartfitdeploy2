@@ -1,10 +1,9 @@
-
 import { useState, useRef, useCallback, useEffect } from 'react';
 import Webcam from 'react-webcam';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Camera, Video, Expand, Settings, Share, ShoppingCart, Bookmark } from 'lucide-react';
+import { Camera, Video, Expand, Settings, Share, ShoppingCart, Bookmark, Package } from 'lucide-react';
 
 interface Product {
   id: string;
@@ -46,7 +45,7 @@ export default function ARTryOnInterface({
   const startARSession = useCallback(() => {
     setIsARActive(true);
     setIsTracking(true);
-    
+
     // Simulate body detection delay
     setTimeout(() => {
       setBodyDetected(true);
@@ -97,194 +96,193 @@ export default function ARTryOnInterface({
 
   const getColorHex = (color: string) => {
     const colors: Record<string, string> = {
-      blue: '#3B82F6',
-      red: '#EF4444',
-      green: '#10B981',
-      black: '#1F2937',
-      white: '#F9FAFB',
-      gray: '#6B7280'
+      blue: '#3B82F6', // Primary Blue
+      red: '#E53E3E', // Red
+      green: '#38A169', // Green
+      black: '#1A202C', // Dark Gray/Black
+      white: '#FFFFFF', // White
+      gray: '#718096'  // Medium Gray
     };
     return colors[color] || colors.blue;
   };
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
       {/* Enhanced AR Camera Feed */}
       <div className="lg:col-span-2">
-        <Card className="overflow-hidden">
-          <CardContent className="p-0 bg-gray-900">
-            <div className="relative">
-              <div className="aspect-video bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl relative overflow-hidden">
-                <Webcam
-                  ref={webcamRef}
-                  audio={false}
-                  screenshotFormat="image/jpeg"
-                  className="w-full h-full object-cover webcam-container"
-                  data-testid="ar-webcam"
-                />
-                
-                {/* Enhanced Canvas for AR overlay */}
-                <canvas
-                  ref={canvasRef}
-                  className="absolute inset-0 w-full h-full ar-overlay"
-                />
+        <Card className="overflow-hidden card-professional">
+          <CardContent className="p-0 bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl">
+            <div className="relative aspect-video">
+              <Webcam
+                ref={webcamRef}
+                audio={false}
+                screenshotFormat="image/jpeg"
+                className="w-full h-full object-cover"
+                data-testid="ar-webcam"
+              />
 
-                {/* Professional status indicators */}
-                <div className="absolute top-4 left-4 flex flex-col space-y-2">
-                  <div className={`detection-indicator ${isARActive ? 'detection-active' : 'detection-inactive'}`}>
-                    <div className={`w-2 h-2 rounded-full ${isARActive ? 'bg-green-500 animate-pulse' : 'bg-gray-400'}`}></div>
-                    <span>AR {isARActive ? 'Active' : 'Inactive'}</span>
-                  </div>
-                  
-                  <div className={`detection-indicator ${bodyDetected ? 'detection-active' : 'detection-processing'}`}>
-                    <div className={`w-2 h-2 rounded-full ${bodyDetected ? 'bg-green-500' : 'bg-blue-500 animate-pulse'}`}></div>
-                    <span>{bodyDetected ? 'Body Detected' : 'Detecting...'}</span>
-                  </div>
+              {/* Enhanced Canvas for AR overlay */}
+              <canvas
+                ref={canvasRef}
+                className="absolute inset-0 w-full h-full"
+              />
+
+              {/* Professional status indicators */}
+              <div className="absolute top-4 left-4 flex flex-col space-y-3">
+                <div className="flex items-center space-x-2">
+                  <div className={`w-2.5 h-2.5 rounded-full ${isARActive ? 'bg-green-400 animate-pulse' : 'bg-slate-500'}`}></div>
+                  <span className="text-sm font-medium text-slate-200">AR {isARActive ? 'Active' : 'Inactive'}</span>
                 </div>
 
-                {/* Enhanced AR clothing overlay with precise body tracking */}
-                {bodyDetected && (
-                  <div className="body-detection-overlay">
-                    <div className="absolute top-[20%] left-1/2 transform -translate-x-1/2">
-                      <div className="relative">
-                        {/* Precise T-shirt overlay based on body measurements */}
-                        {(product.category === 'shirts' || !product.category) && (
-                          <div className="relative">
-                            {/* Main shirt body */}
-                            <div 
-                              className="w-48 h-40 rounded-t-3xl relative transition-all duration-300 shadow-lg"
-                              style={{ 
-                                background: `linear-gradient(145deg, ${getColorHex(currentColor)}F5, ${getColorHex(currentColor)}E6)`,
-                                border: `2px solid ${getColorHex(currentColor)}B0`,
-                                boxShadow: `0 8px 20px ${getColorHex(currentColor)}30, inset 0 2px 4px rgba(255,255,255,0.2)`
-                              }}
-                            >
-                              {/* Neckline */}
-                              <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-16 h-8 bg-white/20 rounded-b-full"></div>
-                              
-                              {/* Fabric seam lines */}
-                              <div className="absolute inset-4 border border-white/20 rounded-t-2xl"></div>
-                              <div className="absolute top-6 left-4 right-4 h-px bg-white/10"></div>
-                              <div className="absolute bottom-6 left-4 right-4 h-px bg-white/10"></div>
-                              
-                              {/* Buttons */}
-                              <div className="absolute top-8 left-1/2 transform -translate-x-1/2 flex flex-col space-y-3">
-                                <div className="w-1.5 h-1.5 bg-white/80 rounded-full"></div>
-                                <div className="w-1.5 h-1.5 bg-white/80 rounded-full"></div>
-                                <div className="w-1.5 h-1.5 bg-white/80 rounded-full"></div>
-                              </div>
-                              
-                              {/* Pocket */}
-                              <div className="absolute top-10 left-6 w-8 h-6 border border-white/30 rounded"></div>
-                              
-                              {/* Fit indicators */}
-                              <div className="absolute top-2 right-2 w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                              <div className="absolute top-1/3 right-2 w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                              <div className="absolute bottom-4 right-2 w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
-                              
-                              {/* Fabric texture and highlights */}
-                              <div className="absolute inset-0 opacity-15 bg-gradient-to-br from-white via-transparent to-black/10 rounded-t-3xl"></div>
-                              <div className="absolute top-2 left-2 w-6 h-6 bg-white/5 rounded-full blur-sm"></div>
+                <div className="flex items-center space-x-2">
+                  <div className={`w-2.5 h-2.5 rounded-full ${bodyDetected ? 'bg-green-400' : 'bg-blue-400 animate-pulse'}`}></div>
+                  <span className="text-sm font-medium text-slate-200">{bodyDetected ? 'Body Detected' : 'Detecting...'}</span>
+                </div>
+              </div>
+
+              {/* Enhanced AR clothing overlay with precise body tracking */}
+              {bodyDetected && (
+                <div className="body-detection-overlay">
+                  <div className="absolute top-1/4 left-1/2 transform -translate-x-1/2">
+                    <div className="relative">
+                      {/* Precise T-shirt overlay based on body measurements */}
+                      {(product.category === 'shirts' || !product.category) && (
+                        <div className="relative">
+                          {/* Main shirt body */}
+                          <div 
+                            className="w-48 h-40 rounded-t-3xl relative transition-all duration-300 shadow-2xl"
+                            style={{ 
+                              background: `linear-gradient(145deg, ${getColorHex(currentColor)}F5, ${getColorHex(currentColor)}E6)`,
+                              border: `2px solid ${getColorHex(currentColor)}B0`,
+                              boxShadow: `0 8px 20px ${getColorHex(currentColor)}30, inset 0 2px 4px rgba(255,255,255,0.2)`
+                            }}
+                          >
+                            {/* Neckline */}
+                            <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-16 h-8 bg-white/20 rounded-b-full"></div>
+
+                            {/* Fabric seam lines */}
+                            <div className="absolute inset-4 border border-white/20 rounded-t-2xl"></div>
+                            <div className="absolute top-6 left-4 right-4 h-px bg-white/10"></div>
+                            <div className="absolute bottom-6 left-4 right-4 h-px bg-white/10"></div>
+
+                            {/* Buttons */}
+                            <div className="absolute top-8 left-1/2 transform -translate-x-1/2 flex flex-col space-y-3">
+                              <div className="w-1.5 h-1.5 bg-white/80 rounded-full"></div>
+                              <div className="w-1.5 h-1.5 bg-white/80 rounded-full"></div>
+                              <div className="w-1.5 h-1.5 bg-white/80 rounded-full"></div>
                             </div>
-                            
-                            {/* Left sleeve with realistic draping */}
-                            <div 
-                              className="absolute top-2 -left-10 w-18 h-32 rounded-xl transform -rotate-15 transition-all duration-300 shadow-md"
-                              style={{ 
-                                background: `linear-gradient(135deg, ${getColorHex(currentColor)}F0, ${getColorHex(currentColor)}E0)`,
-                                border: `1px solid ${getColorHex(currentColor)}A0`,
-                                boxShadow: `0 4px 12px ${getColorHex(currentColor)}20`
-                              }}
-                            >
-                              <div className="absolute inset-2 border border-white/15 rounded-lg"></div>
-                              <div className="absolute bottom-2 left-2 right-2 h-px bg-white/10"></div>
-                            </div>
-                            
-                            {/* Right sleeve with realistic draping */}
-                            <div 
-                              className="absolute top-2 -right-10 w-18 h-32 rounded-xl transform rotate-15 transition-all duration-300 shadow-md"
-                              style={{ 
-                                background: `linear-gradient(225deg, ${getColorHex(currentColor)}F0, ${getColorHex(currentColor)}E0)`,
-                                border: `1px solid ${getColorHex(currentColor)}A0`,
-                                boxShadow: `0 4px 12px ${getColorHex(currentColor)}20`
-                              }}
-                            >
-                              <div className="absolute inset-2 border border-white/15 rounded-lg"></div>
-                              <div className="absolute bottom-2 left-2 right-2 h-px bg-white/10"></div>
-                            </div>
-                            
-                            {/* Size indicator */}
-                            <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 bg-primary text-white text-xs px-2 py-1 rounded-full">
-                              Size {selectedSize}
-                            </div>
+
+                            {/* Pocket */}
+                            <div className="absolute top-10 left-6 w-8 h-6 border border-white/30 rounded"></div>
+
+                            {/* Fit indicators */}
+                            <div className="absolute top-2 right-2 w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                            <div className="absolute top-1/3 right-2 w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                            <div className="absolute bottom-4 right-2 w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
+
+                            {/* Fabric texture and highlights */}
+                            <div className="absolute inset-0 opacity-15 bg-gradient-to-br from-white via-transparent to-black/10 rounded-t-3xl"></div>
+                            <div className="absolute top-2 left-2 w-6 h-6 bg-white/5 rounded-full blur-sm"></div>
                           </div>
-                        )}
-                        
-                        {/* Pants overlay for lower body */}
-                        {product.category === 'pants' && (
-                          <div className="absolute top-20 left-1/2 transform -translate-x-1/2">
-                            <div 
-                              className="w-32 h-48 relative transition-all duration-300"
-                              style={{ 
-                                background: `linear-gradient(180deg, ${getColorHex(currentColor)}F0, ${getColorHex(currentColor)}E6)`,
-                                border: `2px solid ${getColorHex(currentColor)}A0`,
-                                borderRadius: '8px 8px 12px 12px'
-                              }}
-                            >
-                              <div className="absolute inset-2 border border-white/20 rounded"></div>
-                              <div className="absolute top-4 left-1/2 transform -translate-x-1/2 w-px h-8 bg-white/20"></div>
-                            </div>
+
+                          {/* Left sleeve with realistic draping */}
+                          <div 
+                            className="absolute top-2 -left-10 w-18 h-32 rounded-xl transform -rotate-15 transition-all duration-300 shadow-md"
+                            style={{ 
+                              background: `linear-gradient(135deg, ${getColorHex(currentColor)}F0, ${getColorHex(currentColor)}E0)`,
+                              border: `1px solid ${getColorHex(currentColor)}A0`,
+                              boxShadow: `0 4px 12px ${getColorHex(currentColor)}20`
+                            }}
+                          >
+                            <div className="absolute inset-2 border border-white/15 rounded-lg"></div>
+                            <div className="absolute bottom-2 left-2 right-2 h-px bg-white/10"></div>
                           </div>
-                        )}
-                      </div>
+
+                          {/* Right sleeve with realistic draping */}
+                          <div 
+                            className="absolute top-2 -right-10 w-18 h-32 rounded-xl transform rotate-15 transition-all duration-300 shadow-md"
+                            style={{ 
+                              background: `linear-gradient(225deg, ${getColorHex(currentColor)}F0, ${getColorHex(currentColor)}E0)`,
+                              border: `1px solid ${getColorHex(currentColor)}A0`,
+                              boxShadow: `0 4px 12px ${getColorHex(currentColor)}20`
+                            }}
+                          >
+                            <div className="absolute inset-2 border border-white/15 rounded-lg"></div>
+                            <div className="absolute bottom-2 left-2 right-2 h-px bg-white/10"></div>
+                          </div>
+
+                          {/* Size indicator */}
+                          <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 bg-primary text-white text-xs px-2 py-1 rounded-full">
+                            Size {selectedSize}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Pants overlay for lower body */}
+                      {product.category === 'pants' && (
+                        <div className="absolute top-20 left-1/2 transform -translate-x-1/2">
+                          <div 
+                            className="w-32 h-48 relative transition-all duration-300"
+                            style={{ 
+                              background: `linear-gradient(180deg, ${getColorHex(currentColor)}F0, ${getColorHex(currentColor)}E6)`,
+                              border: `2px solid ${getColorHex(currentColor)}A0`,
+                              borderRadius: '8px 8px 12px 12px'
+                            }}
+                          >
+                            <div className="absolute inset-2 border border-white/20 rounded"></div>
+                            <div className="absolute top-4 left-1/2 transform -translate-x-1/2 w-px h-8 bg-white/20"></div>
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </div>
-                )}
+                </div>
+              )}
 
-                {/* Professional AR controls */}
-                <div className="absolute bottom-4 left-4 right-4">
-                  <div className="ar-controls rounded-xl p-4">
-                    <div className="flex justify-between items-center">
-                      <div className="flex space-x-2">
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={capturePhoto}
-                          className="w-10 h-10 bg-white/10 hover:bg-white/20 rounded-lg text-gray-700 border border-white/20"
-                          data-testid="button-ar-photo"
-                        >
-                          <Camera className="h-4 w-4" />
-                        </Button>
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          className="w-10 h-10 bg-white/10 hover:bg-white/20 rounded-lg text-gray-700 border border-white/20"
-                          data-testid="button-ar-video"
-                        >
-                          <Video className="h-4 w-4" />
-                        </Button>
-                      </div>
-                      <div className="text-gray-700 text-sm text-center">
-                        <div className="font-medium">Perfect Fit Detected</div>
-                      </div>
-                      <div className="flex space-x-2">
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          className="w-10 h-10 bg-white/10 hover:bg-white/20 rounded-lg text-gray-700 border border-white/20"
-                          data-testid="button-ar-fullscreen"
-                        >
-                          <Expand className="h-4 w-4" />
-                        </Button>
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          className="w-10 h-10 bg-white/10 hover:bg-white/20 rounded-lg text-gray-700 border border-white/20"
-                          data-testid="button-ar-settings"
-                        >
-                          <Settings className="h-4 w-4" />
-                        </Button>
-                      </div>
+              {/* Professional AR controls */}
+              <div className="absolute bottom-6 left-6 right-6">
+                <div className="bg-black/40 backdrop-blur-sm rounded-xl p-4 shadow-lg">
+                  <div className="flex justify-between items-center">
+                    <div className="flex space-x-3">
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={capturePhoto}
+                        className="w-12 h-12 bg-white/15 hover:bg-white/25 rounded-xl text-slate-200 border border-white/20"
+                        data-testid="button-ar-photo"
+                      >
+                        <Camera className="h-5 w-5" />
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="w-12 h-12 bg-white/15 hover:bg-white/25 rounded-xl text-slate-200 border border-white/20"
+                        data-testid="button-ar-video"
+                      >
+                        <Video className="h-5 w-5" />
+                      </Button>
+                    </div>
+                    <div className="text-slate-100 text-center">
+                      <div className="font-bold text-lg">Perfect Fit Detected</div>
+                      <p className="text-sm">Based on your measurements</p>
+                    </div>
+                    <div className="flex space-x-3">
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="w-12 h-12 bg-white/15 hover:bg-white/25 rounded-xl text-slate-200 border border-white/20"
+                        data-testid="button-ar-fullscreen"
+                      >
+                        <Expand className="h-5 w-5" />
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="w-12 h-12 bg-white/15 hover:bg-white/25 rounded-xl text-slate-200 border border-white/20"
+                        data-testid="button-ar-settings"
+                      >
+                        <Settings className="h-5 w-5" />
+                      </Button>
                     </div>
                   </div>
                 </div>
@@ -295,40 +293,46 @@ export default function ARTryOnInterface({
       </div>
 
       {/* Enhanced Controls & Analysis */}
-      <div className="space-y-6">
+      <div className="space-y-8">
         {/* Product being tried on */}
-        <Card>
+        <Card className="card-professional">
           <CardHeader>
-            <CardTitle className="text-lg">Trying On</CardTitle>
+            <CardTitle className="text-xl font-bold text-slate-800">Product Details</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="measurement-card flex items-center space-x-4">
-              <div className="w-16 h-16 bg-gradient-to-br from-primary to-primary/80 rounded-lg flex items-center justify-center text-white text-sm font-medium">
-                {product.name.charAt(0)}
+            <div className="flex items-center space-x-5">
+              <div className="relative w-20 h-20 rounded-xl overflow-hidden shadow-lg border border-slate-200">
+                {product.imageUrl ? (
+                  <img src={product.imageUrl} alt={product.name} className="w-full h-full object-cover" />
+                ) : (
+                  <div className="w-full h-full bg-gradient-to-br from-slate-300 to-slate-400 flex items-center justify-center text-white text-2xl font-bold">
+                    {product.name.charAt(0)}
+                  </div>
+                )}
               </div>
-              <div>
-                <h4 className="font-semibold text-gray-900" data-testid="ar-product-name">{product.name}</h4>
-                <p className="text-gray-600 text-sm">
+              <div className="flex-1">
+                <h4 className="font-semibold text-xl text-slate-800" data-testid="ar-product-name">{product.name}</h4>
+                <p className="text-slate-600 text-base mt-1">
                   Size {selectedSize}
                   {product.brand && ` - ${product.brand}`}
                 </p>
-                <p className="text-primary font-medium text-sm">₹{Math.floor(Math.random() * 2000) + 500}</p>
+                <p className="text-primary font-bold text-lg mt-2">₹{Math.floor(Math.random() * 2000) + 500}</p>
               </div>
             </div>
           </CardContent>
         </Card>
 
         {/* Real-time fit analysis */}
-        <Card>
+        <Card className="card-professional">
           <CardHeader>
-            <CardTitle className="text-lg">Fit Analysis</CardTitle>
+            <CardTitle className="text-xl font-bold text-slate-800">Fit Analysis</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="space-y-3">
+            <div className="space-y-4">
               {Object.entries(fitAnalysis).map(([key, status]) => (
                 <div key={key} className="flex justify-between items-center" data-testid={`ar-fit-${key}`}>
-                  <span className="text-gray-700 capitalize text-sm">{key} Fit</span>
-                  <Badge className={`${getFitStatusColor(status)} border text-xs px-2 py-1`}>
+                  <span className="text-slate-700 capitalize text-base">{key} Fit</span>
+                  <Badge className={`${getFitStatusColor(status)} border-2 text-xs px-2.5 py-1.5 rounded-md font-semibold`}>
                     {status === 'perfect' ? 'Perfect' : status === 'good' ? 'Good' : status === 'tight' ? 'Tight' : 'Loose'}
                   </Badge>
                 </div>
@@ -338,35 +342,35 @@ export default function ARTryOnInterface({
         </Card>
 
         {/* Color & Size Controls */}
-        <Card>
+        <Card className="card-professional">
           <CardHeader>
-            <CardTitle className="text-lg">Customize</CardTitle>
+            <CardTitle className="text-xl font-bold text-slate-800">Customize Options</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="space-y-4">
+            <div className="space-y-5">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Color</label>
-                <div className="flex space-x-2">
+                <label className="block text-base font-medium text-slate-700 mb-2.5">Color</label>
+                <div className="flex space-x-3">
                   {['blue', 'black', 'white', 'red', 'green'].map((color) => (
                     <button
                       key={color}
                       onClick={() => changeColor(color)}
-                      className={`w-8 h-8 rounded-full border-2 ${currentColor === color ? 'border-primary' : 'border-gray-200'}`}
+                      className={`w-9 h-9 rounded-full border-2 transition-all duration-300 ease-in-out ${currentColor === color ? 'border-primary shadow-md' : 'border-slate-300 hover:border-slate-400'}`}
                       style={{ backgroundColor: getColorHex(color) }}
                       data-testid={`color-${color}`}
                     />
                   ))}
                 </div>
               </div>
-              
+
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Size</label>
-                <div className="flex space-x-2">
+                <label className="block text-base font-medium text-slate-700 mb-2.5">Size</label>
+                <div className="flex space-x-3">
                   {['S', 'M', 'L', 'XL'].map((size) => (
                     <button
                       key={size}
                       onClick={() => changeSize(size)}
-                      className={`px-3 py-1 text-sm rounded-md border ${selectedSize === size ? 'bg-primary text-white border-primary' : 'bg-white text-gray-700 border-gray-200'}`}
+                      className={`px-3.5 py-1.5 text-base rounded-lg font-medium transition-all duration-300 ease-in-out ${selectedSize === size ? 'bg-primary text-white border-primary' : 'bg-white text-slate-700 border border-slate-300 hover:border-slate-400'}`}
                       data-testid={`size-${size}`}
                     >
                       {size}
@@ -379,27 +383,32 @@ export default function ARTryOnInterface({
         </Card>
 
         {/* Action buttons */}
-        <div className="space-y-3">
+        <div className="space-y-4">
           <Button 
             onClick={() => onPurchase?.(product.id)} 
-            className="w-full bg-primary hover:bg-primary/90 text-white"
+            className="w-full h-14 text-lg font-semibold bg-primary hover:bg-primary/90 text-white shadow-lg transition-all duration-300 ease-in-out rounded-xl"
             data-testid="button-purchase"
           >
-            <ShoppingCart className="mr-2 h-4 w-4" />
+            <ShoppingCart className="mr-3 h-5 w-5" />
             Purchase - ₹{Math.floor(Math.random() * 2000) + 500}
           </Button>
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid grid-cols-2 gap-3">
             <Button 
               variant="outline" 
               onClick={() => onSaveToProfile?.(product.id)}
+              className="h-12 text-base font-medium rounded-xl border-slate-300 text-slate-700 hover:bg-slate-50 transition-all duration-300 ease-in-out"
               data-testid="button-save-profile"
             >
-              <Bookmark className="mr-1 h-4 w-4" />
-              Save
+              <Bookmark className="mr-2 h-5 w-5" />
+              Save to Profile
             </Button>
-            <Button variant="outline" data-testid="button-share-ar">
-              <Share className="mr-1 h-4 w-4" />
-              Share
+            <Button 
+              variant="outline" 
+              className="h-12 text-base font-medium rounded-xl border-slate-300 text-slate-700 hover:bg-slate-50 transition-all duration-300 ease-in-out"
+              data-testid="button-share-ar"
+            >
+              <Share className="mr-2 h-5 w-5" />
+              Share AR
             </Button>
           </div>
         </div>

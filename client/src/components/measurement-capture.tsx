@@ -1,4 +1,3 @@
-
 import { useState, useRef, useCallback } from 'react';
 import Webcam from 'react-webcam';
 import { Button } from '@/components/ui/button';
@@ -8,6 +7,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Camera, Upload, Save, Eye, EyeOff, Settings } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+// Import RotateCcw from lucide-react
+import { RotateCcw } from 'lucide-react';
 
 interface MeasurementData {
   chest: number;
@@ -26,10 +27,10 @@ interface MeasurementCaptureProps {
   isLoading?: boolean;
 }
 
-export default function MeasurementCapture({ 
-  onMeasurementsCapture, 
-  onSaveMeasurements, 
-  isLoading 
+export default function MeasurementCapture({
+  onMeasurementsCapture,
+  onSaveMeasurements,
+  isLoading
 }: MeasurementCaptureProps) {
   const webcamRef = useRef<Webcam>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -51,14 +52,14 @@ export default function MeasurementCapture({
   // Enhanced measurement extraction with multiple views
   const extractMeasurements = useCallback(async (imageData: string, view: string, type: 'body' | 'foot'): Promise<MeasurementData> => {
     setIsCapturing(true);
-    
+
     // Simulate realistic processing time based on view and type
     const processingTime = type === 'foot' ? 3000 : 2500;
     await new Promise(resolve => setTimeout(resolve, processingTime));
-    
+
     // Mock measurements with view-specific accuracy
     const baseAccuracy = view === 'front' ? 95 : view === 'side' ? 90 : 85;
-    
+
     const bodyMeasurements = {
       chest: Math.round((95 + Math.random() * 15) * 100) / 100,
       shoulders: Math.round((40 + Math.random() * 10) * 100) / 100,
@@ -85,15 +86,15 @@ export default function MeasurementCapture({
   const captureImage = useCallback(async () => {
     if (webcamRef.current) {
       setIsCapturing(true);
-      
+
       if (measurementType === 'body') {
         setBodyDetected(true);
       } else {
         setFootDetected(true);
       }
-      
+
       const imageSrc = webcamRef.current.getScreenshot();
-      
+
       if (imageSrc) {
         try {
           const measuredData = await extractMeasurements(imageSrc, currentView, measurementType);
@@ -111,7 +112,7 @@ export default function MeasurementCapture({
     const files = e.target.files;
     if (files && files.length > 0) {
       setIsCapturing(true);
-      
+
       // Process multiple files for different views
       for (let i = 0; i < Math.min(files.length, 3); i++) {
         const file = files[i];
@@ -210,14 +211,14 @@ export default function MeasurementCapture({
             <div className="space-y-4">
               {/* View Selection */}
               <div className="flex justify-center space-x-2 mb-4">
-                {measurementType === 'body' 
+                {measurementType === 'body'
                   ? ['front', 'side', 'back'].map((view) => (
                       <Button
                         key={view}
                         variant={currentView === view ? 'default' : 'outline'}
                         size="sm"
                         onClick={() => setCurrentView(view as any)}
-                        className={`${viewsCompleted[view] ? 'bg-green-50 border-green-200' : ''}`}
+                        className={`${viewsCompleted[view] ? 'status-success' : 'btn-secondary'}`}
                         data-testid={`view-${view}`}
                       >
                         {view.charAt(0).toUpperCase() + view.slice(1)}
@@ -230,7 +231,7 @@ export default function MeasurementCapture({
                         variant={currentView === view ? 'default' : 'outline'}
                         size="sm"
                         onClick={() => setCurrentView(view as any)}
-                        className={`${viewsCompleted[view] ? 'bg-green-50 border-green-200' : ''}`}
+                        className={`${viewsCompleted[view] ? 'status-success' : 'btn-secondary'}`}
                         data-testid={`view-${view}`}
                       >
                         {view.charAt(0).toUpperCase() + view.slice(1)}
@@ -248,19 +249,19 @@ export default function MeasurementCapture({
                   className="w-full aspect-video webcam-container"
                   data-testid="webcam"
                 />
-                
+
                 {/* Detection overlays */}
                 <div className="absolute top-4 right-4 flex flex-col space-y-2">
                   <div className={`detection-indicator ${faceBlurred ? 'detection-active' : 'detection-inactive'}`}>
                     {faceBlurred ? <EyeOff className="h-3 w-3" /> : <Eye className="h-3 w-3" />}
                     <span className="text-xs">{faceBlurred ? 'Face Blurred' : 'Face Visible'}</span>
                   </div>
-                  
+
                   <div className={`detection-indicator ${(measurementType === 'body' ? bodyDetected : footDetected) ? 'detection-active' : 'detection-processing'}`}>
                     <div className={`w-2 h-2 rounded-full ${(measurementType === 'body' ? bodyDetected : footDetected) ? 'bg-green-500' : 'bg-blue-500 animate-pulse'}`}></div>
                     <span className="text-xs">
-                      {measurementType === 'body' 
-                        ? (bodyDetected ? 'Body Detected' : 'Detecting Body...') 
+                      {measurementType === 'body'
+                        ? (bodyDetected ? 'Body Detected' : 'Detecting Body...')
                         : (footDetected ? 'Foot Detected' : 'Detecting Foot...')}
                     </span>
                   </div>
@@ -282,42 +283,42 @@ export default function MeasurementCapture({
                       <div className="absolute inset-0">
                         {/* Head */}
                         <div className="skeleton-point" style={{top: '10%', left: '50%', transform: 'translateX(-50%)'}}></div>
-                        
+
                         {/* Shoulder line */}
                         <div className="skeleton-point" style={{top: '20%', left: '30%'}}></div>
                         <div className="skeleton-point" style={{top: '20%', right: '30%'}}></div>
                         <div className="measurement-line" style={{top: '20%', left: '30%', right: '30%'}}></div>
-                        
+
                         {/* Arms */}
                         <div className="skeleton-point" style={{top: '30%', left: '22%'}}></div>
                         <div className="skeleton-point" style={{top: '30%', right: '22%'}}></div>
                         <div className="skeleton-point" style={{top: '45%', left: '18%'}}></div>
                         <div className="skeleton-point" style={{top: '45%', right: '18%'}}></div>
-                        
+
                         {/* Chest measurement line */}
                         <div className="skeleton-point" style={{top: '35%', left: '35%'}}></div>
                         <div className="skeleton-point" style={{top: '35%', right: '35%'}}></div>
                         <div className="measurement-line" style={{top: '35%', left: '35%', right: '35%'}}></div>
-                        
+
                         {/* Waist measurement line */}
                         <div className="skeleton-point" style={{top: '45%', left: '40%'}}></div>
                         <div className="skeleton-point" style={{top: '45%', right: '40%'}}></div>
                         <div className="measurement-line" style={{top: '45%', left: '40%', right: '40%'}}></div>
-                        
+
                         {/* Hip measurement line */}
                         <div className="skeleton-point" style={{top: '55%', left: '38%'}}></div>
                         <div className="skeleton-point" style={{top: '55%', right: '38%'}}></div>
                         <div className="measurement-line" style={{top: '55%', left: '38%', right: '38%'}}></div>
-                        
+
                         {/* Height line */}
                         <div className="measurement-line border-l-2 border-primary h-full absolute left-1/2 transform -translate-x-1/2 opacity-60"></div>
-                        
+
                         {/* Legs */}
                         <div className="skeleton-point" style={{top: '75%', left: '42%'}}></div>
                         <div className="skeleton-point" style={{top: '75%', right: '42%'}}></div>
                         <div className="skeleton-point" style={{bottom: '10%', left: '42%'}}></div>
                         <div className="skeleton-point" style={{bottom: '10%', right: '42%'}}></div>
-                        
+
                         {/* Measurement labels */}
                         <div className="absolute top-[18%] left-1/2 transform -translate-x-1/2 text-xs bg-primary text-white px-2 py-1 rounded">
                           Shoulders
@@ -340,25 +341,25 @@ export default function MeasurementCapture({
                           <div className="w-40 h-60 relative">
                             {/* Foot boundary */}
                             <div className="absolute inset-0 border-2 border-primary/60 rounded-full transform rotate-12"></div>
-                            
+
                             {/* Length measurement */}
                             <div className="measurement-line border-l-2 border-primary h-full absolute left-1/2 transform -translate-x-1/2"></div>
                             <div className="skeleton-point" style={{top: '5%', left: '50%', transform: 'translateX(-50%)'}}></div>
                             <div className="skeleton-point" style={{bottom: '5%', left: '50%', transform: 'translateX(-50%)'}}></div>
-                            
+
                             {/* Width measurement */}
                             <div className="measurement-line border-t-2 border-primary w-3/4 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
                             <div className="skeleton-point" style={{top: '50%', left: '25%', transform: 'translateY(-50%)'}}></div>
                             <div className="skeleton-point" style={{top: '50%', right: '25%', transform: 'translateY(-50%)'}}></div>
-                            
+
                             {/* Toe and heel points */}
                             <div className="skeleton-point" style={{top: '10%', left: '50%', transform: 'translateX(-50%)'}}></div>
                             <div className="skeleton-point" style={{bottom: '10%', left: '50%', transform: 'translateX(-50%)'}}></div>
-                            
+
                             {/* Arch points */}
                             <div className="skeleton-point" style={{top: '40%', left: '20%'}}></div>
                             <div className="skeleton-point" style={{top: '40%', right: '20%'}}></div>
-                            
+
                             {/* Measurement labels */}
                             <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-6 text-xs bg-primary text-white px-2 py-1 rounded">
                               Length
@@ -384,8 +385,8 @@ export default function MeasurementCapture({
               </div>
 
               <div className="flex justify-center space-x-4">
-                <Button 
-                  onClick={captureImage} 
+                <Button
+                  onClick={captureImage}
                   disabled={isCapturing}
                   className="bg-primary hover:bg-primary/90"
                   data-testid="button-capture"
@@ -393,8 +394,8 @@ export default function MeasurementCapture({
                   <Camera className="mr-2 h-4 w-4" />
                   {isCapturing ? 'Processing...' : 'Capture'}
                 </Button>
-                <Button 
-                  variant="outline" 
+                <Button
+                  variant="outline"
                   onClick={retake}
                   disabled={isCapturing}
                   data-testid="button-retake"
@@ -431,7 +432,7 @@ export default function MeasurementCapture({
                       className="hidden"
                       data-testid="input-file-upload"
                     />
-                    <Button 
+                    <Button
                       onClick={() => fileInputRef.current?.click()}
                       disabled={isCapturing}
                       data-testid="button-choose-file"
@@ -528,8 +529,8 @@ export default function MeasurementCapture({
               </div>
 
               <div className="flex flex-col space-y-3">
-                <Button 
-                  onClick={handleSave} 
+                <Button
+                  onClick={handleSave}
                   disabled={isLoading}
                   className="bg-primary hover:bg-primary/90"
                   data-testid="button-save-measurements"
