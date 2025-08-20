@@ -35,7 +35,10 @@ export default function Measurements() {
   // Redirect if not authenticated
   useEffect(() => {
     if (!user) {
-      setLocation('/login');
+      const timer = setTimeout(() => {
+        setLocation('/login');
+      }, 0);
+      return () => clearTimeout(timer);
     }
   }, [user, setLocation]);
 

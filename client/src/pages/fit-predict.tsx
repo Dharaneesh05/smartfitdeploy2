@@ -16,7 +16,10 @@ export default function FitPredict() {
 
   useEffect(() => {
     if (!user) {
-      setLocation('/login');
+      const timer = setTimeout(() => {
+        setLocation('/login');
+      }, 0);
+      return () => clearTimeout(timer);
     }
   }, [user, setLocation]);
 
