@@ -107,24 +107,24 @@ export default function ARTryOnInterface({
   };
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 bg-gradient-to-br from-slate-100 to-slate-200 min-h-screen p-8">
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
       {/* Enhanced AR Camera Feed */}
       <div className="lg:col-span-2">
-        <Card className="overflow-hidden card-professional shadow-xl rounded-2xl">
-          <CardContent className="p-0 bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl">
+        <Card className="overflow-hidden card-professional">
+          <CardContent className="p-0 bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl">
             <div className="relative aspect-video">
               <Webcam
                 ref={webcamRef}
                 audio={false}
                 screenshotFormat="image/jpeg"
-                className="w-full h-full object-cover rounded-2xl"
+                className="w-full h-full object-cover"
                 data-testid="ar-webcam"
               />
 
               {/* Enhanced Canvas for AR overlay */}
               <canvas
                 ref={canvasRef}
-                className="absolute inset-0 w-full h-full rounded-2xl"
+                className="absolute inset-0 w-full h-full"
               />
 
               {/* Professional status indicators */}
@@ -145,21 +145,31 @@ export default function ARTryOnInterface({
                 <div className="body-detection-overlay">
                   <div className="absolute top-1/4 left-1/2 transform -translate-x-1/2">
                     <div className="relative">
-                      {/* Lenskart-style enhanced T-shirt with ultra-realistic overlay */}
-                        <div className="relative ar-product-overlay">
-                          {/* Main shirt body with advanced material rendering and realistic positioning */}
+                      {/* Hyper-realistic T-shirt overlay with physics-based rendering */}
+                      {(product.category === 'shirts' || !product.category) && (
+                        <div className="relative">
+                          {/* Advanced main shirt body with real fabric simulation */}
                           <div 
-                            className="ar-cloth-overlay absolute top-8 left-1/2 transform -translate-x-1/2 w-32 h-40 rounded-t-3xl ar-shadow-enhancement"
+                            className="w-56 h-48 rounded-t-3xl relative transition-all duration-300 shadow-2xl"
                             style={{ 
-                              background: `linear-gradient(180deg, ${getColorHex(currentColor)}F0, ${getColorHex(currentColor)}E5, ${getColorHex(currentColor)}F5)`,
+                              background: `
+                                linear-gradient(145deg, 
+                                  ${getColorHex(currentColor)}F8 0%, 
+                                  ${getColorHex(currentColor)}E8 25%, 
+                                  ${getColorHex(currentColor)}F0 50%, 
+                                  ${getColorHex(currentColor)}E5 75%, 
+                                  ${getColorHex(currentColor)}EA 100%
+                                )`,
                               border: `2px solid ${getColorHex(currentColor)}C0`,
                               boxShadow: `
-                                0 15px 35px ${getColorHex(currentColor)}35, 
-                                inset 0 2px 8px rgba(255,255,255,0.25), 
+                                0 16px 40px ${getColorHex(currentColor)}20, 
+                                inset 0 2px 8px rgba(255,255,255,0.3), 
                                 inset 0 -2px 8px rgba(0,0,0,0.1),
-                                0 0 0 1px rgba(255,255,255,0.2) inset
+                                0 0 20px ${getColorHex(currentColor)}15
                               `,
-                              filter: `drop-shadow(0 20px 40px ${getColorHex(currentColor)}20)`
+                              filter: 'drop-shadow(0 12px 24px rgba(0,0,0,0.15))',
+                              transform: 'perspective(800px) rotateX(2deg) rotateY(-1deg)',
+                              borderRadius: '24px 24px 8px 8px'
                             }}
                           >
                             {/* Ultra-realistic neckline with proper collar structure */}
@@ -215,22 +225,22 @@ export default function ARTryOnInterface({
                             <div className="absolute top-3 left-4 w-12 h-12 bg-white/12 rounded-full blur-md"></div>
                             <div className="absolute top-6 right-6 w-8 h-8 bg-white/8 rounded-full blur-md"></div>
                             <div className="absolute bottom-8 left-8 w-10 h-10 bg-white/6 rounded-full blur-md"></div>
-
+                            
                             {/* Ultra-realistic fabric wrinkles and folds */}
                             <div className="absolute top-10 left-10 w-20 h-1 bg-black/8 rounded-full blur-sm transform rotate-15 shadow-sm"></div>
                             <div className="absolute top-16 right-10 w-16 h-1 bg-black/6 rounded-full blur-sm transform -rotate-8 shadow-sm"></div>
                             <div className="absolute bottom-12 left-16 w-24 h-1 bg-black/8 rounded-full blur-sm transform rotate-5 shadow-sm"></div>
                             <div className="absolute top-20 left-6 w-14 h-1 bg-black/4 rounded-full blur-sm transform rotate-25 shadow-sm"></div>
                             <div className="absolute bottom-16 right-12 w-18 h-1 bg-black/6 rounded-full blur-sm transform -rotate-12 shadow-sm"></div>
-
+                            
                             {/* Dynamic fabric stretching with real-time indicators */}
                             <div className="absolute top-18 left-1/2 transform -translate-x-1/2 w-10 h-10 border-2 border-green-400/40 rounded-full animate-pulse shadow-md bg-green-50/10"></div>
                             <div className="absolute bottom-14 left-1/4 w-8 h-8 border-2 border-blue-400/40 rounded-full animate-pulse shadow-md bg-blue-50/10"></div>
                             <div className="absolute bottom-14 right-1/4 w-8 h-8 border-2 border-blue-400/40 rounded-full animate-pulse shadow-md bg-blue-50/10"></div>
-
+                            
                             {/* Advanced fit visualization with body mapping */}
                             <div className="absolute inset-3 border-2 border-green-400/40 rounded-t-2xl animate-pulse shadow-lg bg-green-50/5"></div>
-
+                            
                             {/* Realistic fabric highlights */}
                             <div className="absolute top-4 left-8 w-6 h-2 bg-white/30 rounded-full blur-sm transform rotate-45"></div>
                             <div className="absolute top-8 right-10 w-4 h-2 bg-white/25 rounded-full blur-sm transform -rotate-30"></div>
@@ -353,8 +363,8 @@ export default function ARTryOnInterface({
       {/* Enhanced Controls & Analysis */}
       <div className="space-y-8">
         {/* Product being tried on */}
-        <Card className="card-professional shadow-lg rounded-2xl">
-          <CardHeader className="bg-slate-50 rounded-t-2xl">
+        <Card className="card-professional">
+          <CardHeader>
             <CardTitle className="text-xl font-bold text-slate-800">Product Details</CardTitle>
           </CardHeader>
           <CardContent>
@@ -381,8 +391,8 @@ export default function ARTryOnInterface({
         </Card>
 
         {/* Real-time fit analysis */}
-        <Card className="card-professional shadow-lg rounded-2xl">
-          <CardHeader className="bg-slate-50 rounded-t-2xl">
+        <Card className="card-professional">
+          <CardHeader>
             <CardTitle className="text-xl font-bold text-slate-800">Fit Analysis</CardTitle>
           </CardHeader>
           <CardContent>
@@ -400,8 +410,8 @@ export default function ARTryOnInterface({
         </Card>
 
         {/* Color & Size Controls */}
-        <Card className="card-professional shadow-lg rounded-2xl">
-          <CardHeader className="bg-slate-50 rounded-t-2xl">
+        <Card className="card-professional">
+          <CardHeader>
             <CardTitle className="text-xl font-bold text-slate-800">Customize Options</CardTitle>
           </CardHeader>
           <CardContent>

@@ -5,16 +5,16 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import {
+import { 
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import {
-  Heart,
-  ExternalLink,
+import { 
+  Heart, 
+  ExternalLink, 
   Star,
   Filter,
   ShoppingCart,
@@ -303,7 +303,7 @@ export default function RecommendationsPage() {
 
   const filteredRecommendations = recommendations.filter(rec => {
     const categoryMatch = categoryFilter === 'all' || rec.category === categoryFilter;
-    const fitMatch = fitFilter === 'all' ||
+    const fitMatch = fitFilter === 'all' || 
       (fitFilter === 'excellent' && rec.fitScore >= 90) ||
       (fitFilter === 'good' && rec.fitScore >= 70 && rec.fitScore < 90) ||
       (fitFilter === 'fair' && rec.fitScore < 70);
@@ -314,16 +314,21 @@ export default function RecommendationsPage() {
   if (!user) return null;
 
   return (
-    <div className="min-h-screen page-background py-8">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="text-center mb-8 animate-fade-in">
-          <h1 className="text-3xl font-bold text-gray-900 mb-4">Product Recommendations</h1>
-          <p className="text-lg text-gray-600">Discover products tailored to your measurements and preferences</p>
+    <div className="min-h-screen bg-gray-50 pt-20 pb-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <div className="mb-8" data-testid="recommendations-header">
+          <h1 className="text-4xl font-extrabold text-slate-900 mb-4">
+            Personalized Recommendations
+          </h1>
+          <p className="text-xl text-slate-700">
+            Discover items tailored to your unique style and fit.
+          </p>
         </div>
 
         {/* Filters */}
         <div className="mb-8">
-          <Card className="shadow-lg border-none bg-white rounded-xl">
+          <Card className="shadow-lg border-none">
             <CardHeader className="pb-4">
               <CardTitle className="flex items-center space-x-3 text-2xl font-bold text-slate-900">
                 <Filter className="w-6 h-6 text-blue-600" />
@@ -337,15 +342,15 @@ export default function RecommendationsPage() {
                     Category
                   </label>
                   <Select value={categoryFilter} onValueChange={setCategoryFilter}>
-                    <SelectTrigger className="h-12 text-lg text-slate-700 border-slate-300 focus:ring-blue-500 focus:border-blue-500 focus:ring-2 rounded-md">
+                    <SelectTrigger className="h-12 text-lg text-slate-700 border-slate-300 focus:ring-blue-500 focus:border-blue-500 focus:ring-2">
                       <SelectValue placeholder="All Categories" />
                     </SelectTrigger>
-                    <SelectContent className="bg-white border-slate-200 rounded-md shadow-lg">
-                      <SelectItem value="all" className="hover:bg-slate-100 cursor-pointer py-2 px-3">All Categories</SelectItem>
-                      <SelectItem value="shirts" className="hover:bg-slate-100 cursor-pointer py-2 px-3">Shirts</SelectItem>
-                      <SelectItem value="pants" className="hover:bg-slate-100 cursor-pointer py-2 px-3">Pants</SelectItem>
-                      <SelectItem value="jackets" className="hover:bg-slate-100 cursor-pointer py-2 px-3">Jackets</SelectItem>
-                      <SelectItem value="footwear" className="hover:bg-slate-100 cursor-pointer py-2 px-3">Footwear</SelectItem>
+                    <SelectContent className="bg-white border-slate-200">
+                      <SelectItem value="all" className="hover:bg-slate-100 cursor-pointer">All Categories</SelectItem>
+                      <SelectItem value="shirts" className="hover:bg-slate-100 cursor-pointer">Shirts</SelectItem>
+                      <SelectItem value="pants" className="hover:bg-slate-100 cursor-pointer">Pants</SelectItem>
+                      <SelectItem value="jackets" className="hover:bg-slate-100 cursor-pointer">Jackets</SelectItem>
+                      <SelectItem value="footwear" className="hover:bg-slate-100 cursor-pointer">Footwear</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -355,14 +360,14 @@ export default function RecommendationsPage() {
                     Fit Quality
                   </label>
                   <Select value={fitFilter} onValueChange={setFitFilter}>
-                    <SelectTrigger className="h-12 text-lg text-slate-700 border-slate-300 focus:ring-blue-500 focus:border-blue-500 focus:ring-2 rounded-md">
+                    <SelectTrigger className="h-12 text-lg text-slate-700 border-slate-300 focus:ring-blue-500 focus:border-blue-500 focus:ring-2">
                       <SelectValue placeholder="All Fits" />
                     </SelectTrigger>
-                    <SelectContent className="bg-white border-slate-200 rounded-md shadow-lg">
-                      <SelectItem value="all" className="hover:bg-slate-100 cursor-pointer py-2 px-3">All Fits</SelectItem>
-                      <SelectItem value="excellent" className="hover:bg-slate-100 cursor-pointer py-2 px-3">Excellent (90%+)</SelectItem>
-                      <SelectItem value="good" className="hover:bg-slate-100 cursor-pointer py-2 px-3">Good (70-89%)</SelectItem>
-                      <SelectItem value="fair" className="hover:bg-slate-100 cursor-pointer py-2 px-3">Fair (&lt;70%)</SelectItem>
+                    <SelectContent className="bg-white border-slate-200">
+                      <SelectItem value="all" className="hover:bg-slate-100 cursor-pointer">All Fits</SelectItem>
+                      <SelectItem value="excellent" className="hover:bg-slate-100 cursor-pointer">Excellent (90%+)</SelectItem>
+                      <SelectItem value="good" className="hover:bg-slate-100 cursor-pointer">Good (70-89%)</SelectItem>
+                      <SelectItem value="fair" className="hover:bg-slate-100 cursor-pointer">Fair (&lt;70%)</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -375,7 +380,7 @@ export default function RecommendationsPage() {
         {isLoading && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[...Array(6)].map((_, i) => (
-              <Card key={i} className="animate-pulse bg-gradient-to-br from-slate-50 to-slate-100 shadow-xl rounded-xl">
+              <Card key={i} className="animate-pulse bg-gradient-to-br from-slate-50 to-slate-100 shadow-md rounded-xl">
                 <CardContent className="p-6">
                   <div className="bg-slate-200 h-48 rounded-lg mb-4"></div>
                   <div className="bg-slate-200 h-4 rounded mb-2 w-3/4"></div>
@@ -388,20 +393,20 @@ export default function RecommendationsPage() {
 
         {/* Recommendations Grid */}
         {!isLoading && filteredRecommendations.length === 0 && (
-          <Card className="text-center py-16 bg-gradient-to-br from-blue-50 to-purple-50 border-none shadow-xl rounded-2xl">
+          <Card className="text-center py-16 bg-gradient-to-br from-blue-50 to-purple-50 border-none shadow-lg rounded-2xl">
             <CardContent>
               <Package className="w-20 h-20 text-blue-400 mx-auto mb-5" />
               <h3 className="text-3xl font-bold text-slate-900 mb-3">
                 No Recommendations Yet
               </h3>
               <p className="text-xl text-slate-700 mb-8 leading-relaxed">
-                {categoryFilter !== 'all' || fitFilter !== 'all'
+                {categoryFilter !== 'all' || fitFilter !== 'all' 
                   ? 'Try adjusting your filters to discover more items.'
                   : 'Complete your profile measurements to unlock personalized style suggestions.'}
               </p>
-              <Button
+              <Button 
                 onClick={() => setLocation('/measurements')}
-                className="h-12 px-8 text-lg font-semibold shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1 rounded-md"
+                className="h-12 px-8 text-lg font-semibold shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1"
                 data-testid="button-go-measurements"
               >
                 Update Measurements
@@ -424,7 +429,7 @@ export default function RecommendationsPage() {
                       data-testid={`image-${recommendation.id}`}
                       loading="lazy"
                     />
-                    <Badge
+                    <Badge 
                       className={`absolute top-3 right-3 font-bold tracking-wide text-sm
                         ${recommendation.fitScore >= 90 ? 'bg-green-500 shadow-md' :
                         recommendation.fitScore >= 70 ? 'bg-yellow-500 shadow-md' : 'bg-orange-500 shadow-md'}`}
@@ -474,7 +479,7 @@ export default function RecommendationsPage() {
                         size="lg"
                         onClick={() => addToFavoritesMutation.mutate(recommendation)}
                         disabled={addToFavoritesMutation.isPending}
-                        className="flex-1 border-slate-300 hover:bg-slate-100 text-slate-700 font-semibold rounded-md"
+                        className="flex-1 border-slate-300 hover:bg-slate-100 text-slate-700 font-semibold"
                         data-testid={`button-favorite-${recommendation.id}`}
                       >
                         <Heart className="w-5 h-5 mr-2 fill-current text-red-500" />
@@ -485,7 +490,7 @@ export default function RecommendationsPage() {
                         <Button
                           size="lg"
                           onClick={() => window.open(recommendation.externalUrl!, '_blank')}
-                          className="flex-1 bg-blue-600 hover:bg-blue-700 font-semibold shadow-md transform hover:-translate-y-0.5 rounded-md"
+                          className="flex-1 bg-blue-600 hover:bg-blue-700 font-semibold shadow-md transform hover:-translate-y-0.5"
                           data-testid={`button-buy-${recommendation.id}`}
                         >
                           <ShoppingCart className="w-5 h-5 mr-2" />
@@ -503,9 +508,9 @@ export default function RecommendationsPage() {
         {/* Generate More Recommendations Button */}
         {filteredRecommendations.length > 0 && (
           <div className="text-center mt-12">
-            <Button
+            <Button 
               onClick={generateSampleRecommendations}
-              className="h-12 px-8 text-lg font-semibold bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white shadow-lg transform hover:-translate-y-1 transition-all duration-300 rounded-md"
+              className="h-12 px-8 text-lg font-semibold bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white shadow-lg transform hover:-translate-y-1 transition-all duration-300"
               data-testid="button-load-more"
             >
               <TrendingUp className="w-5 h-5 mr-2" />
@@ -520,17 +525,17 @@ export default function RecommendationsPage() {
             Need more styling advice?
           </p>
           <div className="flex justify-center space-x-6">
-            <Button
-              variant="outline"
-              size="lg"
+            <Button 
+              variant="outline" 
+              size="lg" 
               onClick={() => setLocation('/profile')}
-              className="border-slate-300 text-slate-700 hover:bg-slate-50 font-medium rounded-md"
+              className="border-slate-300 text-slate-700 hover:bg-slate-50 font-medium"
             >
               My Profile
             </Button>
-            <Button
-              size="lg"
-              className="bg-gray-800 hover:bg-gray-900 text-white font-medium shadow-md rounded-md"
+            <Button 
+              size="lg" 
+              className="bg-gray-800 hover:bg-gray-900 text-white font-medium shadow-md"
               onClick={() => setLocation('/measurements')}
             >
               Update Measurements

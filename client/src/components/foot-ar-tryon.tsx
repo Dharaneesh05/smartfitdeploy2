@@ -1,3 +1,4 @@
+
 import { useState, useRef, useCallback, useEffect } from 'react';
 import Webcam from 'react-webcam';
 import { Button } from '@/components/ui/button';
@@ -41,7 +42,7 @@ export default function FootARTryOn({
 
   const startARSession = useCallback(() => {
     setIsARActive(true);
-
+    
     // Simulate foot detection
     setTimeout(() => {
       setFeetDetected(true);
@@ -115,7 +116,7 @@ export default function FootARTryOn({
                   className="w-full h-full object-cover webcam-container"
                   data-testid="foot-ar-webcam"
                 />
-
+                
                 <canvas
                   ref={canvasRef}
                   className="absolute inset-0 w-full h-full ar-overlay"
@@ -127,7 +128,7 @@ export default function FootARTryOn({
                     <div className={`w-2 h-2 rounded-full ${isARActive ? 'bg-green-500 animate-pulse' : 'bg-gray-400'}`}></div>
                     <span>Foot AR {isARActive ? 'Active' : 'Inactive'}</span>
                   </div>
-
+                  
                   <div className={`detection-indicator ${feetDetected ? 'detection-active' : 'detection-processing'}`}>
                     <div className={`w-2 h-2 rounded-full ${feetDetected ? 'bg-green-500' : 'bg-blue-500 animate-pulse'}`}></div>
                     <span>{feetDetected ? 'Feet Detected' : 'Detecting Feet...'}</span>
@@ -139,18 +140,27 @@ export default function FootARTryOn({
                   <div className="foot-measurement-overlay absolute bottom-[15%] left-1/2 transform -translate-x-1/2">
                     <div className="flex space-x-12">
                       {/* Left foot with enhanced realism */}
-                      <div className="relative ar-product-overlay">
+                      <div className="relative">
                         <div 
-                          className="ar-footwear-overlay w-28 h-16 rounded-2xl transition-all duration-300 ar-shadow-enhancement transform hover:scale-105"
+                          className={`w-40 h-28 ${getFootwearShape(product.type)} relative transition-all duration-300 shadow-2xl`}
                           style={{ 
-                            background: `linear-gradient(135deg, ${getColorHex(currentColor)}E5, ${getColorHex(currentColor)}F0, ${getColorHex(currentColor)}E0)`,
-                            border: `2px solid ${getColorHex(currentColor)}B0`,
+                            background: `
+                              linear-gradient(135deg, 
+                                ${getColorHex(currentColor)}F8 0%, 
+                                ${getColorHex(currentColor)}E8 25%, 
+                                ${getColorHex(currentColor)}F0 50%, 
+                                ${getColorHex(currentColor)}E6 75%, 
+                                ${getColorHex(currentColor)}EA 100%
+                              )`,
+                            border: `3px solid ${getColorHex(currentColor)}C0`,
                             boxShadow: `
-                              0 8px 25px ${getColorHex(currentColor)}30, 
-                              inset 0 2px 4px rgba(255,255,255,0.2),
-                              0 0 0 1px rgba(255,255,255,0.3) inset
+                              0 12px 30px ${getColorHex(currentColor)}25, 
+                              inset 0 3px 8px rgba(255,255,255,0.2), 
+                              inset 0 -3px 8px rgba(0,0,0,0.1),
+                              0 0 25px ${getColorHex(currentColor)}15
                             `,
-                            filter: `drop-shadow(0 15px 30px ${getColorHex(currentColor)}25)`
+                            filter: 'drop-shadow(0 8px 16px rgba(0,0,0,0.2))',
+                            transform: 'perspective(600px) rotateX(8deg) rotateY(-3deg)'
                           }}
                         >
                           {/* Enhanced sports shoe details */}
@@ -164,7 +174,7 @@ export default function FootARTryOn({
                               <div className="absolute bottom-4 left-4 w-6 h-1 bg-white/25 rounded"></div>
                             </>
                           )}
-
+                          
                           {/* Enhanced formal shoe details */}
                           {product.type === 'formal' && (
                             <>
@@ -199,30 +209,25 @@ export default function FootARTryOn({
                           {/* Enhanced fit indicators */}
                           <div className="absolute -top-2 -right-2 w-4 h-4 bg-green-400 rounded-full animate-pulse shadow-md"></div>
                           <div className="absolute top-1 right-1 w-2 h-2 bg-green-300 rounded-full"></div>
-
+                          
                           {/* Size indicator */}
                           <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-primary text-white text-xs px-2 py-1 rounded-full">
                             {selectedSize}
                           </div>
-
+                          
                           {/* Texture overlay */}
                           <div className="absolute inset-0 opacity-10 bg-gradient-to-br from-white via-transparent to-black/10 rounded-xl"></div>
                         </div>
                       </div>
 
                       {/* Right foot with enhanced realism */}
-                      <div className="relative ar-product-overlay">
+                      <div className="relative">
                         <div 
-                          className="ar-footwear-overlay w-36 h-24 rounded-2xl transition-all duration-300 ar-shadow-enhancement transform hover:scale-105"
+                          className={`w-36 h-24 ${getFootwearShape(product.type)} relative transition-all duration-300 shadow-lg`}
                           style={{ 
                             background: `linear-gradient(225deg, ${getColorHex(currentColor)}F5, ${getColorHex(currentColor)}E6)`,
                             border: `2px solid ${getColorHex(currentColor)}B0`,
-                            boxShadow: `
-                              0 8px 20px ${getColorHex(currentColor)}30, 
-                              inset 0 2px 4px rgba(255,255,255,0.1),
-                              0 0 0 1px rgba(255,255,255,0.3) inset
-                            `,
-                            filter: `drop-shadow(0 15px 30px ${getColorHex(currentColor)}25)`
+                            boxShadow: `0 8px 20px ${getColorHex(currentColor)}30, inset 0 2px 4px rgba(255,255,255,0.1)`
                           }}
                         >
                           {/* Mirror the left foot details with right-foot adjustments */}
@@ -236,7 +241,7 @@ export default function FootARTryOn({
                               <div className="absolute bottom-4 right-4 w-6 h-1 bg-white/25 rounded"></div>
                             </>
                           )}
-
+                          
                           {product.type === 'formal' && (
                             <>
                               <div className="absolute inset-3 border border-white/15 rounded-md"></div>
@@ -267,11 +272,11 @@ export default function FootARTryOn({
 
                           <div className="absolute -top-2 -left-2 w-4 h-4 bg-green-400 rounded-full animate-pulse shadow-md"></div>
                           <div className="absolute top-1 left-1 w-2 h-2 bg-green-300 rounded-full"></div>
-
+                          
                           <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-primary text-white text-xs px-2 py-1 rounded-full">
                             {selectedSize}
                           </div>
-
+                          
                           <div className="absolute inset-0 opacity-10 bg-gradient-to-bl from-white via-transparent to-black/10 rounded-xl"></div>
                         </div>
                       </div>
@@ -391,7 +396,7 @@ export default function FootARTryOn({
                   ))}
                 </div>
               </div>
-
+              
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Size</label>
                 <div className="flex space-x-2">

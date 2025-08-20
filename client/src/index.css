@@ -1,11 +1,10 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    /* Professional navy and gold color scheme with smooth gradients */
+    /* Professional navy and gold color scheme */
     --background: 0 0% 100%;
     --foreground: 220 15% 20%;
     --card: 0 0% 100%;
@@ -65,305 +64,184 @@
     @apply border-border;
   }
   body {
-    @apply bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-50/20 text-foreground antialiased min-h-screen;
+    @apply bg-background text-foreground antialiased;
     font-feature-settings: "rlig" 1, "calt" 1;
-    background-attachment: fixed;
   }
 }
 
-/* Professional page backgrounds with smooth gradients */
-.page-background {
-  background: linear-gradient(135deg, 
-    rgba(248, 250, 252, 0.9) 0%, 
-    rgba(241, 245, 249, 0.8) 25%,
-    rgba(255, 255, 255, 0.9) 50%,
-    rgba(239, 246, 255, 0.8) 75%,
-    rgba(238, 242, 255, 0.7) 100%
-  );
-  min-height: 100vh;
-  backdrop-filter: blur(1px);
-}
-
-/* Smooth card backgrounds */
-.card-smooth {
-  background: linear-gradient(145deg, 
-    rgba(255, 255, 255, 0.95) 0%,
-    rgba(248, 250, 252, 0.9) 100%
-  );
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(226, 232, 240, 0.5);
-  box-shadow: 
-    0 4px 6px -1px rgba(0, 0, 0, 0.05),
-    0 2px 4px -1px rgba(0, 0, 0, 0.03),
-    0 0 0 1px rgba(255, 255, 255, 0.4) inset;
-}
-
-/* Enhanced AR and measurement styling */
+/* Professional AR and measurement styling with enhanced visual hierarchy */
 .webcam-container {
-  border-radius: 20px;
-  background: linear-gradient(145deg, #ffffff, #f8fafc);
-  box-shadow: 
-    0 25px 50px -12px rgba(0, 0, 0, 0.15),
-    0 0 0 1px rgba(255, 255, 255, 0.6) inset;
+  border-radius: 16px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
   filter: contrast(1.1) brightness(1.05);
-  overflow: hidden;
-  position: relative;
 }
 
-.webcam-container::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(45deg, transparent 49%, rgba(59, 130, 246, 0.01) 50%, transparent 51%);
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* Lenskart-style AR overlay */
-.ar-product-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  pointer-events: none;
-  z-index: 20;
-}
-
-.ar-cloth-overlay {
-  position: absolute;
-  transform-origin: center;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.15));
-}
-
-.ar-footwear-overlay {
-  position: absolute;
-  transform-origin: bottom center;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.2));
-}
-
-/* Enhanced detection indicators */
 .detection-indicator {
-  @apply bg-white/95 backdrop-blur-md px-4 py-2.5 rounded-full flex items-center space-x-3 text-sm font-semibold shadow-lg border border-white/30;
+  @apply bg-white/95 backdrop-blur-md px-4 py-2.5 rounded-xl flex items-center space-x-3 text-sm font-semibold shadow-xl border border-white/20;
   backdrop-filter: blur(20px);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(248, 250, 252, 0.9));
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .detection-active {
-  @apply border-emerald-200 text-emerald-800;
-  background: linear-gradient(145deg, rgba(236, 253, 245, 0.95), rgba(209, 250, 229, 0.9));
-  box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.15), 0 0 0 1px rgba(16, 185, 129, 0.1) inset;
+  @apply border-emerald-200 text-emerald-800 bg-emerald-50/90;
+  box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.1);
 }
 
 .detection-inactive {
-  @apply border-slate-200 text-slate-600;
-  background: linear-gradient(145deg, rgba(248, 250, 252, 0.95), rgba(241, 245, 249, 0.9));
+  @apply border-slate-200 text-slate-600 bg-slate-50/90;
 }
 
 .detection-processing {
-  @apply border-blue-200 text-blue-800;
-  background: linear-gradient(145deg, rgba(239, 246, 255, 0.95), rgba(219, 234, 254, 0.9));
-  box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.15), 0 0 0 1px rgba(59, 130, 246, 0.1) inset;
+  @apply border-blue-200 text-blue-800 bg-blue-50/90;
+  box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.1);
 }
 
-/* Smooth skeleton points for body mapping */
 .skeleton-point {
-  @apply w-3 h-3 rounded-full absolute z-20 border-2 border-white shadow-lg;
-  background: radial-gradient(circle, #3b82f6 0%, #06b6d4 100%);
+  @apply w-3 h-3 bg-blue-500 rounded-full absolute z-20 border-2 border-white shadow-lg;
   transition: all 0.2s ease-in-out;
-  animation: pulse-smooth 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  box-shadow: 
-    0 0 15px rgba(59, 130, 246, 0.4),
-    0 0 5px rgba(255, 255, 255, 0.8) inset;
-}
-
-@keyframes pulse-smooth {
-  0%, 100% { 
-    opacity: 1; 
-    transform: scale(1);
-  }
-  50% { 
-    opacity: 0.7; 
-    transform: scale(1.1);
-  }
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
 .measurement-line {
-  @apply absolute z-10 opacity-90;
-  border-color: #3b82f6;
-  filter: drop-shadow(0 2px 4px rgba(59, 130, 246, 0.2));
-  background: linear-gradient(90deg, #3b82f6, #06b6d4);
+  @apply border-blue-400 absolute z-10 opacity-90 shadow-sm;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
 }
 
-/* Professional measurement cards */
+.body-detection-overlay {
+  @apply absolute inset-0 pointer-events-none;
+  background: linear-gradient(45deg, transparent 49%, rgba(59, 130, 246, 0.03) 50%, transparent 51%);
+}
+
+.foot-measurement-overlay {
+  @apply absolute inset-0 pointer-events-none;
+  background: radial-gradient(circle at center, rgba(59, 130, 246, 0.05) 0%, transparent 70%);
+}
+
 .measurement-card {
-  @apply bg-gradient-to-br from-white via-slate-50/30 to-white border border-slate-200/40 rounded-xl p-6 hover:shadow-xl transition-all duration-500;
-  backdrop-filter: blur(10px);
-  background: linear-gradient(145deg, 
-    rgba(255, 255, 255, 0.95) 0%,
-    rgba(248, 250, 252, 0.8) 50%,
-    rgba(255, 255, 255, 0.95) 100%
-  );
-  box-shadow: 
-    0 4px 6px -1px rgba(0, 0, 0, 0.03),
-    0 2px 4px -1px rgba(0, 0, 0, 0.02),
-    0 0 0 1px rgba(255, 255, 255, 0.6) inset;
+  @apply bg-gradient-to-br from-white via-slate-50/50 to-white border border-slate-200/60 rounded-xl p-5 hover:shadow-lg transition-all duration-300 hover:border-blue-300/60;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
 }
 
 .measurement-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(59, 130, 246, 0.3);
-  box-shadow: 
-    0 20px 40px -12px rgba(0, 0, 0, 0.08),
-    0 0 0 1px rgba(59, 130, 246, 0.1) inset;
+  transform: translateY(-2px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08);
 }
 
-/* Enhanced AR controls */
 .ar-controls {
-  @apply border border-slate-200/50 shadow-2xl rounded-2xl;
-  background: linear-gradient(145deg, 
-    rgba(255, 255, 255, 0.95) 0%,
-    rgba(248, 250, 252, 0.9) 100%
-  );
-  backdrop-filter: blur(20px);
-  box-shadow: 
-    0 25px 50px -12px rgba(0, 0, 0, 0.1),
-    0 0 0 1px rgba(255, 255, 255, 0.8) inset;
+  @apply bg-white/95 backdrop-blur-md border border-slate-200 shadow-2xl rounded-xl;
+  backdrop-filter: blur(16px);
 }
 
-/* Professional button styling */
+/* Enhanced button styling for professional look */
 .btn-primary {
-  @apply text-white font-semibold px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300;
-  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
-  box-shadow: 
-    0 4px 14px 0 rgba(59, 130, 246, 0.25),
-    0 0 0 1px rgba(255, 255, 255, 0.3) inset;
-}
-
-.btn-primary:hover {
-  background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
-  transform: translateY(-1px);
+  @apply bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300;
+  box-shadow: 0 4px 14px 0 rgba(59, 130, 246, 0.25);
 }
 
 .btn-secondary {
-  @apply text-slate-700 font-semibold px-8 py-3 rounded-xl shadow-md hover:shadow-lg transition-all duration-300;
-  background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+  @apply bg-gradient-to-r from-slate-100 to-slate-200 hover:from-slate-200 hover:to-slate-300 text-slate-700 font-semibold px-6 py-3 rounded-xl shadow-md hover:shadow-lg transition-all duration-300;
 }
 
 .btn-accent {
-  @apply text-white font-semibold px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300;
-  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-  box-shadow: 
-    0 4px 14px 0 rgba(245, 158, 11, 0.25),
-    0 0 0 1px rgba(255, 255, 255, 0.3) inset;
+  @apply bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-semibold px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300;
+  box-shadow: 0 4px 14px 0 rgba(245, 158, 11, 0.25);
 }
 
-/* Professional status indicators */
+/* Professional card enhancements */
+.card-professional {
+  @apply bg-white/80 backdrop-blur-sm border border-slate-200/60 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300;
+  backdrop-filter: blur(8px);
+}
+
+.card-professional:hover {
+  transform: translateY(-4px);
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
+/* Status indicators with better visual feedback */
 .status-indicator {
-  @apply inline-flex items-center px-4 py-2 rounded-full text-xs font-medium;
-  backdrop-filter: blur(10px);
+  @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium;
 }
 
 .status-success {
-  background: linear-gradient(135deg, rgba(236, 253, 245, 0.9), rgba(209, 250, 229, 0.8));
-  @apply text-emerald-800 border border-emerald-200;
+  @apply bg-emerald-100 text-emerald-800 border border-emerald-200;
 }
 
 .status-processing {
-  background: linear-gradient(135deg, rgba(239, 246, 255, 0.9), rgba(219, 234, 254, 0.8));
-  @apply text-blue-800 border border-blue-200;
+  @apply bg-blue-100 text-blue-800 border border-blue-200;
 }
 
 .status-inactive {
-  background: linear-gradient(135deg, rgba(248, 250, 252, 0.9), rgba(241, 245, 249, 0.8));
-  @apply text-slate-600 border border-slate-200;
+  @apply bg-slate-100 text-slate-600 border border-slate-200;
 }
 
 /* Smooth animations */
 .animate-fade-in {
-  animation: fadeIn 0.6s ease-out;
+  animation: fadeIn 0.5s ease-in;
 }
 
 .animate-slide-up {
-  animation: slideUp 0.6s ease-out;
+  animation: slideUp 0.5s ease-out;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+/* Enhanced AR Detection Styles */
+.body-detection-overlay {
+  position: relative;
+  pointer-events: none;
 }
 
-@keyframes slideUp {
-  from { 
-    opacity: 0; 
-    transform: translateY(20px); 
-  }
-  to { 
-    opacity: 1; 
-    transform: translateY(0); 
-  }
+.skeleton-point {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: linear-gradient(45deg, #3b82f6, #06b6d4);
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.6);
+  transform: translate(-50%, -50%);
+  z-index: 10;
 }
 
-/* Professional gradient backgrounds for different sections */
-.hero-gradient {
-  background: linear-gradient(135deg, 
-    rgba(255, 255, 255, 1) 0%,
-    rgba(239, 246, 255, 0.8) 25%,
-    rgba(219, 234, 254, 0.6) 50%,
-    rgba(239, 246, 255, 0.8) 75%,
-    rgba(255, 255, 255, 1) 100%
-  );
+.measurement-line {
+  position: absolute;
+  border-color: #3b82f6;
+  filter: drop-shadow(0 0 3px rgba(59, 130, 246, 0.5));
 }
 
-.section-gradient {
-  background: linear-gradient(180deg, 
-    transparent 0%,
-    rgba(248, 250, 252, 0.3) 50%,
-    transparent 100%
-  );
+.detection-indicator {
+  @apply flex items-center space-x-2 px-2 py-1 rounded-md text-xs font-medium;
 }
 
-/* Enhanced navbar styling */
-.navbar-glass {
-  background: linear-gradient(135deg, 
-    rgba(255, 255, 255, 0.95) 0%,
-    rgba(248, 250, 252, 0.9) 100%
-  );
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(226, 232, 240, 0.5);
-  box-shadow: 
-    0 4px 6px -1px rgba(0, 0, 0, 0.05),
-    0 0 0 1px rgba(255, 255, 255, 0.8) inset;
+.detection-active {
+  @apply bg-green-100 text-green-800 border border-green-200;
 }
 
-/* Lenskart-style AR enhancements */
-.ar-realistic-overlay {
-  mix-blend-mode: multiply;
-  opacity: 0.9;
+.detection-inactive {
+  @apply bg-gray-100 text-gray-600 border border-gray-200;
 }
 
-.ar-shadow-enhancement {
-  filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.2)) 
-          drop-shadow(0 5px 15px rgba(0, 0, 0, 0.1));
+.detection-processing {
+  @apply bg-blue-100 text-blue-800 border border-blue-200;
 }
 
-/* Responsive enhancements */
-@media (max-width: 768px) {
-  .measurement-card {
-    @apply p-4;
-  }
-  
-  .webcam-container {
-    border-radius: 16px;
-  }
-  
-  .btn-primary, .btn-secondary, .btn-accent {
-    @apply px-6 py-2.5 text-sm;
-  }
+/* Real-time measurement styles */
+.measurement-card {
+  @apply p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg border border-blue-200 transition-all duration-300 hover:shadow-md;
+}
+
+.webcam-container {
+  filter: contrast(1.1) brightness(1.05);
+}
+
+/* Professional gradient backgrounds */
+.gradient-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.gradient-secondary {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.gradient-accent {
+  background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
 }

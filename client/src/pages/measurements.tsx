@@ -82,16 +82,53 @@ export default function Measurements() {
   };
 
   return (
-    <div className="min-h-screen page-background py-8">
-      <div className="max-w-4xl mx-auto px-4">
-        <div className="text-center mb-8 animate-fade-in">
-          <h1 className="text-3xl font-bold text-gray-900 mb-4">Body & Foot Measurements</h1>
-          <p className="text-lg text-gray-600">Capture your measurements for perfect fitting recommendations</p>
+    <div className="min-h-screen bg-gray-50 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="mb-8">
+          <h1 className="text-3xl lg:text-4xl font-bold text-gray-900 mt-10" data-testid="title-measurements">
+            Body Measurement Interface
+          </h1>
+          <p className="text-xl text-gray-600 mt-5">
+            Privacy-first measurement capture with AI-powered landmark detection
+          </p>
         </div>
 
-        <Card className="shadow-xl card-smooth animate-slide-up">
+        {existingMeasurements && (
+          <Card className="mb-8">
+            <CardHeader>
+              <CardTitle>Current Measurements</CardTitle>
+              <CardDescription>
+                Last updated: {new Date((existingMeasurements as any).updatedAt || Date.now()).toLocaleDateString()}
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+                {Object.entries({
+                  chest: 'Chest',
+                  shoulders: 'Shoulders',
+                  waist: 'Waist',
+                  height: 'Height',
+                  hips: 'Hips'
+                }).map(([key, label]) => (
+                  <div key={key} className="text-center" data-testid={`current-${key}`}>
+                    <div className="text-2xl font-bold text-primary">
+                      {(existingMeasurements as any)[key]} cm
+                    </div>
+                    <div className="text-sm text-gray-600">{label}</div>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
+        <Card>
           <CardContent className="p-8">
-            <MeasurementCapture />
+            <MeasurementCapture
+              onMeasurementsCapture={handleMeasurementsCapture}
+              onSaveMeasurements={handleSaveMeasurements}
+              isLoading={saveMeasurementsMutation.isPending}
+            />
           </CardContent>
         </Card>
       </div>
