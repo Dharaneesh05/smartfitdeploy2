@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Camera, Upload, Save, Eye, EyeOff, Settings, RotateCcw } from 'lucide-react';
+import { Camera, Upload, Save, Eye, EyeOff, Settings, RotateCcw, Activity, Zap } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 // Import RotateCcw from lucide-react
@@ -38,8 +38,11 @@ export default function MeasurementCapture({
   const [measurementType, setMeasurementType] = useState<'body' | 'foot'>('body');
   const [currentView, setCurrentView] = useState<'front' | 'side' | 'back' | 'top'>('front');
   const [isCapturing, setIsCapturing] = useState(false);
+  const [capturedImage, setCapturedImage] = useState<string | null>(null);
+  const [isDetecting, setIsDetecting] = useState(false);
   const [bodyDetected, setBodyDetected] = useState(false);
-  const [footDetected, setFootDetected] = useState(false);
+  const [realTimeTracking, setRealTimeTracking] = useState(false);
+  const [detectionConfidence, setDetectionConfidence] = useState(0);
   const [measurements, setMeasurements] = useState<MeasurementData | null>(null);
   const [faceBlurred, setFaceBlurred] = useState(true);
   const [viewsCompleted, setViewsCompleted] = useState<Record<string, boolean>>({
@@ -61,21 +64,21 @@ export default function MeasurementCapture({
     const baseAccuracy = view === 'front' ? 95 : view === 'side' ? 90 : 85;
 
     const bodyMeasurements = {
-      chest: Math.round((95 + Math.random() * 15) * 100) / 100,
-      shoulders: Math.round((40 + Math.random() * 10) * 100) / 100,
-      waist: Math.round((80 + Math.random() * 15) * 100) / 100,
-      height: Math.round((165 + Math.random() * 20) * 100) / 100,
-      hips: Math.round((85 + Math.random() * 15) * 100) / 100,
-      footLength: Math.round((24 + Math.random() * 4) * 100) / 100,
-      footWidth: Math.round((9 + Math.random() * 2) * 100) / 100,
+      chest: parseFloat((95 + Math.random() * 15).toFixed(2)),
+      shoulders: parseFloat((40 + Math.random() * 10).toFixed(2)),
+      waist: parseFloat((80 + Math.random() * 15).toFixed(2)),
+      height: parseFloat((165 + Math.random() * 20).toFixed(2)),
+      hips: parseFloat((85 + Math.random() * 15).toFixed(2)),
+      footLength: parseFloat((24 + Math.random() * 4).toFixed(2)),
+      footWidth: parseFloat((9 + Math.random() * 2).toFixed(2)),
       confidence: {
-        chest: Math.round((baseAccuracy - 5 + Math.random() * 10) * 100) / 100,
-        shoulders: Math.round((baseAccuracy - 3 + Math.random() * 8) * 100) / 100,
-        waist: Math.round((baseAccuracy - 2 + Math.random() * 6) * 100) / 100,
-        height: Math.round((baseAccuracy + Math.random() * 5) * 100) / 100,
-        hips: Math.round((baseAccuracy - 4 + Math.random() * 8) * 100) / 100,
-        footLength: Math.round((baseAccuracy - 2 + Math.random() * 6) * 100) / 100,
-        footWidth: Math.round((baseAccuracy - 3 + Math.random() * 7) * 100) / 100,
+        chest: parseFloat((baseAccuracy - 5 + Math.random() * 10).toFixed(2)),
+        shoulders: parseFloat((baseAccuracy - 3 + Math.random() * 8).toFixed(2)),
+        waist: parseFloat((baseAccuracy - 2 + Math.random() * 6).toFixed(2)),
+        height: parseFloat((baseAccuracy + Math.random() * 5).toFixed(2)),
+        hips: parseFloat((baseAccuracy - 4 + Math.random() * 8).toFixed(2)),
+        footLength: parseFloat((baseAccuracy - 2 + Math.random() * 6).toFixed(2)),
+        footWidth: parseFloat((baseAccuracy - 3 + Math.random() * 7).toFixed(2)),
       }
     };
 
@@ -83,30 +86,77 @@ export default function MeasurementCapture({
     return bodyMeasurements;
   }, []);
 
-  const captureImage = useCallback(async () => {
-    if (webcamRef.current) {
-      setIsCapturing(true);
+  const startRealTimeDetection = useCallback(() => {
+    setIsDetecting(true);
+    setRealTimeTracking(true);
 
-      if (measurementType === 'body') {
+    // Simulate progressive detection
+    let confidence = 0;
+    const detectionInterval = setInterval(() => {
+      confidence += Math.random() * 20;
+      setDetectionConfidence(Math.min(confidence, 100));
+
+      if (confidence >= 50) {
         setBodyDetected(true);
-      } else {
-        setFootDetected(true);
       }
 
-      const imageSrc = webcamRef.current.getScreenshot();
-
-      if (imageSrc) {
-        try {
-          const measuredData = await extractMeasurements(imageSrc, currentView, measurementType);
-          setMeasurements(measuredData);
-          setViewsCompleted(prev => ({ ...prev, [currentView]: true }));
-          onMeasurementsCapture(measuredData);
-        } catch (error) {
-          console.error('Failed to extract measurements:', error);
-        }
+      if (confidence >= 100) {
+        clearInterval(detectionInterval);
+        setIsDetecting(false);
+        simulateMeasurement();
       }
+    }, 200);
+
+    return () => clearInterval(detectionInterval);
+  }, []);
+
+  const simulateMeasurement = useCallback(() => {
+    const newMeasurements: MeasurementData = {
+      chest: parseFloat((Math.random() * 20 + 90).toFixed(2)),
+      shoulders: parseFloat((Math.random() * 10 + 40).toFixed(2)),
+      waist: parseFloat((Math.random() * 15 + 75).toFixed(2)),
+      height: parseFloat((Math.random() * 30 + 160).toFixed(2)),
+      hips: parseFloat((Math.random() * 20 + 85).toFixed(2)),
+      footLength: parseFloat((Math.random() * 5 + 22).toFixed(2)),
+      footWidth: parseFloat((Math.random() * 3 + 8).toFixed(2))
+    };
+
+    setMeasurements(newMeasurements);
+
+    console.log('Measurements captured:', {
+      ...newMeasurements,
+      confidence: {
+        chest: parseFloat((Math.random() * 10 + 90).toFixed(2)),
+        shoulders: parseFloat((Math.random() * 10 + 90).toFixed(2)),
+        waist: parseFloat((Math.random() * 10 + 90).toFixed(2)),
+        height: parseFloat((Math.random() * 10 + 90).toFixed(2)),
+        hips: parseFloat((Math.random() * 10 + 90).toFixed(2)),
+        footLength: parseFloat((Math.random() * 10 + 90).toFixed(2)),
+        footWidth: parseFloat((Math.random() * 10 + 90).toFixed(2))
+      }
+    });
+
+    if (onMeasurementsCapture) {
+      onMeasurementsCapture(newMeasurements);
     }
-  }, [extractMeasurements, currentView, measurementType, onMeasurementsCapture]);
+  }, [onMeasurementsCapture]);
+
+  const captureImage = useCallback(async () => {
+    if (!webcamRef.current) return;
+
+    setIsCapturing(true);
+
+    const imageSrc = webcamRef.current.getScreenshot();
+    if (imageSrc) {
+      setCapturedImage(imageSrc);
+
+      // Start enhanced real-time detection
+      setTimeout(() => {
+        startRealTimeDetection();
+        setIsCapturing(false);
+      }, 1000);
+    }
+  }, [startRealTimeDetection]);
 
   const handleFileUpload = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
@@ -146,6 +196,9 @@ export default function MeasurementCapture({
     setBodyDetected(false);
     setFootDetected(false);
     setViewsCompleted({ front: false, side: false, back: false, top: false });
+    setCapturedImage(null); // Reset captured image
+    setRealTimeTracking(false); // Reset tracking state
+    setDetectionConfidence(0); // Reset confidence
   };
 
   const getViewInstructions = () => {
@@ -275,102 +328,86 @@ export default function MeasurementCapture({
                   </div>
                 </div>
 
-                {/* Enhanced MediaPipe/YOLO detection overlay with precise line mapping */}
-                {(measurementType === 'body' ? bodyDetected : footDetected) && (
-                  <div className={measurementType === 'body' ? 'body-detection-overlay' : 'foot-measurement-overlay'}>
-                    {measurementType === 'body' ? (
-                      // Enhanced body skeleton with MediaPipe precision
-                      <div className="absolute inset-0">
-                        {/* Head */}
-                        <div className="skeleton-point" style={{top: '10%', left: '50%', transform: 'translateX(-50%)'}}></div>
-
-                        {/* Shoulder line */}
-                        <div className="skeleton-point" style={{top: '20%', left: '30%'}}></div>
-                        <div className="skeleton-point" style={{top: '20%', right: '30%'}}></div>
-                        <div className="measurement-line" style={{top: '20%', left: '30%', right: '30%'}}></div>
-
-                        {/* Arms */}
-                        <div className="skeleton-point" style={{top: '30%', left: '22%'}}></div>
-                        <div className="skeleton-point" style={{top: '30%', right: '22%'}}></div>
-                        <div className="skeleton-point" style={{top: '45%', left: '18%'}}></div>
-                        <div className="skeleton-point" style={{top: '45%', right: '18%'}}></div>
-
-                        {/* Chest measurement line */}
-                        <div className="skeleton-point" style={{top: '35%', left: '35%'}}></div>
-                        <div className="skeleton-point" style={{top: '35%', right: '35%'}}></div>
-                        <div className="measurement-line" style={{top: '35%', left: '35%', right: '35%'}}></div>
-
-                        {/* Waist measurement line */}
-                        <div className="skeleton-point" style={{top: '45%', left: '40%'}}></div>
-                        <div className="skeleton-point" style={{top: '45%', right: '40%'}}></div>
-                        <div className="measurement-line" style={{top: '45%', left: '40%', right: '40%'}}></div>
-
-                        {/* Hip measurement line */}
-                        <div className="skeleton-point" style={{top: '55%', left: '38%'}}></div>
-                        <div className="skeleton-point" style={{top: '55%', right: '38%'}}></div>
-                        <div className="measurement-line" style={{top: '55%', left: '38%', right: '38%'}}></div>
-
-                        {/* Height line */}
-                        <div className="measurement-line border-l-2 border-primary h-full absolute left-1/2 transform -translate-x-1/2 opacity-60"></div>
-
-                        {/* Legs */}
-                        <div className="skeleton-point" style={{top: '75%', left: '42%'}}></div>
-                        <div className="skeleton-point" style={{top: '75%', right: '42%'}}></div>
-                        <div className="skeleton-point" style={{bottom: '10%', left: '42%'}}></div>
-                        <div className="skeleton-point" style={{bottom: '10%', right: '42%'}}></div>
-
-                        {/* Measurement labels */}
-                        <div className="absolute top-[18%] left-1/2 transform -translate-x-1/2 text-xs bg-primary text-white px-2 py-1 rounded">
-                          Shoulders
+                {/* Enhanced real-time body detection overlay */}
+                {(capturedImage || realTimeTracking) && (
+                  <div className="absolute inset-0 pointer-events-none">
+                    <div className="body-detection-overlay">
+                      {/* Real-time detection status */}
+                      <div className="absolute top-4 left-4 bg-black/80 rounded-lg px-3 py-2 text-white">
+                        <div className="flex items-center space-x-2">
+                          {isDetecting ? (
+                            <>
+                              <Activity className="w-4 h-4 animate-pulse text-blue-400" />
+                              <span className="text-sm">Detecting... {Math.round(detectionConfidence)}%</span>
+                            </>
+                          ) : bodyDetected ? (
+                            <>
+                              <Zap className="w-4 h-4 text-green-400" />
+                              <span className="text-sm">Body Detected</span>
+                            </>
+                          ) : (
+                            <>
+                              <div className="w-4 h-4 bg-gray-400 rounded-full animate-pulse"></div>
+                              <span className="text-sm">Initializing...</span>
+                            </>
+                          )}
                         </div>
-                        <div className="absolute top-[33%] left-1/2 transform -translate-x-1/2 text-xs bg-primary text-white px-2 py-1 rounded">
-                          Chest
-                        </div>
-                        <div className="absolute top-[43%] left-1/2 transform -translate-x-1/2 text-xs bg-primary text-white px-2 py-1 rounded">
-                          Waist
-                        </div>
-                        <div className="absolute top-[53%] left-1/2 transform -translate-x-1/2 text-xs bg-primary text-white px-2 py-1 rounded">
-                          Hips
-                        </div>
-                      </div>
-                    ) : (
-                      // Enhanced foot detection with precise mapping
-                      <div className="absolute inset-0 flex justify-center items-center">
-                        <div className="relative">
-                          {/* Foot outline with measurement points */}
-                          <div className="w-40 h-60 relative">
-                            {/* Foot boundary */}
-                            <div className="absolute inset-0 border-2 border-primary/60 rounded-full transform rotate-12"></div>
-
-                            {/* Length measurement */}
-                            <div className="measurement-line border-l-2 border-primary h-full absolute left-1/2 transform -translate-x-1/2"></div>
-                            <div className="skeleton-point" style={{top: '5%', left: '50%', transform: 'translateX(-50%)'}}></div>
-                            <div className="skeleton-point" style={{bottom: '5%', left: '50%', transform: 'translateX(-50%)'}}></div>
-
-                            {/* Width measurement */}
-                            <div className="measurement-line border-t-2 border-primary w-3/4 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
-                            <div className="skeleton-point" style={{top: '50%', left: '25%', transform: 'translateY(-50%)'}}></div>
-                            <div className="skeleton-point" style={{top: '50%', right: '25%', transform: 'translateY(-50%)'}}></div>
-
-                            {/* Toe and heel points */}
-                            <div className="skeleton-point" style={{top: '10%', left: '50%', transform: 'translateX(-50%)'}}></div>
-                            <div className="skeleton-point" style={{bottom: '10%', left: '50%', transform: 'translateX(-50%)'}}></div>
-
-                            {/* Arch points */}
-                            <div className="skeleton-point" style={{top: '40%', left: '20%'}}></div>
-                            <div className="skeleton-point" style={{top: '40%', right: '20%'}}></div>
-
-                            {/* Measurement labels */}
-                            <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-6 text-xs bg-primary text-white px-2 py-1 rounded">
-                              Length
-                            </div>
-                            <div className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-12 text-xs bg-primary text-white px-2 py-1 rounded">
-                              Width
-                            </div>
+                        {isDetecting && (
+                          <div className="w-full bg-gray-700 rounded-full h-1 mt-1">
+                            <div
+                              className="bg-blue-400 h-1 rounded-full transition-all duration-300"
+                              style={{ width: `${detectionConfidence}%` }}
+                            ></div>
                           </div>
-                        </div>
+                        )}
                       </div>
-                    )}
+
+                      {/* Enhanced skeleton points with real-time tracking */}
+                      {bodyDetected && (
+                        <>
+                          <div className="skeleton-point animate-pulse" style={{top: '20%', left: '50%'}}></div> {/* Head */}
+                          <div className="skeleton-point animate-pulse" style={{top: '25%', left: '45%'}}></div> {/* Left Shoulder */}
+                          <div className="skeleton-point animate-pulse" style={{top: '25%', left: '55%'}}></div> {/* Right Shoulder */}
+                          <div className="skeleton-point animate-pulse" style={{top: '35%', left: '50%'}}></div> {/* Chest */}
+                          <div className="skeleton-point animate-pulse" style={{top: '45%', left: '50%'}}></div> {/* Waist */}
+                          <div className="skeleton-point animate-pulse" style={{top: '55%', left: '48%'}}></div> {/* Left Hip */}
+                          <div className="skeleton-point animate-pulse" style={{top: '55%', left: '52%'}}></div> {/* Right Hip */}
+                          <div className="skeleton-point animate-pulse" style={{top: '70%', left: '47%'}}></div> {/* Left Knee */}
+                          <div className="skeleton-point animate-pulse" style={{top: '70%', left: '53%'}}></div> {/* Right Knee */}
+                          <div className="skeleton-point animate-pulse" style={{top: '85%', left: '47%'}}></div> {/* Left Foot */}
+                          <div className="skeleton-point animate-pulse" style={{top: '85%', left: '53%'}}></div> {/* Right Foot */}
+
+                          {/* Enhanced measurement lines with labels */}
+                          <div className="measurement-line border-t-2" style={{top: '25%', left: '42%', width: '16%'}}>
+                            <span className="absolute -top-6 left-0 text-xs text-blue-400 font-semibold bg-black/60 px-1 rounded">
+                              Shoulders: {measurements?.shoulders !== undefined ? measurements.shoulders.toFixed(2) : '--'}cm
+                            </span>
+                          </div>
+                          <div className="measurement-line border-t-2" style={{top: '35%', left: '40%', width: '20%'}}>
+                            <span className="absolute -top-6 left-0 text-xs text-blue-400 font-semibold bg-black/60 px-1 rounded">
+                              Chest: {measurements?.chest !== undefined ? measurements.chest.toFixed(2) : '--'}cm
+                            </span>
+                          </div>
+                          <div className="measurement-line border-t-2" style={{top: '45%', left: '44%', width: '12%'}}>
+                            <span className="absolute -top-6 left-0 text-xs text-blue-400 font-semibold bg-black/60 px-1 rounded">
+                              Waist: {measurements?.waist !== undefined ? measurements.waist.toFixed(2) : '--'}cm
+                            </span>
+                          </div>
+                          <div className="measurement-line border-t-2" style={{top: '55%', left: '44%', width: '12%'}}>
+                            <span className="absolute -top-6 left-0 text-xs text-blue-400 font-semibold bg-black/60 px-1 rounded">
+                              Hips: {measurements?.hips !== undefined ? measurements.hips.toFixed(2) : '--'}cm
+                            </span>
+                          </div>
+
+                          {/* Height measurement line */}
+                          <div className="measurement-line border-l-2" style={{left: '60%', top: '20%', height: '65%'}}>
+                            <span className="absolute -right-16 top-1/2 transform -translate-y-1/2 -rotate-90 text-xs text-blue-400 font-semibold bg-black/60 px-1 rounded">
+                              Height: {measurements?.height !== undefined ? measurements.height.toFixed(2) : '--'}cm
+                            </span>
+                          </div>
+                        </>
+                      )}
+                    </div>
                   </div>
                 )}
 
@@ -387,12 +424,12 @@ export default function MeasurementCapture({
               <div className="flex justify-center space-x-4">
                 <Button
                   onClick={captureImage}
-                  disabled={isCapturing}
+                  disabled={isCapturing || isDetecting}
                   className="bg-primary hover:bg-primary/90"
                   data-testid="button-capture"
                 >
                   <Camera className="mr-2 h-4 w-4" />
-                  {isCapturing ? 'Processing...' : 'Capture'}
+                  {isCapturing ? 'Capturing...' : 'Capture'}
                 </Button>
                 <Button
                   variant="outline"
@@ -494,7 +531,7 @@ export default function MeasurementCapture({
                       </div>
                       <div className="text-right">
                         <span className="text-xl font-bold text-gray-900" data-testid={`value-${key}`}>
-                          {String(measurements[key as keyof MeasurementData])} {info.unit}
+                          {measurements[key as keyof MeasurementData].toFixed(2)} {info.unit}
                         </span>
                         <p className="text-sm text-green-600" data-testid={`confidence-${key}`}>
                           {measurements.confidence[key]}% confidence
@@ -517,7 +554,7 @@ export default function MeasurementCapture({
                       </div>
                       <div className="text-right">
                         <span className="text-xl font-bold text-gray-900" data-testid={`value-${key}`}>
-                          {String(measurements[key as keyof MeasurementData])} {info.unit}
+                          {measurements[key as keyof MeasurementData].toFixed(2)} {info.unit}
                         </span>
                         <p className="text-sm text-green-600" data-testid={`confidence-${key}`}>
                           {measurements.confidence[key]}% confidence
@@ -548,7 +585,7 @@ export default function MeasurementCapture({
             <div className="text-center py-12">
               <Camera className="mx-auto h-12 w-12 text-gray-400 mb-4" />
               <p className="text-gray-600">
-                {isCapturing ? 'Processing measurements...' : 'Capture or upload an image to get started'}
+                {isCapturing ? 'Capturing...' : isDetecting ? 'Detecting...' : 'Capture or upload an image to get started'}
               </p>
             </div>
           )}

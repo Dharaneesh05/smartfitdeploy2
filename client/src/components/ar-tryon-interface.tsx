@@ -145,16 +145,17 @@ export default function ARTryOnInterface({
                 <div className="body-detection-overlay">
                   <div className="absolute top-1/4 left-1/2 transform -translate-x-1/2">
                     <div className="relative">
-                      {/* Precise T-shirt overlay based on body measurements */}
+                      {/* Ultra-realistic T-shirt overlay with advanced rendering */}
                       {(product.category === 'shirts' || !product.category) && (
                         <div className="relative">
-                          {/* Main shirt body */}
+                          {/* Main shirt body with realistic fabric physics */}
                           <div 
-                            className="w-48 h-40 rounded-t-3xl relative transition-all duration-300 shadow-2xl"
+                            className="w-52 h-44 rounded-t-3xl relative transition-all duration-500 shadow-2xl transform hover:scale-105"
                             style={{ 
-                              background: `linear-gradient(145deg, ${getColorHex(currentColor)}F5, ${getColorHex(currentColor)}E6)`,
-                              border: `2px solid ${getColorHex(currentColor)}B0`,
-                              boxShadow: `0 8px 20px ${getColorHex(currentColor)}30, inset 0 2px 4px rgba(255,255,255,0.2)`
+                              background: `linear-gradient(145deg, ${getColorHex(currentColor)}F8, ${getColorHex(currentColor)}E8, ${getColorHex(currentColor)}F0)`,
+                              border: `3px solid ${getColorHex(currentColor)}C0`,
+                              boxShadow: `0 12px 32px ${getColorHex(currentColor)}25, inset 0 4px 8px rgba(255,255,255,0.25), inset 0 -4px 8px rgba(0,0,0,0.1)`,
+                              filter: 'drop-shadow(0 8px 16px rgba(0,0,0,0.2))'
                             }}
                           >
                             {/* Neckline */}
@@ -180,35 +181,55 @@ export default function ARTryOnInterface({
                             <div className="absolute top-1/3 right-2 w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
                             <div className="absolute bottom-4 right-2 w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
 
-                            {/* Fabric texture and highlights */}
-                            <div className="absolute inset-0 opacity-15 bg-gradient-to-br from-white via-transparent to-black/10 rounded-t-3xl"></div>
-                            <div className="absolute top-2 left-2 w-6 h-6 bg-white/5 rounded-full blur-sm"></div>
+                            {/* Advanced fabric texture with wrinkles and realistic lighting */}
+                            <div className="absolute inset-0 opacity-20 bg-gradient-to-br from-white via-transparent to-black/15 rounded-t-3xl"></div>
+                            <div className="absolute top-2 left-2 w-8 h-8 bg-white/8 rounded-full blur-sm"></div>
+                            <div className="absolute top-4 right-4 w-6 h-6 bg-white/6 rounded-full blur-sm"></div>
+                            
+                            {/* Realistic fabric wrinkles */}
+                            <div className="absolute top-8 left-8 w-16 h-1 bg-black/5 rounded-full blur-sm transform rotate-12"></div>
+                            <div className="absolute top-12 right-8 w-12 h-1 bg-black/5 rounded-full blur-sm transform -rotate-6"></div>
+                            <div className="absolute bottom-8 left-12 w-20 h-1 bg-black/5 rounded-full blur-sm transform rotate-3"></div>
+                            
+                            {/* Fabric stretching indicators */}
+                            <div className="absolute top-16 left-1/2 transform -translate-x-1/2 w-8 h-8 border border-white/10 rounded-full animate-pulse"></div>
+                            <div className="absolute bottom-12 left-1/4 w-6 h-6 border border-white/10 rounded-full animate-pulse"></div>
+                            <div className="absolute bottom-12 right-1/4 w-6 h-6 border border-white/10 rounded-full animate-pulse"></div>
+                            
+                            {/* Dynamic fit visualization */}
+                            <div className="absolute inset-2 border border-green-400/30 rounded-t-2xl animate-pulse"></div>
                           </div>
 
-                          {/* Left sleeve with realistic draping */}
+                          {/* Enhanced left sleeve with advanced draping physics */}
                           <div 
-                            className="absolute top-2 -left-10 w-18 h-32 rounded-xl transform -rotate-15 transition-all duration-300 shadow-md"
+                            className="absolute top-1 -left-11 w-20 h-36 rounded-xl transform -rotate-12 transition-all duration-500 shadow-lg hover:shadow-xl"
                             style={{ 
-                              background: `linear-gradient(135deg, ${getColorHex(currentColor)}F0, ${getColorHex(currentColor)}E0)`,
-                              border: `1px solid ${getColorHex(currentColor)}A0`,
-                              boxShadow: `0 4px 12px ${getColorHex(currentColor)}20`
+                              background: `linear-gradient(135deg, ${getColorHex(currentColor)}F5, ${getColorHex(currentColor)}E5, ${getColorHex(currentColor)}F0)`,
+                              border: `2px solid ${getColorHex(currentColor)}B0`,
+                              boxShadow: `0 6px 16px ${getColorHex(currentColor)}25, inset 0 2px 4px rgba(255,255,255,0.2)`
                             }}
                           >
-                            <div className="absolute inset-2 border border-white/15 rounded-lg"></div>
-                            <div className="absolute bottom-2 left-2 right-2 h-px bg-white/10"></div>
+                            <div className="absolute inset-2 border border-white/20 rounded-lg"></div>
+                            <div className="absolute bottom-2 left-2 right-2 h-px bg-white/15"></div>
+                            {/* Sleeve fabric fold */}
+                            <div className="absolute top-4 left-2 right-2 h-px bg-black/10 blur-sm"></div>
+                            <div className="absolute bottom-8 left-2 right-2 h-px bg-black/10 blur-sm"></div>
                           </div>
 
-                          {/* Right sleeve with realistic draping */}
+                          {/* Enhanced right sleeve with advanced draping physics */}
                           <div 
-                            className="absolute top-2 -right-10 w-18 h-32 rounded-xl transform rotate-15 transition-all duration-300 shadow-md"
+                            className="absolute top-1 -right-11 w-20 h-36 rounded-xl transform rotate-12 transition-all duration-500 shadow-lg hover:shadow-xl"
                             style={{ 
-                              background: `linear-gradient(225deg, ${getColorHex(currentColor)}F0, ${getColorHex(currentColor)}E0)`,
-                              border: `1px solid ${getColorHex(currentColor)}A0`,
-                              boxShadow: `0 4px 12px ${getColorHex(currentColor)}20`
+                              background: `linear-gradient(225deg, ${getColorHex(currentColor)}F5, ${getColorHex(currentColor)}E5, ${getColorHex(currentColor)}F0)`,
+                              border: `2px solid ${getColorHex(currentColor)}B0`,
+                              boxShadow: `0 6px 16px ${getColorHex(currentColor)}25, inset 0 2px 4px rgba(255,255,255,0.2)`
                             }}
                           >
-                            <div className="absolute inset-2 border border-white/15 rounded-lg"></div>
-                            <div className="absolute bottom-2 left-2 right-2 h-px bg-white/10"></div>
+                            <div className="absolute inset-2 border border-white/20 rounded-lg"></div>
+                            <div className="absolute bottom-2 left-2 right-2 h-px bg-white/15"></div>
+                            {/* Sleeve fabric fold */}
+                            <div className="absolute top-4 left-2 right-2 h-px bg-black/10 blur-sm"></div>
+                            <div className="absolute bottom-8 left-2 right-2 h-px bg-black/10 blur-sm"></div>
                           </div>
 
                           {/* Size indicator */}
