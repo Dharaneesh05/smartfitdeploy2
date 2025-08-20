@@ -9,12 +9,14 @@ import FitPrediction from '@/components/fit-prediction';
 export default function FitPredict() {
   const { user } = useAuth();
   const [, setLocation] = useLocation();
-  const { toast } = useToast();
-  const queryClient = useQueryClient();
 
-  // Redirect if not authenticated
+  useEffect(() => {
+    if (!user) {
+      setLocation('/login');
+    }
+  }, [user, setLocation]);
+
   if (!user) {
-    setLocation('/login');
     return null;
   }
 

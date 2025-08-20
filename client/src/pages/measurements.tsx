@@ -13,6 +13,8 @@ interface MeasurementData {
   waist: number;
   height: number;
   hips: number;
+  footLength: number;
+  footWidth: number;
   confidence: Record<string, number>;
 }
 
@@ -31,8 +33,13 @@ export default function Measurements() {
   }, [measurements]);
 
   // Redirect if not authenticated
+  useEffect(() => {
+    if (!user) {
+      setLocation('/login');
+    }
+  }, [user, setLocation]);
+
   if (!user) {
-    setLocation('/login');
     return null;
   }
 

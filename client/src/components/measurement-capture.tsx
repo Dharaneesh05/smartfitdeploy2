@@ -41,6 +41,7 @@ export default function MeasurementCapture({
   const [capturedImage, setCapturedImage] = useState<string | null>(null);
   const [isDetecting, setIsDetecting] = useState(false);
   const [bodyDetected, setBodyDetected] = useState(false);
+  const [footDetected, setFootDetected] = useState(false); // Added missing state
   const [realTimeTracking, setRealTimeTracking] = useState(false);
   const [detectionConfidence, setDetectionConfidence] = useState(0);
   const [measurements, setMeasurements] = useState<MeasurementData | null>(null);
@@ -63,7 +64,7 @@ export default function MeasurementCapture({
     // Mock measurements with view-specific accuracy
     const baseAccuracy = view === 'front' ? 95 : view === 'side' ? 90 : 85;
 
-    const bodyMeasurements = {
+    const bodyMeasurements: MeasurementData = {
       chest: parseFloat((95 + Math.random() * 15).toFixed(2)),
       shoulders: parseFloat((40 + Math.random() * 10).toFixed(2)),
       waist: parseFloat((80 + Math.random() * 15).toFixed(2)),
@@ -98,6 +99,7 @@ export default function MeasurementCapture({
 
       if (confidence >= 50) {
         setBodyDetected(true);
+        setFootDetected(true); // Set footDetected to true as well
       }
 
       if (confidence >= 100) {
@@ -118,13 +120,7 @@ export default function MeasurementCapture({
       height: parseFloat((Math.random() * 30 + 160).toFixed(2)),
       hips: parseFloat((Math.random() * 20 + 85).toFixed(2)),
       footLength: parseFloat((Math.random() * 5 + 22).toFixed(2)),
-      footWidth: parseFloat((Math.random() * 3 + 8).toFixed(2))
-    };
-
-    setMeasurements(newMeasurements);
-
-    console.log('Measurements captured:', {
-      ...newMeasurements,
+      footWidth: parseFloat((Math.random() * 3 + 8).toFixed(2)),
       confidence: {
         chest: parseFloat((Math.random() * 10 + 90).toFixed(2)),
         shoulders: parseFloat((Math.random() * 10 + 90).toFixed(2)),
@@ -134,7 +130,11 @@ export default function MeasurementCapture({
         footLength: parseFloat((Math.random() * 10 + 90).toFixed(2)),
         footWidth: parseFloat((Math.random() * 10 + 90).toFixed(2))
       }
-    });
+    };
+
+    setMeasurements(newMeasurements);
+
+    console.log('Measurements captured:', newMeasurements);
 
     if (onMeasurementsCapture) {
       onMeasurementsCapture(newMeasurements);
@@ -194,7 +194,7 @@ export default function MeasurementCapture({
   const retake = () => {
     setMeasurements(null);
     setBodyDetected(false);
-    setFootDetected(false);
+    setFootDetected(false); // Reset footDetected state
     setViewsCompleted({ front: false, side: false, back: false, top: false });
     setCapturedImage(null); // Reset captured image
     setRealTimeTracking(false); // Reset tracking state
@@ -534,7 +534,7 @@ export default function MeasurementCapture({
                           {measurements[key as keyof MeasurementData].toFixed(2)} {info.unit}
                         </span>
                         <p className="text-sm text-green-600" data-testid={`confidence-${key}`}>
-                          {measurements.confidence[key]}% confidence
+                          {measurements.confidence?.[key] || 95}% confidence
                         </p>
                       </div>
                     </div>
@@ -557,7 +557,7 @@ export default function MeasurementCapture({
                           {measurements[key as keyof MeasurementData].toFixed(2)} {info.unit}
                         </span>
                         <p className="text-sm text-green-600" data-testid={`confidence-${key}`}>
-                          {measurements.confidence[key]}% confidence
+                          {measurements.confidence?.[key] || 95}% confidence
                         </p>
                       </div>
                     </div>
