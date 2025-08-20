@@ -68,49 +68,177 @@ export default function RecommendationsPage() {
 
   const generateSampleRecommendations = async () => {
     const sampleRecs = [
+      // Shirts
       {
-        productName: "Classic Fit Cotton Shirt",
-        brand: "Calvin Klein",
-        price: "₹599",
+        productName: "Premium Cotton Formal Shirt",
+        brand: "Arrow",
+        price: "₹1,299",
         imageUrl: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=400",
         fitScore: 95,
         reason: "Perfect chest fit, ideal shoulder width for your measurements",
         category: "shirts",
         size: "L",
-        externalUrl: "https://amazon.com"
+        externalUrl: "https://amazon.in"
       },
       {
-        productName: "Slim Fit Chinos",
-        brand: "J.Crew",
-        price: "₹799",
-        imageUrl: "https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=400",
-        fitScore: 88,
-        reason: "Waist perfect match, length suits your height",
-        category: "pants",
-        size: "34x32",
-        externalUrl: "https://jcrew.com"
+        productName: "Casual Linen Shirt",
+        brand: "Fabindia",
+        price: "₹899",
+        imageUrl: "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=400",
+        fitScore: 92,
+        reason: "Excellent fit for casual wear, breathable fabric",
+        category: "shirts",
+        size: "L",
+        externalUrl: "https://fabindia.com"
       },
       {
         productName: "Athletic Fit Polo",
         brand: "Nike",
-        price: "₹349",
+        price: "₹1,695",
         imageUrl: "https://images.unsplash.com/photo-1586790170083-2f9ceadc732d?w=400",
-        fitScore: 92,
-        reason: "Excellent shoulder fit, ideal for athletic build",
+        fitScore: 89,
+        reason: "Great for sports and casual wear, perfect arm length",
         category: "shirts",
         size: "L",
         externalUrl: "https://nike.com"
       },
       {
+        productName: "Checked Cotton Shirt",
+        brand: "Peter England",
+        price: "₹749",
+        imageUrl: "https://images.unsplash.com/photo-1603252109303-2751441dd157?w=400",
+        fitScore: 88,
+        reason: "Classic fit, good for office and casual wear",
+        category: "shirts",
+        size: "L",
+        externalUrl: "https://peterengland.com"
+      },
+      
+      // Pants
+      {
+        productName: "Slim Fit Chinos",
+        brand: "Blackberrys",
+        price: "₹1,399",
+        imageUrl: "https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=400",
+        fitScore: 94,
+        reason: "Perfect waist fit, ideal leg length for your height",
+        category: "pants",
+        size: "34x32",
+        externalUrl: "https://blackberrys.com"
+      },
+      {
         productName: "Relaxed Fit Jeans",
         brand: "Levi's",
-        price: "₹999",
+        price: "₹2,999",
         imageUrl: "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=400",
-        fitScore: 85,
+        fitScore: 91,
         reason: "Comfortable waist, good hip room for your measurements",
         category: "pants",
         size: "34x32",
-        externalUrl: "https://levis.com"
+        externalUrl: "https://levis.in"
+      },
+      {
+        productName: "Formal Trousers",
+        brand: "Van Heusen",
+        price: "₹1,199",
+        imageUrl: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=400",
+        fitScore: 87,
+        reason: "Professional fit, good for office wear",
+        category: "pants",
+        size: "34x32",
+        externalUrl: "https://vanheusenindia.com"
+      },
+      {
+        productName: "Cargo Pants",
+        brand: "Roadster",
+        price: "₹899",
+        imageUrl: "https://images.unsplash.com/photo-1506629905607-690d2f3a6102?w=400",
+        fitScore: 85,
+        reason: "Casual fit, good for weekend activities",
+        category: "pants",
+        size: "34",
+        externalUrl: "https://myntra.com"
+      },
+
+      // Footwear
+      {
+        productName: "Leather Formal Shoes",
+        brand: "Bata",
+        price: "₹2,499",
+        imageUrl: "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=400",
+        fitScore: 93,
+        reason: "Perfect foot length match, comfortable width",
+        category: "footwear",
+        size: "9",
+        externalUrl: "https://bata.in"
+      },
+      {
+        productName: "Running Shoes",
+        brand: "Adidas",
+        price: "₹3,999",
+        imageUrl: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400",
+        fitScore: 96,
+        reason: "Excellent foot measurements match, great arch support",
+        category: "footwear",
+        size: "9",
+        externalUrl: "https://adidas.co.in"
+      },
+      {
+        productName: "Canvas Sneakers",
+        brand: "Converse",
+        price: "₹2,799",
+        imageUrl: "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=400",
+        fitScore: 89,
+        reason: "Good casual fit, comfortable for daily wear",
+        category: "footwear",
+        size: "9",
+        externalUrl: "https://converse.in"
+      },
+      {
+        productName: "Sandals",
+        brand: "Woodland",
+        price: "₹1,899",
+        imageUrl: "https://images.unsplash.com/photo-1603808033192-082d6919d3e1?w=400",
+        fitScore: 87,
+        reason: "Perfect for summer, good foot width match",
+        category: "footwear",
+        size: "9",
+        externalUrl: "https://woodlandworldwide.com"
+      },
+
+      // Jackets
+      {
+        productName: "Denim Jacket",
+        brand: "Wrangler",
+        price: "₹2,499",
+        imageUrl: "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=400",
+        fitScore: 90,
+        reason: "Great shoulder fit, perfect for layering",
+        category: "jackets",
+        size: "L",
+        externalUrl: "https://wrangler.in"
+      },
+      {
+        productName: "Bomber Jacket",
+        brand: "H&M",
+        price: "₹1,999",
+        imageUrl: "https://images.unsplash.com/photo-1544022613-e87ca75a784a?w=400",
+        fitScore: 88,
+        reason: "Trendy fit, good arm length",
+        category: "jackets",
+        size: "L",
+        externalUrl: "https://hm.com"
+      },
+      {
+        productName: "Formal Blazer",
+        brand: "Raymond",
+        price: "₹4,999",
+        imageUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400",
+        fitScore: 94,
+        reason: "Professional fit, excellent shoulder measurements",
+        category: "jackets",
+        size: "L",
+        externalUrl: "https://raymond.in"
       }
     ];
 
@@ -221,6 +349,7 @@ export default function RecommendationsPage() {
                       <SelectItem value="shirts">Shirts</SelectItem>
                       <SelectItem value="pants">Pants</SelectItem>
                       <SelectItem value="jackets">Jackets</SelectItem>
+                      <SelectItem value="footwear">Footwear</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>

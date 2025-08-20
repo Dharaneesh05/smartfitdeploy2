@@ -4,6 +4,7 @@ import { useAuth } from '@/contexts/auth-context';
 import { useToast } from '@/hooks/use-toast';
 import { apiRequest } from '@/lib/queryClient';
 import ARTryOnInterface from '@/components/ar-tryon-interface';
+import FootARTryOn from '@/components/foot-ar-tryon';
 import { Card, CardContent } from '@/components/ui/card';
 import { Loader2 } from 'lucide-react';
 
@@ -135,11 +136,23 @@ export default function ARTryOn() {
         </div>
 
         <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
-          <ARTryOnInterface
-            product={product || { id: '', name: 'No Product Selected' }}
-            onPurchase={handlePurchase}
-            onSaveToProfile={handleSaveToProfile}
-          />
+          {product?.category === 'footwear' ? (
+            <FootARTryOn
+              product={{ 
+                ...product, 
+                category: 'footwear' as const,
+                type: 'sports' as const
+              }}
+              onPurchase={handlePurchase}
+              onSaveToProfile={handleSaveToProfile}
+            />
+          ) : (
+            <ARTryOnInterface
+              product={product || { id: '', name: 'No Product Selected' }}
+              onPurchase={handlePurchase}
+              onSaveToProfile={handleSaveToProfile}
+            />
+          )}
         </div>
       </div>
     </div>
