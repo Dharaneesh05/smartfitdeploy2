@@ -606,7 +606,7 @@ export default function MeasurementCapture({
                           {measurements[key as keyof MeasurementData].toFixed(2)} {info.unit}
                         </span>
                         <p className="text-sm text-green-600" data-testid={`confidence-${key}`}>
-                          {measurements.confidence && measurements.confidence[key] ? measurements.confidence[key].toFixed(1) : 95.0}% confidence
+                          {measurements.confidence && measurements.confidence[key] ? measurements.confidence[key].toFixed(1) : '95.0'}% confidence
                         </p>
                       </div>
                     </div>
@@ -632,7 +632,7 @@ export default function MeasurementCapture({
                           {measurements[key as keyof MeasurementData].toFixed(2)} {info.unit}
                         </span>
                         <p className="text-sm text-green-600" data-testid={`confidence-${key}`}>
-                          {measurements.confidence && measurements.confidence[key] ? measurements.confidence[key].toFixed(1) : 95.0}% confidence
+                          {measurements.confidence && measurements.confidence[key] ? measurements.confidence[key].toFixed(1) : '95.0'}% confidence
                         </p>
                       </div>
                     </div>
