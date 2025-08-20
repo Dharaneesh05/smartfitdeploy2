@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -169,39 +170,6 @@
   @apply border-blue-200 text-blue-800;
   background: linear-gradient(145deg, rgba(239, 246, 255, 0.95), rgba(219, 234, 254, 0.9));
   box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.15), 0 0 0 1px rgba(59, 130, 246, 0.1) inset;
-}
-
-/* Enhanced AR and detection styles */
-.webcam-container {
-  position: relative;
-  border-radius: 1.5rem;
-  overflow: hidden;
-}
-
-.body-detection-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  pointer-events: none;
-  z-index: 10;
-}
-
-.detection-indicator {
-  @apply flex items-center space-x-2 px-3 py-1.5 rounded-full text-white text-xs font-medium backdrop-blur-sm;
-}
-
-.detection-active {
-  @apply bg-green-500/70;
-}
-
-.detection-processing {
-  @apply bg-blue-500/70;
-}
-
-.detection-inactive {
-  @apply bg-gray-500/70;
 }
 
 /* Smooth skeleton points for body mapping */
@@ -390,11 +358,11 @@
   .measurement-card {
     @apply p-4;
   }
-
+  
   .webcam-container {
     border-radius: 16px;
   }
-
+  
   .btn-primary, .btn-secondary, .btn-accent {
     @apply px-6 py-2.5 text-sm;
   }

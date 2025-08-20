@@ -342,8 +342,8 @@ export default function MeasurementCapture({
                       <span className="text-xs text-white font-medium ml-1.5">{faceBlurred ? 'Face Blurred' : 'Face Visible'}</span>
                     </div>
 
-                    <div className={`detection-indicator flex items-center px-3 py-1.5 rounded-full shadow-sm ${(measurementType === 'body' ? bodyDetected : footDetected) ? 'detection-active bg-green-500/70' : 'detection-processing bg-blue-500/70'}`}>
-                      <div className={`w-2 h-2 rounded-full mr-1.5 ${(measurementType === 'body' ? bodyDetected : footDetected) ? 'bg-white animate-pulse' : 'bg-white animate-pulse'}`}></div>
+                    <div className={`flex items-center px-3 py-1.5 rounded-full shadow-sm ${ (measurementType === 'body' ? bodyDetected : footDetected) ? 'bg-green-500/70' : 'bg-blue-500/70'}`}>
+                      <div className={`w-2 h-2 rounded-full mr-1.5 ${ (measurementType === 'body' ? bodyDetected : footDetected) ? 'bg-white animate-pulse' : 'bg-white animate-pulse'}`}></div>
                       <span className="text-xs text-white font-medium">
                         {measurementType === 'body'
                           ? (bodyDetected ? 'Body Detected' : 'Detecting Body...')
@@ -606,7 +606,7 @@ export default function MeasurementCapture({
                           {measurements[key as keyof MeasurementData].toFixed(2)} {info.unit}
                         </span>
                         <p className="text-sm text-green-600" data-testid={`confidence-${key}`}>
-                          {(measurements.confidence && measurements.confidence[key] !== undefined) ? measurements.confidence[key].toFixed(1) : '95.0'}% confidence
+                          {measurements.confidence && measurements.confidence[key] ? measurements.confidence[key].toFixed(1) : 95.0}% confidence
                         </p>
                       </div>
                     </div>
@@ -632,7 +632,7 @@ export default function MeasurementCapture({
                           {measurements[key as keyof MeasurementData].toFixed(2)} {info.unit}
                         </span>
                         <p className="text-sm text-green-600" data-testid={`confidence-${key}`}>
-                          {(measurements.confidence && measurements.confidence[key] !== undefined) ? measurements.confidence[key].toFixed(1) : '95.0'}% confidence
+                          {measurements.confidence && measurements.confidence[key] ? measurements.confidence[key].toFixed(1) : 95.0}% confidence
                         </p>
                       </div>
                     </div>
