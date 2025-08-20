@@ -29,7 +29,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Authentication routes
   app.post("/api/auth/signup", async (req: Request, res: Response) => {
     try {
+      console.log('Received signup data:', req.body);
       const userData = insertUserSchema.parse(req.body);
+      console.log('Parsed user data:', userData);
+      console.log('User data before saving:', userData);
       
       // Check if user already exists
       const existingUser = await storage.getUserByEmail(userData.email);

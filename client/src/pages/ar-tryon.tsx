@@ -108,7 +108,7 @@ export default function ARTryOn() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Card>
             <CardContent className="p-8 text-center">
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">Product Not Found</h2>
+              <h2 className="text-2xl font-bold text-gray-900 mb-4 mt-10">Product Not Found</h2>
               <p className="text-gray-600 mb-6">The product you're trying to view could not be found.</p>
               <button
                 onClick={() => setLocation('/fit-predict')}
