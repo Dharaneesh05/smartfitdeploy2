@@ -35,7 +35,7 @@ export default function Signup() {
     try {
       await signup(formData.fullName, formData.username, formData.email, formData.password);
       toast({
-        title: "Welcome to FitPredict!",
+        title: "Welcome to SmartFit!",
         description: "Your account has been created successfully.",
       });
       setLocation('/measurements');
@@ -61,7 +61,7 @@ export default function Signup() {
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
           <CardTitle className="text-2xl font-bold">Get Started</CardTitle>
-          <CardDescription>Create your FitPredict account</CardDescription>
+          <CardDescription>Create your SmartFit account</CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-6">

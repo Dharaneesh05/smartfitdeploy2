@@ -36,7 +36,7 @@ export default function Navbar() {
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2" data-testid="link-home">
             <Ruler className="text-primary text-2xl" />
-            <span className="text-xl font-bold text-gray-900">FitPredict</span>
+            <span className="text-xl font-bold text-gray-900">SmartFit</span>
           </Link>
 
           {/* Desktop Navigation */}

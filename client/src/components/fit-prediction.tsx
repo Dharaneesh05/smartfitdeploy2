@@ -190,7 +190,7 @@ export default function FitPrediction({ onTryOnAR, onAddToFavorites }: FitPredic
               data-testid="button-analyze"
             >
               <Search className="mr-2 h-4 w-4" />
-              {createProductMutation.isPending || fitPredictionMutation.isPending ? 'Analyzing...' : 'Analyze Product'}
+              {createProductMutation.isPending || fitPredictionMutation.isPending ? 'Analyzing...' : 'Analyze Your Product'}
             </Button>
           </div>
         </CardContent>
@@ -199,7 +199,7 @@ export default function FitPrediction({ onTryOnAR, onAddToFavorites }: FitPredic
       {/* Fit Analysis Results */}
       <Card>
         <CardHeader>
-          <CardTitle>Fit Analysis</CardTitle>
+          <CardTitle>Analyszed product details</CardTitle>
         </CardHeader>
         <CardContent className="space-y-6">
           {currentProduct ? (

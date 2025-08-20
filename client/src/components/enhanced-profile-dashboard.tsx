@@ -595,14 +595,14 @@ export default function EnhancedProfileDashboard() {
 
             {/* Delete Account Section */}
             <Card className="mt-8 border-red-200">
-              <CardHeader>
+              {/* <CardHeader>
                 <CardTitle className="text-red-600">Danger Zone</CardTitle>
-              </CardHeader>
+              </CardHeader> */}
               <CardContent>
                 <AlertDialog>
                   <AlertDialogTrigger asChild>
                     <Button variant="destructive" data-testid="button-delete-account">
-                      <Trash2 className="w-4 h-4 mr-2" />
+                      <Trash2 className="w-4 h-4 mr-2 text-red-600" />
                       Delete Account
                     </Button>
                   </AlertDialogTrigger>

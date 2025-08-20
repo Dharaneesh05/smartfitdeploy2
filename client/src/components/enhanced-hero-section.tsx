@@ -44,7 +44,7 @@ export default function EnhancedHeroSection() {
       imageUrl: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=400",
       fitScore: 95,
       reason: "Perfect for athletic builds",
-      price: "$49.99"
+      price: "₹599"
     },
     {
       id: '2',
@@ -53,7 +53,7 @@ export default function EnhancedHeroSection() {
       imageUrl: "https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=400",
       fitScore: 88,
       reason: "Ideal waist-to-height ratio",
-      price: "$79.50"
+      price: "₹799"
     },
     {
       id: '3',
@@ -62,7 +62,7 @@ export default function EnhancedHeroSection() {
       imageUrl: "https://images.unsplash.com/photo-1586790170083-2f9ceadc732d?w=400",
       fitScore: 92,
       reason: "Excellent shoulder fit",
-      price: "$35.00"
+      price: "₹349"
     }
   ];
 
@@ -76,14 +76,14 @@ export default function EnhancedHeroSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-20">
         <div className="text-center mb-16" data-testid="hero-content">
           <Badge className="mb-6 px-4 py-2 text-sm" data-testid="hero-badge">
-            <Zap className="w-4 h-4 mr-2" />
+            {/* <Zap className="w-4 h-4 mr-2" /> */}
             AI-Powered Fit Technology
           </Badge>
           
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-8 leading-tight">
             Welcome to{' '}
             <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
-              FitPredict
+              SmartFit
             </span>
           </h1>
           
@@ -110,7 +110,7 @@ export default function EnhancedHeroSection() {
               onClick={() => setLocation('/ar-tryon')}
               data-testid="button-try-ar"
             >
-              <Camera className="mr-2 w-5 h-5" />
+              {/* <Camera className="mr-2 w-5 h-5" /> */}
               Try AR Demo
             </Button>
           </div>
@@ -118,16 +118,16 @@ export default function EnhancedHeroSection() {
           {/* Trust Indicators */}
           <div className="flex flex-wrap justify-center items-center gap-8 text-sm text-gray-500">
             <div className="flex items-center">
-              <Shield className="w-5 h-5 mr-2 text-green-500" />
+              {/* <Shield className="w-5 h-5 mr-2 text-green-500" /> */}
               <span>Privacy Protected</span>
             </div>
             <div className="flex items-center">
-              <TrendingUp className="w-5 h-5 mr-2 text-blue-500" />
-              <span>99% Accuracy</span>
+              {/* <TrendingUp className="w-5 h-5 mr-2 text-blue-500" /> */}
+              <span>90% Accuracy</span>
             </div>
             <div className="flex items-center">
-              <Star className="w-5 h-5 mr-2 text-yellow-500" />
-              <span>10k+ Happy Users</span>
+              {/* <Star className="w-5 h-5 mr-2 text-yellow-500" /> */}
+              <span>AI powered</span>
             </div>
           </div>
         </div>
@@ -138,32 +138,32 @@ export default function EnhancedHeroSection() {
             How It Works
           </h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 ">
             {[
               {
-                icon: Ruler,
+                // icon: Ruler,
                 title: "1. Measure Body",
                 description: "Use our AI-powered camera technology to capture precise body measurements with privacy protection",
-                color: "bg-blue-500"
+                // color: "bg-blue-500"
               },
               {
-                icon: Shirt,
+                // icon: Shirt,
                 title: "2. Predict Fit & Get Recommendations", 
                 description: "Our AI analyzes product compatibility and suggests personalized clothing recommendations",
-                color: "bg-green-500"
+                // color: "bg-green-500"
               },
               {
-                icon: Camera,
+                // icon: Camera,
                 title: "3. AR Try-On",
                 description: "Visualize how clothes look on you with real-time augmented reality before purchasing",
-                color: "bg-purple-500"
+                // color: "bg-purple-500"
               }
             ].map((step, index) => (
               <Card key={index} className="text-center hover:shadow-lg transition-shadow duration-300">
                 <CardContent className="p-8">
-                  <div className={`w-16 h-16 ${step.color} rounded-full flex items-center justify-center mx-auto mb-6`}>
+                  {/* <div className={`w-16 h-16 ${step.color} rounded-full flex items-center justify-center mx-auto mb-6`}>
                     <step.icon className="w-8 h-8 text-white" />
-                  </div>
+                  </div> */}
                   <h3 className="text-xl font-semibold text-gray-900 mb-4">
                     {step.title}
                   </h3>
@@ -254,7 +254,7 @@ export default function EnhancedHeroSection() {
 
         {/* CTA Section */}
         {!user && (
-          <div className="bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl p-8 md:p-12 text-center text-white">
+          <div className="bg-gradient-to-r from-blue-500 to-blue-900 rounded-2xl p-8 md:p-12 text-center text-white">
             <h2 className="text-2xl md:text-3xl font-bold mb-4">
               Ready to Transform Your Shopping Experience?
             </h2>
@@ -268,7 +268,7 @@ export default function EnhancedHeroSection() {
               onClick={() => setLocation('/signup')}
               data-testid="button-join-now"
             >
-              Join FitPredict Today
+              Join SmartFit Today
               <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
           </div>
@@ -280,7 +280,7 @@ export default function EnhancedHeroSection() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div className="col-span-1">
-              <h3 className="text-2xl font-bold mb-4">FitPredict</h3>
+              <h3 className="text-2xl font-bold mb-4">SmartFit</h3>
               <p className="text-gray-400">
                 AI-powered clothing fit prediction for smarter shopping decisions.
               </p>
@@ -317,9 +317,9 @@ export default function EnhancedHeroSection() {
             </div>
           </div>
           
-          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+          {/* <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
             <p>&copy; 2025 FitPredict. All rights reserved.</p>
-          </div>
+          </div> */}
         </div>
       </footer>
     </div>

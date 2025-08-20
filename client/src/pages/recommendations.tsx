@@ -71,7 +71,7 @@ export default function RecommendationsPage() {
       {
         productName: "Classic Fit Cotton Shirt",
         brand: "Calvin Klein",
-        price: "$49.99",
+        price: "₹599",
         imageUrl: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=400",
         fitScore: 95,
         reason: "Perfect chest fit, ideal shoulder width for your measurements",
@@ -82,7 +82,7 @@ export default function RecommendationsPage() {
       {
         productName: "Slim Fit Chinos",
         brand: "J.Crew",
-        price: "$79.50",
+        price: "₹799",
         imageUrl: "https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=400",
         fitScore: 88,
         reason: "Waist perfect match, length suits your height",
@@ -93,7 +93,7 @@ export default function RecommendationsPage() {
       {
         productName: "Athletic Fit Polo",
         brand: "Nike",
-        price: "$35.00",
+        price: "₹349",
         imageUrl: "https://images.unsplash.com/photo-1586790170083-2f9ceadc732d?w=400",
         fitScore: 92,
         reason: "Excellent shoulder fit, ideal for athletic build",
@@ -104,7 +104,7 @@ export default function RecommendationsPage() {
       {
         productName: "Relaxed Fit Jeans",
         brand: "Levi's",
-        price: "$89.99",
+        price: "₹999",
         imageUrl: "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=400",
         fitScore: 85,
         reason: "Comfortable waist, good hip room for your measurements",

@@ -3,15 +3,15 @@
 @tailwind utilities;
 
 :root {
-  --background: hsl(0, 0%, 100%);
-  --foreground: hsl(220, 14%, 8%);
-  --card: hsl(0, 0%, 100%);
+  --background: hsl(206, 89%, 79%);
+  --foreground: hsl(228, 23%, 39%);
+  --card: hsla(223, 33%, 62%, 0);
   --card-foreground: hsl(220, 14%, 8%);
-  --popover: hsl(0, 0%, 100%);
+  --popover: hsl(207, 81%, 82%);
   --popover-foreground: hsl(220, 14%, 8%);
   --primary: hsl(221, 83%, 53%);
-  --primary-foreground: hsl(0, 0%, 100%);
-  --secondary: hsl(220, 14%, 96%);
+  --primary-foreground: hsl(202, 24%, 31%);
+  --secondary: hsl(220, 28%, 38%);
   --secondary-foreground: hsl(220, 9%, 46%);
   --muted: hsl(220, 14%, 96%);
   --muted-foreground: hsl(220, 9%, 46%);
@@ -19,7 +19,7 @@
   --accent-foreground: hsl(220, 9%, 46%);
   --destructive: hsl(0, 84%, 60%);
   --destructive-foreground: hsl(0, 0%, 100%);
-  --border: hsl(220, 13%, 91%);
+  --border: hsl(220, 65%, 76%);
   --input: hsl(220, 13%, 91%);
   --ring: hsl(221, 83%, 53%);
   --success: hsl(160, 84%, 39%);
@@ -37,8 +37,8 @@
 }
 
 .dark {
-  --background: hsl(220, 27%, 6%);
-  --foreground: hsl(220, 9%, 91%);
+  --background: hsl(218, 32%, 29%);
+  --foreground: hsl(225, 24%, 62%);
   --card: hsl(220, 27%, 8%);
   --card-foreground: hsl(220, 9%, 91%);
   --popover: hsl(220, 27%, 8%);
@@ -82,7 +82,7 @@
 
   /* Custom gradient backgrounds */
   .gradient-blue {
-    background: linear-gradient(135deg, hsl(214, 100%, 97%) 0%, hsl(221, 91%, 91%) 100%);
+    background: linear-gradient(135deg, hsl(216, 85%, 69%) 0%, hsl(221, 85%, 58%) 100%);
   }
 
   /* Custom button styles for fit status */

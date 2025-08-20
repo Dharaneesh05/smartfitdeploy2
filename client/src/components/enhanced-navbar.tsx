@@ -93,9 +93,8 @@ export default function EnhancedNavbar() {
             <Link 
               href="/" 
               className="text-2xl font-bold text-primary hover:text-blue-700 transition-colors"
-              data-testid="logo-fitpredict"
             >
-              FitPredict
+              SmartFit
             </Link>
           </div>
 
@@ -117,7 +116,7 @@ export default function EnhancedNavbar() {
           </div>
 
           {/* Right Side - 20% */}
-          <div className="flex items-center justify-end space-x-4 w-1/5">
+          <div className="flex items-center justify-end space-x-4 w-20/30">
             {user ? (
               <>
                 {/* Notifications */}
