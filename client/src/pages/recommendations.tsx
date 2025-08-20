@@ -113,7 +113,7 @@ export default function RecommendationsPage() {
         size: "L",
         externalUrl: "https://peterengland.com"
       },
-      
+
       // Pants
       {
         productName: "Slim Fit Chinos",
@@ -152,7 +152,7 @@ export default function RecommendationsPage() {
         productName: "Cargo Pants",
         brand: "Roadster",
         price: "₹899",
-        imageUrl: "https://images.unsplash.com/photo-1506629905607-690d2f3a6102?w=400",
+        imageUrl: "https://images.unsplash.com/photo-1506629905607-6f0d6f3a6102?w=400",
         fitScore: 85,
         reason: "Casual fit, good for weekend activities",
         category: "pants",
@@ -306,7 +306,7 @@ export default function RecommendationsPage() {
       (fitFilter === 'excellent' && rec.fitScore >= 90) ||
       (fitFilter === 'good' && rec.fitScore >= 70 && rec.fitScore < 90) ||
       (fitFilter === 'fair' && rec.fitScore < 70);
-    
+
     return categoryMatch && fitMatch;
   });
 

@@ -4,7 +4,7 @@ import Webcam from 'react-webcam';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Camera, Video, Expand, Settings, Palette, Share, ShoppingCart, Bookmark, RotateCcw } from 'lucide-react';
+import { Camera, Video, Expand, Settings, Share, ShoppingCart, Bookmark } from 'lucide-react';
 
 interface Product {
   id: string;
@@ -142,47 +142,100 @@ export default function ARTryOnInterface({
                   </div>
                 </div>
 
-                {/* Enhanced clothing overlay with realistic positioning */}
+                {/* Enhanced AR clothing overlay with precise body tracking */}
                 {bodyDetected && (
                   <div className="body-detection-overlay">
-                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                    <div className="absolute top-[20%] left-1/2 transform -translate-x-1/2">
                       <div className="relative">
-                        {/* Realistic T-shirt overlay based on product type */}
-                        {product.category === 'shirts' || !product.category && (
-                          <div 
-                            className="w-44 h-36 rounded-t-3xl relative transition-all duration-300"
-                            style={{ 
-                              background: `linear-gradient(to bottom, ${getColorHex(currentColor)}E6, ${getColorHex(currentColor)}F0)`,
-                              border: `2px solid ${getColorHex(currentColor)}80`,
-                              boxShadow: `0 4px 12px ${getColorHex(currentColor)}40`
-                            }}
-                          >
-                            {/* Realistic texture and fit lines */}
-                            <div className="absolute inset-4 border border-white/30 rounded-t-2xl"></div>
-                            <div className="absolute top-2 right-2 w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                            <div className="absolute top-8 right-2 w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                            <div className="absolute bottom-8 right-2 w-2 h-2 bg-orange-400 rounded-full animate-pulse"></div>
+                        {/* Precise T-shirt overlay based on body measurements */}
+                        {(product.category === 'shirts' || !product.category) && (
+                          <div className="relative">
+                            {/* Main shirt body */}
+                            <div 
+                              className="w-48 h-40 rounded-t-3xl relative transition-all duration-300 shadow-lg"
+                              style={{ 
+                                background: `linear-gradient(145deg, ${getColorHex(currentColor)}F5, ${getColorHex(currentColor)}E6)`,
+                                border: `2px solid ${getColorHex(currentColor)}B0`,
+                                boxShadow: `0 8px 20px ${getColorHex(currentColor)}30, inset 0 2px 4px rgba(255,255,255,0.2)`
+                              }}
+                            >
+                              {/* Neckline */}
+                              <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-16 h-8 bg-white/20 rounded-b-full"></div>
+                              
+                              {/* Fabric seam lines */}
+                              <div className="absolute inset-4 border border-white/20 rounded-t-2xl"></div>
+                              <div className="absolute top-6 left-4 right-4 h-px bg-white/10"></div>
+                              <div className="absolute bottom-6 left-4 right-4 h-px bg-white/10"></div>
+                              
+                              {/* Buttons */}
+                              <div className="absolute top-8 left-1/2 transform -translate-x-1/2 flex flex-col space-y-3">
+                                <div className="w-1.5 h-1.5 bg-white/80 rounded-full"></div>
+                                <div className="w-1.5 h-1.5 bg-white/80 rounded-full"></div>
+                                <div className="w-1.5 h-1.5 bg-white/80 rounded-full"></div>
+                              </div>
+                              
+                              {/* Pocket */}
+                              <div className="absolute top-10 left-6 w-8 h-6 border border-white/30 rounded"></div>
+                              
+                              {/* Fit indicators */}
+                              <div className="absolute top-2 right-2 w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                              <div className="absolute top-1/3 right-2 w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                              <div className="absolute bottom-4 right-2 w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
+                              
+                              {/* Fabric texture and highlights */}
+                              <div className="absolute inset-0 opacity-15 bg-gradient-to-br from-white via-transparent to-black/10 rounded-t-3xl"></div>
+                              <div className="absolute top-2 left-2 w-6 h-6 bg-white/5 rounded-full blur-sm"></div>
+                            </div>
                             
-                            {/* Fabric texture simulation */}
-                            <div className="absolute inset-0 opacity-10 bg-gradient-to-br from-white to-transparent rounded-t-3xl"></div>
+                            {/* Left sleeve with realistic draping */}
+                            <div 
+                              className="absolute top-2 -left-10 w-18 h-32 rounded-xl transform -rotate-15 transition-all duration-300 shadow-md"
+                              style={{ 
+                                background: `linear-gradient(135deg, ${getColorHex(currentColor)}F0, ${getColorHex(currentColor)}E0)`,
+                                border: `1px solid ${getColorHex(currentColor)}A0`,
+                                boxShadow: `0 4px 12px ${getColorHex(currentColor)}20`
+                              }}
+                            >
+                              <div className="absolute inset-2 border border-white/15 rounded-lg"></div>
+                              <div className="absolute bottom-2 left-2 right-2 h-px bg-white/10"></div>
+                            </div>
+                            
+                            {/* Right sleeve with realistic draping */}
+                            <div 
+                              className="absolute top-2 -right-10 w-18 h-32 rounded-xl transform rotate-15 transition-all duration-300 shadow-md"
+                              style={{ 
+                                background: `linear-gradient(225deg, ${getColorHex(currentColor)}F0, ${getColorHex(currentColor)}E0)`,
+                                border: `1px solid ${getColorHex(currentColor)}A0`,
+                                boxShadow: `0 4px 12px ${getColorHex(currentColor)}20`
+                              }}
+                            >
+                              <div className="absolute inset-2 border border-white/15 rounded-lg"></div>
+                              <div className="absolute bottom-2 left-2 right-2 h-px bg-white/10"></div>
+                            </div>
+                            
+                            {/* Size indicator */}
+                            <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 bg-primary text-white text-xs px-2 py-1 rounded-full">
+                              Size {selectedSize}
+                            </div>
                           </div>
                         )}
                         
-                        {/* Sleeves with better positioning */}
-                        <div 
-                          className="absolute top-4 -left-8 w-16 h-28 rounded-lg transform -rotate-12 transition-all duration-300"
-                          style={{ 
-                            background: `linear-gradient(to bottom, ${getColorHex(currentColor)}E6, ${getColorHex(currentColor)}F0)`,
-                            border: `1px solid ${getColorHex(currentColor)}80`
-                          }}
-                        ></div>
-                        <div 
-                          className="absolute top-4 -right-8 w-16 h-28 rounded-lg transform rotate-12 transition-all duration-300"
-                          style={{ 
-                            background: `linear-gradient(to bottom, ${getColorHex(currentColor)}E6, ${getColorHex(currentColor)}F0)`,
-                            border: `1px solid ${getColorHex(currentColor)}80`
-                          }}
-                        ></div>
+                        {/* Pants overlay for lower body */}
+                        {product.category === 'pants' && (
+                          <div className="absolute top-20 left-1/2 transform -translate-x-1/2">
+                            <div 
+                              className="w-32 h-48 relative transition-all duration-300"
+                              style={{ 
+                                background: `linear-gradient(180deg, ${getColorHex(currentColor)}F0, ${getColorHex(currentColor)}E6)`,
+                                border: `2px solid ${getColorHex(currentColor)}A0`,
+                                borderRadius: '8px 8px 12px 12px'
+                              }}
+                            >
+                              <div className="absolute inset-2 border border-white/20 rounded"></div>
+                              <div className="absolute top-4 left-1/2 transform -translate-x-1/2 w-px h-8 bg-white/20"></div>
+                            </div>
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>

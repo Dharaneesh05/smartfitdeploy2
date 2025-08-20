@@ -135,79 +135,136 @@ export default function FootARTryOn({
                   </div>
                 </div>
 
-                {/* Footwear overlay */}
+                {/* Enhanced footwear AR overlay with precise foot tracking */}
                 {feetDetected && (
-                  <div className="foot-measurement-overlay">
-                    <div className="flex space-x-8">
-                      {/* Left foot */}
-                      <div 
-                        className={`w-32 h-20 ${getFootwearShape(product.type)} relative transition-all duration-300`}
-                        style={{ 
-                          background: `linear-gradient(to right, ${getColorHex(currentColor)}E6, ${getColorHex(currentColor)}F0)`,
-                          border: `2px solid ${getColorHex(currentColor)}80`,
-                          boxShadow: `0 4px 12px ${getColorHex(currentColor)}40`
-                        }}
-                      >
-                        {/* Footwear details based on type */}
-                        {product.type === 'sports' && (
-                          <>
-                            <div className="absolute inset-2 border border-white/30 rounded-xl"></div>
-                            <div className="absolute top-2 left-2 w-2 h-2 bg-white rounded-full"></div>
-                            <div className="absolute bottom-1 left-1 right-1 h-1 bg-white/50 rounded"></div>
-                          </>
-                        )}
-                        
-                        {product.type === 'formal' && (
-                          <>
-                            <div className="absolute inset-3 border border-white/20 rounded-md"></div>
-                            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-1 h-6 bg-white/30"></div>
-                          </>
-                        )}
+                  <div className="foot-measurement-overlay absolute bottom-[15%] left-1/2 transform -translate-x-1/2">
+                    <div className="flex space-x-12">
+                      {/* Left foot with enhanced realism */}
+                      <div className="relative">
+                        <div 
+                          className={`w-36 h-24 ${getFootwearShape(product.type)} relative transition-all duration-300 shadow-lg`}
+                          style={{ 
+                            background: `linear-gradient(135deg, ${getColorHex(currentColor)}F5, ${getColorHex(currentColor)}E6)`,
+                            border: `2px solid ${getColorHex(currentColor)}B0`,
+                            boxShadow: `0 8px 20px ${getColorHex(currentColor)}30, inset 0 2px 4px rgba(255,255,255,0.1)`
+                          }}
+                        >
+                          {/* Enhanced sports shoe details */}
+                          {product.type === 'sports' && (
+                            <>
+                              <div className="absolute inset-2 border border-white/25 rounded-xl"></div>
+                              <div className="absolute top-2 left-3 w-3 h-3 bg-white/80 rounded-full shadow-sm"></div>
+                              <div className="absolute bottom-2 left-2 right-2 h-2 bg-white/40 rounded-full"></div>
+                              <div className="absolute top-1/2 left-2 right-2 h-px bg-white/20"></div>
+                              <div className="absolute top-4 right-3 w-8 h-2 bg-white/15 rounded transform rotate-12"></div>
+                              <div className="absolute bottom-4 left-4 w-6 h-1 bg-white/25 rounded"></div>
+                            </>
+                          )}
+                          
+                          {/* Enhanced formal shoe details */}
+                          {product.type === 'formal' && (
+                            <>
+                              <div className="absolute inset-3 border border-white/15 rounded-md"></div>
+                              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-1 h-8 bg-white/20"></div>
+                              <div className="absolute top-3 left-4 right-4 h-px bg-white/15"></div>
+                              <div className="absolute bottom-3 left-6 right-6 h-px bg-white/10"></div>
+                              <div className="absolute top-4 right-4 w-2 h-2 bg-white/30 rounded-full"></div>
+                            </>
+                          )}
 
-                        {product.type === 'sandals' && (
-                          <>
-                            <div className="absolute top-1/3 left-2 right-2 h-1 bg-white/60 rounded"></div>
-                            <div className="absolute top-1/2 left-4 right-4 h-1 bg-white/60 rounded"></div>
-                          </>
-                        )}
+                          {/* Enhanced sandal details */}
+                          {product.type === 'sandals' && (
+                            <>
+                              <div className="absolute top-1/4 left-3 right-3 h-2 bg-white/50 rounded-full"></div>
+                              <div className="absolute top-1/2 left-5 right-5 h-2 bg-white/50 rounded-full"></div>
+                              <div className="absolute top-3/4 left-4 right-4 h-1 bg-white/30 rounded"></div>
+                              <div className="absolute top-2 left-1/2 transform -translate-x-1/2 w-1 h-4 bg-white/40"></div>
+                            </>
+                          )}
 
-                        {/* Fit indicators */}
-                        <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+                          {/* Casual shoe details */}
+                          {product.type === 'casual' && (
+                            <>
+                              <div className="absolute inset-2 border border-white/20 rounded-lg"></div>
+                              <div className="absolute top-3 left-3 w-6 h-1 bg-white/30 rounded"></div>
+                              <div className="absolute bottom-3 left-3 right-3 h-1 bg-white/20 rounded"></div>
+                              <div className="absolute top-1/2 right-3 w-4 h-3 bg-white/15 rounded transform -rotate-12"></div>
+                            </>
+                          )}
+
+                          {/* Enhanced fit indicators */}
+                          <div className="absolute -top-2 -right-2 w-4 h-4 bg-green-400 rounded-full animate-pulse shadow-md"></div>
+                          <div className="absolute top-1 right-1 w-2 h-2 bg-green-300 rounded-full"></div>
+                          
+                          {/* Size indicator */}
+                          <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-primary text-white text-xs px-2 py-1 rounded-full">
+                            {selectedSize}
+                          </div>
+                          
+                          {/* Texture overlay */}
+                          <div className="absolute inset-0 opacity-10 bg-gradient-to-br from-white via-transparent to-black/10 rounded-xl"></div>
+                        </div>
                       </div>
 
-                      {/* Right foot */}
-                      <div 
-                        className={`w-32 h-20 ${getFootwearShape(product.type)} relative transition-all duration-300`}
-                        style={{ 
-                          background: `linear-gradient(to left, ${getColorHex(currentColor)}E6, ${getColorHex(currentColor)}F0)`,
-                          border: `2px solid ${getColorHex(currentColor)}80`,
-                          boxShadow: `0 4px 12px ${getColorHex(currentColor)}40`
-                        }}
-                      >
-                        {/* Mirror the left foot details */}
-                        {product.type === 'sports' && (
-                          <>
-                            <div className="absolute inset-2 border border-white/30 rounded-xl"></div>
-                            <div className="absolute top-2 right-2 w-2 h-2 bg-white rounded-full"></div>
-                            <div className="absolute bottom-1 left-1 right-1 h-1 bg-white/50 rounded"></div>
-                          </>
-                        )}
-                        
-                        {product.type === 'formal' && (
-                          <>
-                            <div className="absolute inset-3 border border-white/20 rounded-md"></div>
-                            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-1 h-6 bg-white/30"></div>
-                          </>
-                        )}
+                      {/* Right foot with enhanced realism */}
+                      <div className="relative">
+                        <div 
+                          className={`w-36 h-24 ${getFootwearShape(product.type)} relative transition-all duration-300 shadow-lg`}
+                          style={{ 
+                            background: `linear-gradient(225deg, ${getColorHex(currentColor)}F5, ${getColorHex(currentColor)}E6)`,
+                            border: `2px solid ${getColorHex(currentColor)}B0`,
+                            boxShadow: `0 8px 20px ${getColorHex(currentColor)}30, inset 0 2px 4px rgba(255,255,255,0.1)`
+                          }}
+                        >
+                          {/* Mirror the left foot details with right-foot adjustments */}
+                          {product.type === 'sports' && (
+                            <>
+                              <div className="absolute inset-2 border border-white/25 rounded-xl"></div>
+                              <div className="absolute top-2 right-3 w-3 h-3 bg-white/80 rounded-full shadow-sm"></div>
+                              <div className="absolute bottom-2 left-2 right-2 h-2 bg-white/40 rounded-full"></div>
+                              <div className="absolute top-1/2 left-2 right-2 h-px bg-white/20"></div>
+                              <div className="absolute top-4 left-3 w-8 h-2 bg-white/15 rounded transform -rotate-12"></div>
+                              <div className="absolute bottom-4 right-4 w-6 h-1 bg-white/25 rounded"></div>
+                            </>
+                          )}
+                          
+                          {product.type === 'formal' && (
+                            <>
+                              <div className="absolute inset-3 border border-white/15 rounded-md"></div>
+                              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-1 h-8 bg-white/20"></div>
+                              <div className="absolute top-3 left-4 right-4 h-px bg-white/15"></div>
+                              <div className="absolute bottom-3 left-6 right-6 h-px bg-white/10"></div>
+                              <div className="absolute top-4 left-4 w-2 h-2 bg-white/30 rounded-full"></div>
+                            </>
+                          )}
 
-                        {product.type === 'sandals' && (
-                          <>
-                            <div className="absolute top-1/3 left-2 right-2 h-1 bg-white/60 rounded"></div>
-                            <div className="absolute top-1/2 left-4 right-4 h-1 bg-white/60 rounded"></div>
-                          </>
-                        )}
+                          {product.type === 'sandals' && (
+                            <>
+                              <div className="absolute top-1/4 left-3 right-3 h-2 bg-white/50 rounded-full"></div>
+                              <div className="absolute top-1/2 left-5 right-5 h-2 bg-white/50 rounded-full"></div>
+                              <div className="absolute top-3/4 left-4 right-4 h-1 bg-white/30 rounded"></div>
+                              <div className="absolute top-2 left-1/2 transform -translate-x-1/2 w-1 h-4 bg-white/40"></div>
+                            </>
+                          )}
 
-                        <div className="absolute -top-1 -left-1 w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+                          {product.type === 'casual' && (
+                            <>
+                              <div className="absolute inset-2 border border-white/20 rounded-lg"></div>
+                              <div className="absolute top-3 right-3 w-6 h-1 bg-white/30 rounded"></div>
+                              <div className="absolute bottom-3 left-3 right-3 h-1 bg-white/20 rounded"></div>
+                              <div className="absolute top-1/2 left-3 w-4 h-3 bg-white/15 rounded transform rotate-12"></div>
+                            </>
+                          )}
+
+                          <div className="absolute -top-2 -left-2 w-4 h-4 bg-green-400 rounded-full animate-pulse shadow-md"></div>
+                          <div className="absolute top-1 left-1 w-2 h-2 bg-green-300 rounded-full"></div>
+                          
+                          <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-primary text-white text-xs px-2 py-1 rounded-full">
+                            {selectedSize}
+                          </div>
+                          
+                          <div className="absolute inset-0 opacity-10 bg-gradient-to-bl from-white via-transparent to-black/10 rounded-xl"></div>
+                        </div>
                       </div>
                     </div>
                   </div>

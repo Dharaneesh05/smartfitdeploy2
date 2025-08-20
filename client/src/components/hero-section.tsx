@@ -22,15 +22,12 @@ export default function HeroSection() {
             
             <div className="flex items-center space-x-6">
               <div className="flex items-center space-x-2">
-                <Camera className="text-primary" />
                 <span className="text-gray-700 font-medium">Real-time Camera</span>
               </div>
               <div className="flex items-center space-x-2">
-                <Brain className="text-primary" />
                 <span className="text-gray-700 font-medium">AI Analysis</span>
               </div>
               <div className="flex items-center space-x-2">
-                <Eye className="text-primary" />
                 <span className="text-gray-700 font-medium">AR Try-On</span>
               </div>
             </div>
