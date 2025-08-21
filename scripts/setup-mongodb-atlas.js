@@ -17,7 +17,7 @@ console.log('🔧 MongoDB Atlas Setup Helper');
 console.log('=============================');
 
 // Your provided MongoDB Atlas connection string
-const providedUri = 'mongodb+srv://dharaneeshc23aid:<db_password>@smartfit.u09ehga.mongodb.net/?retryWrites=true&w=majority&appName=smartfit';
+const providedUri = 'mongodb+srv://dharaneeshc23aid:aHBHBQshNCqwWh3e@smartfit.u09ehga.mongodb.net/?retryWrites=true&w=majority&appName=smartfit';
 
 console.log('\n📋 Your MongoDB Atlas connection string template:');
 console.log(providedUri);
