@@ -114,6 +114,95 @@ export default function RecommendationsPage() {
         size: "L",
         externalUrl: "https://peterengland.com"
       },
+    {
+    productName: "Formal Slim Fit Shirt",
+    brand: "Van Heusen",
+    price: "₹1,499",
+    imageUrl: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+    fitScore: 94,
+    reason: "Tailored fit for office wear, ideal chest and shoulder measurements",
+    category: "shirts",
+    size: "L",
+    externalUrl: "https://vanheusenindia.com"
+  },
+  {
+    productName: "Casual Printed Shirt",
+    brand: "Highlander",
+    price: "₹799",
+    imageUrl: "https://images.unsplash.com/photo-1603252109303-2751441dd157?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+    fitScore: 91,
+    reason: "Relaxed fit, vibrant print for casual outings",
+    category: "shirts",
+    size: "L",
+    externalUrl: "https://myntra.com"
+  },
+  {
+    productName: "Polo T-Shirt",
+    brand: "U.S. Polo Assn.",
+    price: "₹1,299",
+    imageUrl: "https://images.unsplash.com/photo-1586790170083-2f9ceadc732d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+    fitScore: 90,
+    reason: "Comfortable fit, great for semi-casual settings",
+    category: "shirts",
+    size: "L",
+    externalUrl: "https://uspoloassn.in"
+  },
+  {
+    productName: "Checkered Cotton Shirt",
+    brand: "Arrow",
+    price: "₹1,199",
+    imageUrl: "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+    fitScore: 89,
+    reason: "Classic fit, suitable for both office and casual wear",
+    category: "shirts",
+    size: "L",
+    externalUrl: "https://arrowlife.com"
+  },
+  {
+    productName: "Slim Fit Oxford Shirt",
+    brand: "Louis Philippe",
+    price: "₹1,599",
+    imageUrl: "https://images.unsplash.com/photo-1598033129183-c4f50c6cb6c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+    fitScore: 93,
+    reason: "Tailored fit, perfect for formal occasions",
+    category: "shirts",
+    size: "L",
+    externalUrl: "https://louisphilippe.com"
+  },
+  {
+    productName: "Casual Linen Shirt",
+    brand: "Marks & Spencer",
+    price: "₹1,799",
+    imageUrl: "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+    fitScore: 92,
+    reason: "Lightweight and breathable, great for summer wear",
+    category: "shirts",
+    size: "L",
+    externalUrl: "https://marksandspencer.in"
+  },
+  {
+    productName: "Striped Polo Shirt",
+    brand: "Puma",
+    price: "₹1,499",
+    imageUrl: "https://images.unsplash.com/photo-1622470953794-2b1eb1e686f7?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+    fitScore: 90,
+    reason: "Athletic fit, ideal for casual and sporty looks",
+    category: "shirts",
+    size: "L",
+    externalUrl: "https://in.puma.com"
+  },
+  {
+    productName: "Formal Cotton Shirt",
+    brand: "Allen Solly",
+    price: "₹1,299",
+    imageUrl: "https://images.unsplash.com/photo-1618354691194-1871a7e8f4e1?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+    fitScore: 89,
+    reason: "Smart fit, suitable for office and meetings",
+    category: "shirts",
+    size: "L",
+    externalUrl: "https://allensolly.com"
+  },
+      
 
       // Pants
       {
@@ -160,6 +249,95 @@ export default function RecommendationsPage() {
         size: "34",
         externalUrl: "https://myntra.com"
       },
+      {
+    productName: "Slim Fit Jeans",
+    brand: "Spykar",
+    price: "₹2,299",
+    imageUrl: "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+    fitScore: 93,
+    reason: "Perfect waist fit, stretch fabric for comfort",
+    category: "pants",
+    size: "34x32",
+    externalUrl: "https://spykar.com"
+  },
+  {
+    productName: "Formal Trousers",
+    brand: "Peter England",
+    price: "₹1,599",
+    imageUrl: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+    fitScore: 90,
+    reason: "Sharp fit, ideal for professional settings",
+    category: "pants",
+    size: "34x32",
+    externalUrl: "https://peterengland.com"
+  },
+  {
+    productName: "Casual Chinos",
+    brand: "Jack & Jones",
+    price: "₹1,799",
+    imageUrl: "https://images.unsplash.com/photo-1473966968600-fa801b869a1a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+    fitScore: 88,
+    reason: "Versatile fit, great for casual and semi-formal looks",
+    category: "pants",
+    size: "34x32",
+    externalUrl: "https://jackandjones.in"
+  },
+  {
+    productName: "Cargo Joggers",
+    brand: "HRX",
+    price: "₹999",
+    imageUrl: "https://images.unsplash.com/photo-1506629905607-6f0d6f3a6102?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+    fitScore: 87,
+    reason: "Relaxed fit, perfect for casual and active wear",
+    category: "pants",
+    size: "34",
+    externalUrl: "https://myntra.com"
+  },
+  {
+    productName: "Tapered Fit Jeans",
+    brand: "Levi's",
+    price: "₹2,599",
+    imageUrl: "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+    fitScore: 92,
+    reason: "Comfortable waist, ideal for daily wear",
+    category: "pants",
+    size: "34x32",
+    externalUrl: "https://levis.in"
+  },
+  {
+    productName: "Slim Fit Chinos",
+    brand: "Blackberrys",
+    price: "₹1,899",
+    imageUrl: "https://images.unsplash.com/photo-1584865288642-42078c2812c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+    fitScore: 90,
+    reason: "Sleek fit, great for smart-casual looks",
+    category: "pants",
+    size: "34x32",
+    externalUrl: "https://blackberrys.com"
+  },
+  {
+    productName: "Formal Pleated Trousers",
+    brand: "Raymond",
+    price: "₹1,999",
+    imageUrl: "https://images.unsplash.com/photo-1605514449459-5b94634a2025?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+    fitScore: 89,
+    reason: "Professional fit, perfect for office wear",
+    category: "pants",
+    size: "34x32",
+    externalUrl: "https://raymond.in"
+  },
+  {
+    productName: "Athletic Joggers",
+    brand: "Puma",
+    price: "₹1,299",
+    imageUrl: "https://images.unsplash.com/photo-1618354691438-25bc7e3f318b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+    fitScore: 87,
+    reason: "Comfortable fit, ideal for workouts and casual wear",
+    category: "pants",
+    size: "34",
+    externalUrl: "https://in.puma.com"
+  },
+
 
       // Footwear
       {
@@ -206,7 +384,94 @@ export default function RecommendationsPage() {
         size: "9",
         externalUrl: "https://woodlandworldwide.com"
       },
-
+      {
+    productName: "Leather Oxfords",
+    brand: "Red Tape",
+    price: "₹2,799",
+    imageUrl: "https://images.unsplash.com/photo-1549298916-b41d501d3772?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+    fitScore: 94,
+    reason: "Perfect fit for formal occasions, comfortable insole",
+    category: "footwear",
+    size: "9",
+    externalUrl: "https://redtape.com"
+  },
+  {
+    productName: "Running Sneakers",
+    brand: "Puma",
+    price: "₹3,499",
+    imageUrl: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+    fitScore: 95,
+    reason: "Excellent cushioning, ideal for running and workouts",
+    category: "footwear",
+    size: "9",
+    externalUrl: "https://in.puma.com"
+  },
+  {
+    productName: "Casual Sneakers",
+    brand: "Sparx",
+    price: "₹1,999",
+    imageUrl: "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+    fitScore: 90,
+    reason: "Comfortable fit, great for everyday wear",
+    category: "footwear",
+    size: "9",
+    externalUrl: "https://bata.in"
+  },
+  {
+    productName: "Outdoor Sandals",
+    brand: "Khadim's",
+    price: "₹1,499",
+    imageUrl: "https://images.unsplash.com/photo-1603808033192-082d6919d3e1?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+    fitScore: 88,
+    reason: "Durable design, suitable for summer and outdoor use",
+    category: "footwear",
+    size: "9",
+    externalUrl: "https://khadims.com"
+  },
+  {
+    productName: "Suede Loafers",
+    brand: "Hush Puppies",
+    price: "₹3,299",
+    imageUrl: "https://images.unsplash.com/photo-1562273138-f46be4ebdf33?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+    fitScore: 93,
+    reason: "Comfortable fit, ideal for semi-formal occasions",
+    category: "footwear",
+    size: "9",
+    externalUrl: "https://hushpuppies.in"
+  },
+  {
+    productName: "Training Shoes",
+    brand: "Reebok",
+    price: "₹4,199",
+    imageUrl: "https://images.unsplash.com/photo-1608231387042-66d1773070a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+    fitScore: 94,
+    reason: "Excellent support, perfect for gym and running",
+    category: "footwear",
+    size: "9",
+    externalUrl: "https://reebok.in"
+  },
+  {
+    productName: "High-Top Sneakers",
+    brand: "Vans",
+    price: "₹2,799",
+    imageUrl: "https://images.unsplash.com/photo-1612902376491-7c6d75404d6d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+    fitScore: 90,
+    reason: "Trendy fit, great for casual street style",
+    category: "footwear",
+    size: "9",
+    externalUrl: "https://vans.in"
+  },
+  {
+    productName: "Leather Sandals",
+    brand: "Metro",
+    price: "₹1,699",
+    imageUrl: "https://images.unsplash.com/photo-1605733160314-4fc7f8b3f3f7?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+    fitScore: 88,
+    reason: "Breathable design, suitable for warm weather",
+    category: "footwear",
+    size: "9",
+    externalUrl: "https://metroshoes.net"
+  },
       // Jackets
       {
         productName: "Denim Jacket",
@@ -231,16 +496,83 @@ export default function RecommendationsPage() {
         externalUrl: "https://hm.com"
       },
       {
-        productName: "Formal Blazer",
-        brand: "Raymond",
-        price: "₹4,999",
-        imageUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400",
-        fitScore: 94,
-        reason: "Professional fit, excellent shoulder measurements",
-        category: "jackets",
-        size: "L",
-        externalUrl: "https://raymond.in"
-      }
+    productName: "Denim Jacket",
+    brand: "Pepe Jeans",
+    price: "₹2,499",
+    imageUrl: "https://images.unsplash.com/photo-1551028719-00167b16eac5?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+    fitScore: 92,
+    reason: "Trendy fit, perfect for layering in casual outfits",
+    category: "jackets",
+    size: "L",
+    externalUrl: "https://pepejeans.in"
+  },
+  {
+    productName: "Quilted Puffer Jacket",
+    brand: "Columbia",
+    price: "₹3,999",
+    imageUrl: "https://images.unsplash.com/photo-1544022613-087ca5a784a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+    fitScore: 90,
+    reason: "Warm and lightweight, ideal for cold weather",
+    category: "jackets",
+    size: "L",
+    externalUrl: "https://columbia.co.in"
+  },
+  {
+    productName: "Hooded Windcheater",
+    brand: "Wildcraft",
+    price: "₹1,799",
+    imageUrl: "https://images.unsplash.com/photo-1571945153237-3b2d8e0de0c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+    fitScore: 89,
+    reason: "Water-resistant, great for outdoor activities",
+    category: "jackets",
+    size: "L",
+    externalUrl: "https://wildcraft.com"
+  },
+  {
+    productName: "Casual Bomber Jacket",
+    brand: "Zara",
+    price: "₹3,299",
+    imageUrl: "https://images.unsplash.com/photo-1512709725579-67da69b5d1b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+    fitScore: 91,
+    reason: "Stylish fit, perfect for casual winter wear",
+    category: "jackets",
+    size: "L",
+    externalUrl: "https://zara.com"
+  },
+  {
+    productName: "Lightweight Jacket",
+    brand: "Decathlon",
+    price: "₹2,299",
+    imageUrl: "https://images.unsplash.com/photo-1603785632627-9d03ab0d84bd?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+    fitScore: 90,
+    reason: "Comfortable fit, ideal for layering in cool weather",
+    category: "jackets",
+    size: "L",
+    externalUrl: "https://decathlon.in"
+  },
+  {
+    productName: "Tailored Wool Blazer",
+    brand: "Blackberrys",
+    price: "₹5,999",
+    imageUrl: "https://images.unsplash.com/photo-1516826957135-700d8d8b2d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+    fitScore: 94,
+    reason: "Premium fit, great for formal occasions",
+    category: "jackets",
+    size: "L",
+    externalUrl: "https://blackberrys.com"
+  },
+  {
+    productName: "Hooded Parka",
+    brand: "Superdry",
+    price: "₹4,499",
+    imageUrl: "https://images.unsplash.com/photo-1517842431800-2d85a4e2f3b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+    fitScore: 90,
+    reason: "Warm and stylish, perfect for winter outings",
+    category: "jackets",
+    size: "L",
+    externalUrl: "https://superdry.in"
+  }
+
     ];
 
     for (const rec of sampleRecs) {
@@ -513,7 +845,7 @@ export default function RecommendationsPage() {
               className="h-12 px-8 text-lg font-semibold bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white shadow-lg transform hover:-translate-y-1 transition-all duration-300"
               data-testid="button-load-more"
             >
-              <TrendingUp className="w-5 h-5 mr-2" />
+              {/* <TrendingUp className="w-5 h-5 mr-2" /> */}
               Generate More Recommendations
             </Button>
           </div>

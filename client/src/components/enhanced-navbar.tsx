@@ -15,13 +15,7 @@ import {
   User, 
   LogOut, 
   Menu, 
-  X,
-  Home,
-  Ruler,
-  Shirt,
-  Camera,
-  Settings,
-  Star
+  Settings
 } from 'lucide-react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
@@ -65,12 +59,12 @@ export default function EnhancedNavbar() {
   const unreadCount = notifications.filter(n => !n.isRead).length;
 
   const navLinks = [
-    { href: '/', label: 'Home', icon: Home },
-    { href: '/measurements', label: 'Measurements', icon: Ruler },
-    { href: '/fit-predict', label: 'Fit Predict', icon: Shirt },
-    { href: '/ar-tryon', label: 'AR Try-On', icon: Camera },
-    { href: '/recommendations', label: 'Recommendations', icon: Star },
-    { href: '/profile', label: 'Profile', icon: User },
+    { href: '/', label: 'Home' },
+    { href: '/measurements', label: 'Measurements' },
+    { href: '/fit-predict', label: 'Fit Predict' },
+    { href: '/ar-tryon', label: 'Try AR' },
+    { href: '/recommendations', label: 'Recommendations' },
+    { href: '/profile', label: 'Profile' },
   ];
 
   const handleLogout = () => {
@@ -100,7 +94,7 @@ export default function EnhancedNavbar() {
 
           {/* Desktop Navigation - 60% */}
           <div className="hidden md:flex items-center justify-center space-x-8 flex-1">
-            {navLinks.map(({ href, label, icon: Icon }) => (
+            {navLinks.map(({ href, label }) => (
               <Link 
                 key={href}
                 href={href}
@@ -109,14 +103,13 @@ export default function EnhancedNavbar() {
                 }`}
                 data-testid={`nav-link-${label.toLowerCase().replace(' ', '-')}`}
               >
-                <Icon className="w-4 h-4" />
                 <span>{label}</span>
               </Link>
             ))}
           </div>
 
           {/* Right Side - 20% */}
-          <div className="flex items-center justify-end space-x-4 w-20/30">
+          <div className="flex items-center justify-end space-x-4 w-40">
             {user ? (
               <>
                 {/* Notifications */}
@@ -221,7 +214,7 @@ export default function EnhancedNavbar() {
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               data-testid="button-mobile-menu"
             >
-              {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              <Menu className="w-5 h-5" />
             </Button>
           </div>
         </div>
@@ -230,7 +223,7 @@ export default function EnhancedNavbar() {
         {isMobileMenuOpen && (
           <div className="md:hidden border-t border-gray-100 bg-white" data-testid="mobile-menu">
             <div className="px-4 py-2 space-y-1">
-              {navLinks.map(({ href, label, icon: Icon }) => (
+              {navLinks.map(({ href, label }) => (
                 <Link
                   key={href}
                   href={href}
@@ -242,7 +235,6 @@ export default function EnhancedNavbar() {
                   onClick={() => setIsMobileMenuOpen(false)}
                   data-testid={`mobile-nav-${label.toLowerCase().replace(' ', '-')}`}
                 >
-                  <Icon className="w-4 h-4" />
                   <span>{label}</span>
                 </Link>
               ))}

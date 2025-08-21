@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: smartfit
+    env: node
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 5000
+      - key: MONGODB_URI
+        fromSecret: MONGODB_URI
+      - key: JWT_SECRET
+        fromSecret: JWT_SECRET

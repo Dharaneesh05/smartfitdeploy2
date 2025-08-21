@@ -14,7 +14,6 @@ import {
 import { useLocation } from 'wouter';
 import { useAuth } from '@/contexts/auth-context';
 import { useQuery } from '@tanstack/react-query';
-
 interface Recommendation {
   id: string;
   productName: string;
@@ -24,7 +23,6 @@ interface Recommendation {
   reason: string;
   price: string | null;
 }
-
 export default function EnhancedHeroSection() {
   const { user } = useAuth();
   const [location, setLocation] = useLocation();
@@ -87,9 +85,9 @@ export default function EnhancedHeroSection() {
             </span>
           </h1>
           
-          <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-4xl mx-auto leading-relaxed">
+          <p className="text-xl md:text-2xl text-gray-900 mb-8 max-w-4xl mx-auto leading-relaxed">
             AI-powered body measurements, fit predictions, AR try-on, product suggestions, and 
-            recommendations to <span className="font-semibold text-blue-600">reduce returns by 30%</span>
+            recommendations to <span className="font-semibold text-blue-600">reduce returns by 20%-30%</span>
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
@@ -116,7 +114,7 @@ export default function EnhancedHeroSection() {
           </div>
 
           {/* Trust Indicators */}
-          <div className="flex flex-wrap justify-center items-center gap-8 text-sm text-gray-500">
+          <div className="flex flex-wrap justify-center items-center gap-8 text-sm text-gray-900">
             <div className="flex items-center">
               {/* <Shield className="w-5 h-5 mr-2 text-green-500" /> */}
               <span>Privacy Protected</span>
@@ -176,17 +174,41 @@ export default function EnhancedHeroSection() {
           </div>
         </div>
 
+        
+
+        {/* CTA Section */}
+        <div className="bg-gradient-to-r from-blue-500 to-blue-900 rounded-2xl p-8 md:p-12 text-center text-white">
+          <h2 className="text-2xl md:text-3xl font-bold mb-4">
+            Ready to Transform Your Shopping Experience?
+          </h2>
+          <p className="text-lg mb-6 opacity-90">
+            Reduce your returns on size defect and found perfect fit
+          </p>
+          <Button 
+            size="lg" 
+            variant="secondary" 
+            className="px-8 py-4 text-lg"
+            onClick={() => setLocation(user ? '/measurements' : '/signup')}
+            data-testid="button-join-now"
+          >
+            {user ? 'Start Your Journey' : 'Join SmartFit Today'}
+            <ArrowRight className="ml-2 w-5 h-5" />
+          </Button>
+        </div>
+
+
+
         {/* Featured Recommendations Section */}
         <div className="mb-16" data-testid="featured-recommendations">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 mt-8">
               {user ? "Your Personalized Recommendations" : "Featured Recommendations"}
             </h2>
-            <p className="text-xl text-gray-600">
+            {/* <p className="text-xl text-gray-600">
               {user 
                 ? "Based on your profile measurements and saved analyses" 
                 : "Discover products that could be perfect for you"}
-            </p>
+            </p> */}
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -251,77 +273,7 @@ export default function EnhancedHeroSection() {
             </div>
           )}
         </div>
-
-        {/* CTA Section */}
-        {!user && (
-          <div className="bg-gradient-to-r from-blue-500 to-blue-900 rounded-2xl p-8 md:p-12 text-center text-white">
-            <h2 className="text-2xl md:text-3xl font-bold mb-4">
-              Ready to Transform Your Shopping Experience?
-            </h2>
-            <p className="text-lg mb-6 opacity-90">
-              Join thousands of users who've reduced returns and found their perfect fit
-            </p>
-            <Button 
-              size="lg" 
-              variant="secondary" 
-              className="px-8 py-4 text-lg"
-              onClick={() => setLocation('/signup')}
-              data-testid="button-join-now"
-            >
-              Join SmartFit Today
-              <ArrowRight className="ml-2 w-5 h-5" />
-            </Button>
-          </div>
-        )}
       </div>
-
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div className="col-span-1">
-              <h3 className="text-2xl font-bold mb-4">SmartFit</h3>
-              <p className="text-gray-400">
-                AI-powered clothing fit prediction for smarter shopping decisions.
-              </p>
-            </div>
-            
-            <div>
-              <h4 className="font-semibold mb-4">Product</h4>
-              <ul className="space-y-2 text-gray-400">
-                <li><a href="/measurements" className="hover:text-white transition-colors">Measurements</a></li>
-                <li><a href="/fit-predict" className="hover:text-white transition-colors">Fit Prediction</a></li>
-                <li><a href="/ar-tryon" className="hover:text-white transition-colors">AR Try-On</a></li>
-                <li><a href="/recommendations" className="hover:text-white transition-colors">Recommendations</a></li>
-              </ul>
-            </div>
-            
-            <div>
-              <h4 className="font-semibold mb-4">Company</h4>
-              <ul className="space-y-2 text-gray-400">
-                <li><a href="#" className="hover:text-white transition-colors">About</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Privacy</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Terms</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Support</a></li>
-              </ul>
-            </div>
-            
-            <div>
-              <h4 className="font-semibold mb-4">Connect</h4>
-              <ul className="space-y-2 text-gray-400">
-                <li><a href="#" className="hover:text-white transition-colors">Twitter</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Instagram</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">LinkedIn</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Blog</a></li>
-              </ul>
-            </div>
-          </div>
-          
-          {/* <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-            <p>&copy; 2025 FitPredict. All rights reserved.</p>
-          </div> */}
-        </div>
-      </footer>
     </div>
   );
 }

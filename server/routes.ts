@@ -26,6 +26,20 @@ const authenticateToken = async (req: Request, res: Response, next: any) => {
 };
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Health check endpoint for Render monitoring
+  app.get("/health", async (req: Request, res: Response) => {
+    try {
+      // Simple health check - just return 200 OK
+      res.status(200).json({ 
+        status: "OK", 
+        timestamp: new Date().toISOString(),
+        service: "smartfit" 
+      });
+    } catch (error) {
+      res.status(500).json({ status: "ERROR", error: (error as Error).message });
+    }
+  });
+
   // Authentication routes
   app.post("/api/auth/signup", async (req: Request, res: Response) => {
     try {
@@ -40,14 +54,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ message: 'User already exists' });
       }
 
-      // Hash password
-      const hashedPassword = await bcrypt.hash(userData.password, 10);
-      
-      // Create user
-      const user = await storage.createUser({
-        ...userData,
-        password: hashedPassword
-      });
+      // Create user - password hashing is handled in storage.createUser
+      const user = await storage.createUser(userData);
 
       // Generate JWT token
       const token = jwt.sign({ userId: user.id }, JWT_SECRET, { expiresIn: '7d' });

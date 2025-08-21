@@ -27,22 +27,33 @@ export default function FitPredict() {
   // Add to favorites mutation
   const addToFavoritesMutation = useMutation({
     mutationFn: async (productId: string) => {
-      const response = await apiRequest('POST', '/api/favorites', { productId });
-      return response.json();
+      try {
+        const response = await apiRequest('POST', '/api/favorites', { productId });
+        return response.json();
+      } catch (error) {
+        // Handle the error gracefully without throwing to prevent overlay
+        console.error('Failed to add favorite:', error);
+        return { success: false, error: error instanceof Error ? error.message : 'Unknown error' };
+      }
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['/api/favorites'] });
-      toast({
-        title: "Added to Favorites",
-        description: "Product has been added to your favorites.",
-      });
+    onSuccess: (data) => {
+      if (data && data.success !== false) {
+        queryClient.invalidateQueries({ queryKey: ['/api/favorites'] });
+        toast({
+          title: "Added to Favorites",
+          description: "Product has been added to your favorites.",
+        });
+      } else if (data && data.success === false) {
+        toast({
+          title: "Failed to Add",
+          description: data.error || "Could not add to favorites",
+          variant: "destructive",
+        });
+      }
     },
     onError: (error) => {
-      toast({
-        title: "Failed to Add",
-        description: error instanceof Error ? error.message : "Could not add to favorites",
-        variant: "destructive",
-      });
+      // This won't trigger due to the try-catch in mutationFn
+      console.error('Mutation error:', error);
     },
   });
 
@@ -79,8 +90,8 @@ export default function FitPredict() {
           </TabsContent>
           <TabsContent value="footwear">
             <FootwearFitPrediction
-              onTryOnAR={handleTryOnAR}
-              onAddToFavorites={handleAddToFavorites}
+              onTryOnAR={(product) => handleTryOnAR(product.id)}
+              onAddToFavorites={(product) => handleAddToFavorites(product.id)}
             />
           </TabsContent>
         </Tabs>

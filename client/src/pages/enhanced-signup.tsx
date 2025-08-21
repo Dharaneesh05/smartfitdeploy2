@@ -56,7 +56,7 @@ export default function EnhancedSignupPage() {
     onSuccess: (data) => {
       login(data.user, data.token);
       toast({
-        title: "Welcome to FitPredict!",
+        title: "Welcome to SmartFit!",
         description: "Account created successfully. Explore your new dashboard.",
       });
       setLocation('/profile');

@@ -15,7 +15,7 @@ The SmartFit application has been successfully migrated from in-memory storage a
 
 ## 🚀 Quick Start
 
-### 1. Start MongoDB
+### 1. Start MongoDB (Local Development)
 ```bash
 # Windows
 net start MongoDB
@@ -24,15 +24,32 @@ net start MongoDB
 sudo systemctl start mongod
 ```
 
-### 2. Run the Application
+### 2. Run the Application (Local Development)
 ```bash
 npm install
 npm run dev
 ```
 
-### 3. Access the Application
+### 3. Access the Application (Local Development)
 - **Frontend**: http://localhost:5000
 - **API**: http://localhost:5000/api
+
+## 🚀 Deployment to Render
+
+### 1. Prepare for Deployment
+Make sure you have:
+- MongoDB Atlas cluster set up
+- Environment variables configured (see DEPLOYMENT.md)
+
+### 2. Deploy to Render
+Follow the detailed deployment guide in [DEPLOYMENT.md](./DEPLOYMENT.md)
+
+### 3. Environment Variables for Production
+Set these in your deployment platform:
+- `MONGODB_URI`: Your MongoDB Atlas connection string
+- `JWT_SECRET`: Strong random string for JWT encryption  
+- `PORT`: 5000
+- `NODE_ENV`: production
 
 ## 📊 Database Structure
 
