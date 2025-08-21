@@ -222,7 +222,7 @@ export default function EnhancedHeroSection() {
                       className="w-full h-48 object-cover rounded-t-lg"
                     />
                     <Badge className="absolute top-3 right-3 bg-green-500">
-                      <Star className="w-3 h-3 mr-1" />
+                      {/* <Star className="w-3 h-3 mr-1" /> */}
                       {product.fitScore}% Match
                     </Badge>
                   </div>

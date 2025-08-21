@@ -15,7 +15,7 @@ import {
 import { 
   Heart, 
   ExternalLink, 
-  Star,
+  // Star,
   Filter,
   ShoppingCart,
   Shirt,
@@ -767,7 +767,6 @@ export default function RecommendationsPage() {
                         recommendation.fitScore >= 70 ? 'bg-yellow-500 shadow-md' : 'bg-orange-500 shadow-md'}`}
                       data-testid={`fit-score-${recommendation.id}`}
                     >
-                      <Star className="w-3 h-3 mr-1" />
                       {recommendation.fitScore}% Fit
                     </Badge>
                   </div>
