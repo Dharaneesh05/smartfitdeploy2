@@ -42,7 +42,7 @@ Make sure your repository includes:
    - **Region**: Choose closest to your users
    - **Branch**: main (or your preferred branch)
    - **Root Directory**: (leave empty if root)
-   - **Build Command**: `npm install && npm run build`
+   - **Build Command**: `npm install --include=dev && npm run build`
    - **Start Command**: `npm start`
    - **Plan**: Free or paid based on needs
 
@@ -73,7 +73,7 @@ NODE_ENV=production
 ### 5. Build and Deployment Process
 
 Render will automatically:
-1. Install dependencies: `npm install`
+1. Install dependencies including dev dependencies: `npm install --include=dev`
 2. Build the application: `npm run build`
 3. Start the server: `npm start`
 
